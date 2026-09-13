@@ -1,0 +1,5 @@
+﻿<!-- Tela de formulario de Unidade - construa manualmente -->
+<!-- Controller: com.condomanager.controller.unidade.UnidadeFormController -->
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.condomanager.controller.unidade.UnidadeFormController"/>
+
+

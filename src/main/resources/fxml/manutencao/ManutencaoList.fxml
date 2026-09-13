@@ -1,0 +1,5 @@
+﻿<!-- Tela de lista de Manutencao - construa manualmente -->
+<!-- Controller: com.condomanager.controller.manutencao.ManutencaoListController -->
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.condomanager.controller.manutencao.ManutencaoListController"/>
+
+
