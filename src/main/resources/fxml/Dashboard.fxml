@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+
+<!--
+    DASHBOARD - Visao geral com cards de resumo e tabelas recentes
+    Controller: com.condomanager.controller.DashboardController
+-->
+<VBox xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.condomanager.controller.DashboardController"
+      spacing="20" style="-fx-background-color: #f5f7fa; -fx-padding: 24;">
+
+    <!-- Titulo -->
+    <Label text="Dashboard" style="-fx-font-size: 22px; -fx-font-weight: bold;"/>
+    <Label text="Visao geral da administracao do condominio" style="-fx-text-fill: #666;"/>
+
+    <!-- Cards de resumo -->
+    <HBox spacing="16">
+        <VBox fx:id="cardUnidades"  styleClass="summary-card" prefWidth="220" spacing="4">
+            <Label text="Total de Unidades" styleClass="card-label"/>
+            <Label fx:id="lblTotalUnidades" text="0" styleClass="card-value"/>
+        </VBox>
+        <VBox fx:id="cardMoradores" styleClass="summary-card" prefWidth="220" spacing="4">
+            <Label text="Moradores" styleClass="card-label"/>
+            <Label fx:id="lblTotalMoradores" text="0" styleClass="card-value"/>
+        </VBox>
+        <VBox fx:id="cardTaxas" styleClass="summary-card" prefWidth="220" spacing="4">
+            <Label text="Taxas Pendentes" styleClass="card-label"/>
+            <Label fx:id="lblTaxasPendentes" text="0" styleClass="card-value"/>
+        </VBox>
+        <VBox fx:id="cardManutencoes" styleClass="summary-card" prefWidth="220" spacing="4">
+            <Label text="Manutencoes em Aberto" styleClass="card-label"/>
+            <Label fx:id="lblManutencoesAbertas" text="0" styleClass="card-value"/>
+        </VBox>
+    </HBox>
+
+    <!-- Tabelas recentes -->
+    <HBox spacing="16" VBox.vgrow="ALWAYS">
+        <!-- Reservas recentes -->
+        <VBox spacing="8" HBox.hgrow="ALWAYS">
+            <Label text="Reservas Recentes" style="-fx-font-weight: bold;"/>
+            <TableView fx:id="tblReservasRecentes" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="colReservaArea"      text="Area"     prefWidth="120"/>
+                    <TableColumn fx:id="colReservaUnidade"   text="Unidade"  prefWidth="80"/>
+                    <TableColumn fx:id="colReservaData"      text="Data"     prefWidth="90"/>
+                    <TableColumn fx:id="colReservaHorario"   text="Horario"  prefWidth="100"/>
+                    <TableColumn fx:id="colReservaSituacao"  text="Situacao" prefWidth="90"/>
+                </columns>
+            </TableView>
+        </VBox>
+
+        <!-- Ocorrencias recentes -->
+        <VBox spacing="8" HBox.hgrow="ALWAYS">
+            <Label text="Ocorrencias Recentes" style="-fx-font-weight: bold;"/>
+            <TableView fx:id="tblOcorrenciasRecentes" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="colOcorrDescricao"  text="Descricao"      prefWidth="160"/>
+                    <TableColumn fx:id="colOcorrLocal"      text="Local/Unidade"  prefWidth="110"/>
+                    <TableColumn fx:id="colOcorrData"       text="Data"           prefWidth="80"/>
+                    <TableColumn fx:id="colOcorrSituacao"   text="Situacao"       prefWidth="90"/>
+                </columns>
+            </TableView>
+        </VBox>
+    </HBox>
+</VBox>

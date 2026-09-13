@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+
+<!--
+    TELA PRINCIPAL - Container com sidebar fixa
+    Carrega os modulos na area de conteudo dinamicamente.
+    Controller: com.condomanager.controller.MainLayoutController
+-->
+<BorderPane xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.condomanager.controller.MainLayoutController"
+            prefWidth="1024" prefHeight="680">
+
+    <!-- SIDEBAR ESQUERDA (fixa) -->
+    <left>
+        <VBox fx:id="sidebar" prefWidth="200" spacing="4"
+              style="-fx-background-color: #1a2332; -fx-padding: 0;">
+
+            <!-- Logo / Nome do sistema -->
+            <VBox style="-fx-padding: 20 16 16 16;">
+                <Label text="CondoManager" style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;"/>
+                <Label text="v1.0" style="-fx-text-fill: #8899aa; -fx-font-size: 11px;"/>
+            </VBox>
+
+            <!-- Itens do menu -->
+            <Button fx:id="btnDashboard"   text="Dashboard"   onAction="#onDashboard"   maxWidth="Infinity"/>
+            <Button fx:id="btnUnidades"    text="Unidades"    onAction="#onUnidades"    maxWidth="Infinity"/>
+            <Button fx:id="btnMoradores"   text="Moradores"   onAction="#onMoradores"   maxWidth="Infinity"/>
+            <Button fx:id="btnTaxas"       text="Taxas"       onAction="#onTaxas"       maxWidth="Infinity"/>
+            <Button fx:id="btnReservas"    text="Reservas"    onAction="#onReservas"    maxWidth="Infinity"/>
+            <Button fx:id="btnOcorrencias" text="Ocorrencias" onAction="#onOcorrencias" maxWidth="Infinity"/>
+            <Button fx:id="btnManutencoes" text="Manutencoes" onAction="#onManutencoes" maxWidth="Infinity"/>
+            <Button fx:id="btnVeiculos"    text="Veiculos"    onAction="#onVeiculos"    maxWidth="Infinity"/>
+            <Button fx:id="btnRelatorios"  text="Relatorios"  onAction="#onRelatorios"  maxWidth="Infinity"/>
+
+            <Pane VBox.vgrow="ALWAYS"/>
+
+            <!-- Info do usuario logado + Sair -->
+            <VBox style="-fx-padding: 12 16 16 16;" spacing="8">
+                <Label fx:id="lblUsuario" text="Usuario" style="-fx-text-fill: white; -fx-font-weight: bold;"/>
+                <Label fx:id="lblPerfil"  text="Perfil"  style="-fx-text-fill: #8899aa; -fx-font-size: 11px;"/>
+                <Button fx:id="btnSair"   text="Sair"    onAction="#onSair" maxWidth="Infinity"/>
+            </VBox>
+        </VBox>
+    </left>
+
+    <!-- AREA DE CONTEUDO (troca dinamicamente) -->
+    <center>
+        <StackPane fx:id="contentArea">
+            <!-- Cada modulo sera carregado aqui via FXMLLoader -->
+        </StackPane>
+    </center>
+
+</BorderPane>

@@ -8,21 +8,21 @@ import javafx.stage.Stage;
 
 /**
  * Classe principal da aplicacao.
- * Ponto de entrada do sistema de gestao de condominio.
+ * Inicializa o JavaFX e carrega a tela de Login.
+ * Apos o login, o LoginController carrega o MainLayout.fxml.
  */
 public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        // Carrega a tela de login ao iniciar
         FXMLLoader loader = new FXMLLoader(
             getClass().getResource("/fxml/Login.fxml")
         );
         Parent root = loader.load();
 
         primaryStage.setTitle("CondoManager");
-        primaryStage.setScene(new Scene(root, 800, 600));
-        primaryStage.setResizable(true);
+        primaryStage.setScene(new Scene(root, 480, 340));
+        primaryStage.setResizable(false);
         primaryStage.show();
     }
 
@@ -30,4 +30,3 @@ public class Main extends Application {
         launch(args);
     }
 }
-
