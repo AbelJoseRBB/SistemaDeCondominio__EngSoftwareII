@@ -1,4 +1,4 @@
-﻿# CondoManager - Sistema de Gestao de Condominio
+# CondoManager - Sistema de Gestao de Condominio
 
 Aplicacao desktop desenvolvida em Java com JavaFX para administracao interna de condominios.
 
