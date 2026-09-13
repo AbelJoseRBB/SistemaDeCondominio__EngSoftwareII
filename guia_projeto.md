@@ -179,7 +179,7 @@ test: testes
 ### 7. Resolvendo Conflitos
 
 ```bash
-# Se houver conflito ao dar merge, primeiro atualize sua branch:
+# Se houver conflito ao dar merge, primeiro atualize sua branch
 git checkout feature/sua-branch
 git merge develop   # traz o que veio do develop para sua branch
 
