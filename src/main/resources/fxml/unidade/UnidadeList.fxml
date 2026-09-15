@@ -69,8 +69,7 @@
                    style="-fx-background-color: white;
                           -fx-border-color: #e5e7eb;
                           -fx-border-radius: 8;
-                          -fx-background-radius: 8;"
-                   placeholder="">
+                          -fx-background-radius: 8;">
             <placeholder>
                 <Label text="Nenhuma unidade cadastrada."
                        style="-fx-text-fill: #9ca3af; -fx-font-size: 14px;"/>
