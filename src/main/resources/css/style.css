@@ -111,3 +111,76 @@
 .field-error {
     -fx-border-color: #dc2626;
 }
+
+/* ============================================================ */
+/* Badges de status de ocupacao (Tabela de Unidades)            */
+/* ============================================================ */
+.badge-ocupada {
+    -fx-background-color: #dcfce7;
+    -fx-text-fill: #15803d;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 20;
+    -fx-padding: 3 10 3 10;
+}
+
+.badge-desocupada {
+    -fx-background-color: #fee2e2;
+    -fx-text-fill: #b91c1c;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 20;
+    -fx-padding: 3 10 3 10;
+}
+
+.badge-alugada {
+    -fx-background-color: #fef9c3;
+    -fx-text-fill: #854d0e;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 20;
+    -fx-padding: 3 10 3 10;
+}
+
+/* Botoes de acao na tabela (visualizar / editar / excluir) */
+.btn-acao-ver {
+    -fx-background-color: #eff6ff;
+    -fx-text-fill: #1d4ed8;
+    -fx-background-radius: 4;
+    -fx-padding: 4 8 4 8;
+    -fx-cursor: hand;
+    -fx-font-size: 13px;
+    -fx-border-color: transparent;
+}
+
+.btn-acao-ver:hover {
+    -fx-background-color: #dbeafe;
+}
+
+.btn-acao-editar {
+    -fx-background-color: #f0fdf4;
+    -fx-text-fill: #15803d;
+    -fx-background-radius: 4;
+    -fx-padding: 4 8 4 8;
+    -fx-cursor: hand;
+    -fx-font-size: 13px;
+    -fx-border-color: transparent;
+}
+
+.btn-acao-editar:hover {
+    -fx-background-color: #dcfce7;
+}
+
+.btn-acao-excluir {
+    -fx-background-color: #fff1f2;
+    -fx-text-fill: #be123c;
+    -fx-background-radius: 4;
+    -fx-padding: 4 8 4 8;
+    -fx-cursor: hand;
+    -fx-font-size: 13px;
+    -fx-border-color: transparent;
+}
+
+.btn-acao-excluir:hover {
+    -fx-background-color: #ffe4e6;
+}
