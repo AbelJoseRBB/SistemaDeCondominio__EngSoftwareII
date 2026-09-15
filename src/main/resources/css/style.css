@@ -1,34 +1,96 @@
-﻿/* ============================================================
-   Estilos globais da aplicacao
-   Aplique este CSS nas suas telas JavaFX
-   Exemplo: scene.getStylesheets().add(getClass().getResource("/css/style.css").toExternalForm());
-   ============================================================ */
+﻿/* Fundo geral da aplicação */
+.root-pane {
+    -fx-background-color: #f4f6f9;
+}
 
-.root {
-    -fx-font-family: 'Segoe UI', Arial, sans-serif;
+/* Cartão branco central */
+.login-card {
+    -fx-background-color: white;
+    -fx-background-radius: 10;
+    -fx-padding: 40;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.08), 15, 0, 0, 5);
+}
+
+/* Container do ícone */
+.icon-container {
+    -fx-background-color: #203a5c;
+    -fx-background-radius: 10;
+}
+
+/* Ícone SVG da casa */
+.icon-svg {
+    -fx-fill: white;
+    -fx-scale-x: 1.2;
+    -fx-scale-y: 1.2;
+}
+
+/* Textos do Cabeçalho */
+.title-label {
+    -fx-text-fill: #1f375b;
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+}
+
+.subtitle-label {
+    -fx-text-fill: #7a8b9a;
+    -fx-font-size: 14px;
+}
+
+/* Labels dos campos de texto */
+.field-label {
+    -fx-text-fill: #334155;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+
+/* Campos de Texto (Usuário e Senha) */
+.text-field,
+.password-field {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #d1d5db;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-padding: 10 12 10 12;
+    -fx-font-size: 14px;
+    -fx-text-fill: #334155;
+    -fx-prompt-text-fill: #9ca3af;
+}
+
+.text-field:focused,
+.password-field:focused {
+    -fx-border-color: #203a5c;
+}
+
+/* Checkbox */
+.custom-checkbox {
+    -fx-text-fill: #4b5563;
     -fx-font-size: 13px;
-    -fx-background-color: #f5f5f5;
 }
 
-.button {
-    -fx-background-color: #2196F3;
+/* Botão Entrar */
+.login-button {
+    -fx-background-color: #203a5c;
     -fx-text-fill: white;
-    -fx-background-radius: 4px;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 5;
+    -fx-padding: 12;
     -fx-cursor: hand;
-    -fx-padding: 8 16 8 16;
 }
 
-.button:hover {
-    -fx-background-color: #1976D2;
+.login-button:hover {
+    -fx-background-color: #172a43;
 }
 
-.text-field, .password-field {
-    -fx-background-radius: 4px;
-    -fx-border-color: #cccccc;
-    -fx-border-radius: 4px;
-    -fx-padding: 6 10 6 10;
+/* Link Esqueci minha senha */
+.forgot-password-link {
+    -fx-text-fill: #3b82f6;
+    -fx-font-size: 13px;
+    -fx-border-color: transparent;
+    -fx-padding: 10 0 0 0;
 }
 
-.label {
-    -fx-text-fill: #333333;
+.forgot-password-link:hover {
+    -fx-underline: true;
 }
