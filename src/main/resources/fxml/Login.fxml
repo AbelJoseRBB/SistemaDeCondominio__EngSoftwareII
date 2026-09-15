@@ -6,12 +6,26 @@
 <?import javafx.scene.shape.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.SVGPath?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" scaleX="2.0" scaleY="2.0" style="-fx-background-color: F1F5F9;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<!-- Contêiner principal (Fundo da tela) -->
+<VBox alignment="CENTER" prefHeight="700.0" prefWidth="600.0" styleClass="root-pane" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="238.0" layoutX="198.0" layoutY="81.0" stroke="WHITE" strokeLineCap="ROUND" strokeLineJoin="BEVEL" strokeType="OUTSIDE" strokeWidth="5.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.2), 30, 0, 0, 0);" width="205.0" />
-      <Text layoutX="246.0" layoutY="143.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CondorManager" textAlignment="CENTER" />
+      <Text layoutX="256.0" layoutY="143.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CondorManager" textAlignment="CENTER">
+         <font>
+            <Font size="13.0" />
+         </font></Text>
       <TextField layoutX="222.0" layoutY="175.0" prefHeight="34.0" prefWidth="157.0" promptText="Nome de Usuário" scaleShape="false">
          <font>
             <Font size="12.0" />
@@ -32,5 +46,10 @@
             <Font size="9.0" />
          </font>
       </Text>
+      <Button layoutX="222.0" layoutY="281.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="159.0" text="Entrar">
+         <font>
+            <Font size="9.0" />
+         </font>
+      </Button>
    </children>
-</Pane>
+</VBox>
