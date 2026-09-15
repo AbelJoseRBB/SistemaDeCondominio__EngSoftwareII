@@ -1,5 +1,6 @@
 package com.condomanager.controller;
 
+import com.condomanager.service.AuthService;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.PasswordField;
@@ -7,7 +8,7 @@ import javafx.scene.control.TextField;
 
 /**
  * Controller da tela de Login.
- * Vinculado ao arquivo Login.fxml.
+ * Vinculado ao arquivo Login.fxml via fx:controller.
  * A inicializacao da janela (Stage/Scene) e feita pela classe Main.
  */
 public class LoginController {
@@ -21,9 +22,10 @@ public class LoginController {
     @FXML
     private CheckBox manterConectadoCheckBox;
 
+    private final AuthService authService = new AuthService();
+
     /**
      * Chamado automaticamente pelo FXMLLoader apos o FXML ser carregado.
-     * Use este metodo para configurar estado inicial dos componentes da tela.
      */
     @FXML
     public void initialize() {
@@ -32,14 +34,26 @@ public class LoginController {
 
     /**
      * Acao executada ao clicar no botao "Entrar".
+     * Autentica o usuario via AuthService (que usa UsuarioDAO + BCrypt).
      */
     @FXML
     private void handleLogin() {
-        String usuario = usuarioField != null ? usuarioField.getText() : "";
-        String senha = senhaField != null ? senhaField.getText() : "";
+        String login = usuarioField.getText().trim();
+        String senha = senhaField.getText();
 
-        // TODO: Chamar AuthService para autenticar o usuario
-        System.out.println("Tentando login com usuario: " + usuario);
+        if (login.isEmpty() || senha.isEmpty()) {
+            return;
+        }
+
+        boolean autenticado = authService.autenticar(login, senha);
+
+        if (autenticado) {
+            // TODO (Commit 3): redirecionar para o Dashboard apos login bem-sucedido
+            System.out.println("Login bem-sucedido para: " + login);
+        } else {
+            // TODO (Commit 2): exibir mensagem de erro na tela
+            System.out.println("Credenciais invalidas para: " + login);
+        }
     }
 
     /**
@@ -47,7 +61,7 @@ public class LoginController {
      */
     @FXML
     private void handleEsqueciSenha() {
-        // TODO: Implementar recuperacao de senha
+        // TODO (Commit 4): abrir dialogo de recuperacao de senha por e-mail
         System.out.println("Recuperacao de senha solicitada.");
     }
 }

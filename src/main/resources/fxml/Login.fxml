@@ -21,7 +21,7 @@
 
 <!-- Contêiner principal (Fundo da tela) -->
 
-<VBox alignment="CENTER" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: F1F5F9;" styleClass="root-pane" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="CENTER" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: F1F5F9;" styleClass="root-pane" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.condomanager.controller.LoginController">
    <children>
       <!-- Cartão de Login (Card branco) -->
       <VBox alignment="TOP_CENTER" maxWidth="400.0" spacing="20.0" style="-fx-background-color: FFFFFF; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.2), 20, 0, 0, 0);" styleClass="login-card">
@@ -48,7 +48,7 @@
             <VBox spacing="5.0">
                <children>
                   <Label styleClass="field-label" text="Usuário" />
-                  <TextField promptText="nome.usuario" styleClass="text-field" />
+                  <TextField fx:id="usuarioField" promptText="nome.usuario" styleClass="text-field" />
                </children>
             </VBox>
 
@@ -56,20 +56,20 @@
             <VBox spacing="5.0">
                <children>
                   <Label styleClass="field-label" text="Senha" />
-                  <PasswordField promptText="••••••••" styleClass="password-field" />
+                  <PasswordField fx:id="senhaField" promptText="••••••••" styleClass="password-field" />
                </children>
             </VBox>
 
             <!-- Checkbox Manter conectado -->
             <HBox>
                <children>
-                  <CheckBox styleClass="custom-checkbox" text="Manter conectado" />
+                  <CheckBox fx:id="manterConectadoCheckBox" styleClass="custom-checkbox" text="Manter conectado" />
                </children>
             </HBox>
 
             <!-- Botão Entrar -->
             <!-- maxWidth="Infinity" faz o botão esticar 100% da largura do card -->
-            <Button maxWidth="Infinity" styleClass="login-button" text="Entrar" />
+            <Button maxWidth="Infinity" styleClass="login-button" text="Entrar" onAction="#handleLogin" />
 
             <!-- Link Esqueci minha senha -->
             <Hyperlink styleClass="forgot-password-link" text="Esqueci minha senha" />
