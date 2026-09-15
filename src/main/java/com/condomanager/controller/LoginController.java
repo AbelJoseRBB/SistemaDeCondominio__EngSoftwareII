@@ -3,10 +3,16 @@ package com.condomanager.controller;
 import com.condomanager.service.AuthService;
 import com.condomanager.util.NavigationUtil;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.TextField;
+
+import java.util.Optional;
 
 /**
  * Controller da tela de Login.
@@ -86,10 +92,51 @@ public class LoginController {
 
     /**
      * Acao executada ao clicar no link "Esqueci minha senha".
+     * Exibe um dialogo pedindo o e-mail e mostra confirmacao generica
+     * (sem revelar se o e-mail esta ou nao cadastrado).
      */
     @FXML
     private void handleEsqueciSenha() {
-        // TODO (Commit 4): abrir dialogo de recuperacao de senha por e-mail
-        System.out.println("Recuperacao de senha solicitada.");
+        TextInputDialog dialogo = new TextInputDialog();
+        dialogo.setTitle("Recuperacao de Senha");
+        dialogo.setHeaderText("Esqueceu sua senha?");
+        dialogo.setContentText("Informe seu e-mail cadastrado:");
+        dialogo.getEditor().setPromptText("exemplo@email.com");
+
+        // Estiliza o dialogo com o mesmo CSS da aplicacao
+        dialogo.getDialogPane().getStylesheets().add(
+            getClass().getResource("/css/style.css").toExternalForm()
+        );
+
+        Optional<String> resultado = dialogo.showAndWait();
+
+        resultado.ifPresent(email -> {
+            if (!email.trim().isEmpty() && email.contains("@")) {
+                // TODO: integrar com servico de e-mail para envio real da recuperacao
+                mostrarConfirmacaoEmail();
+            } else {
+                Alert aviso = new Alert(AlertType.WARNING);
+                aviso.setTitle("E-mail invalido");
+                aviso.setHeaderText(null);
+                aviso.setContentText("Por favor, informe um e-mail valido.");
+                aviso.showAndWait();
+            }
+        });
+    }
+
+    /**
+     * Exibe alert de confirmacao apos solicitacao de recuperacao.
+     * A mensagem e generica intencionalmente para nao revelar
+     * se o e-mail esta ou nao cadastrado no sistema.
+     */
+    private void mostrarConfirmacaoEmail() {
+        Alert confirmacao = new Alert(AlertType.INFORMATION, "", ButtonType.OK);
+        confirmacao.setTitle("Solicitacao Enviada");
+        confirmacao.setHeaderText("Verifique sua caixa de entrada");
+        confirmacao.setContentText(
+            "Se o e-mail informado estiver cadastrado, voce recebera\n" +
+            "as instrucoes de recuperacao de senha em breve."
+        );
+        confirmacao.showAndWait();
     }
 }

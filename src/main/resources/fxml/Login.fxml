@@ -75,7 +75,7 @@
             <Button maxWidth="Infinity" styleClass="login-button" text="Entrar" onAction="#handleLogin" />
 
             <!-- Link Esqueci minha senha -->
-            <Hyperlink styleClass="forgot-password-link" text="Esqueci minha senha" />
+            <Hyperlink styleClass="forgot-password-link" text="Esqueci minha senha" onAction="#handleEsqueciSenha" />
  
          </children>
          <padding>
