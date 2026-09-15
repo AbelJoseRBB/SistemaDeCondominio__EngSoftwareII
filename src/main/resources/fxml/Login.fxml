@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.paint.*?>
@@ -19,10 +20,11 @@
 <?import javafx.scene.shape.SVGPath?>
 
 <!-- Contêiner principal (Fundo da tela) -->
-<VBox alignment="CENTER" prefHeight="1080.0" prefWidth="1920.0" styleClass="root-pane" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+
+<VBox alignment="CENTER" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: F1F5F9;" styleClass="root-pane" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <!-- Cartão de Login (Card branco) -->
-      <VBox alignment="TOP_CENTER" maxWidth="400.0" spacing="20.0" styleClass="login-card">
+      <VBox alignment="TOP_CENTER" maxWidth="400.0" spacing="20.0" style="-fx-background-color: FFFFFF; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.2), 20, 0, 0, 0);" styleClass="login-card">
             <children>
                <!-- Ícone (Simulando o ícone da casa com SVG) -->
             <StackPane maxHeight="50.0" maxWidth="50.0" prefHeight="50.0" prefWidth="50.0" styleClass="icon-container">
@@ -73,6 +75,9 @@
             <Hyperlink styleClass="forgot-password-link" text="Esqueci minha senha" />
  
          </children>
+         <padding>
+            <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
+         </padding>
       </VBox>
    </children>
 </VBox>
