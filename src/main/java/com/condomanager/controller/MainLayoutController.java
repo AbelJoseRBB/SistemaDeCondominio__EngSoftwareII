@@ -1,10 +1,12 @@
 package com.condomanager.controller;
 
+import com.condomanager.util.InactivityWatcher;
 import com.condomanager.util.NavigationUtil;
 import com.condomanager.util.SessionManager;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.scene.control.Label;
 
@@ -18,6 +20,8 @@ public class MainLayoutController {
     @FXML private Label lblUsuario;
     @FXML private Label lblPerfil;
 
+    private final InactivityWatcher inactivityWatcher = new InactivityWatcher();
+
     @FXML
     public void initialize() {
         // Exibe o nome do usuario logado na sidebar
@@ -27,6 +31,30 @@ public class MainLayoutController {
         }
         // Carrega o Dashboard como tela inicial
         onDashboard();
+
+        // Inicia o monitoramento de inatividade apos a cena estar disponivel
+        // Usamos Platform.runLater para garantir que a Scene ja foi atribuida ao Stage
+        javafx.application.Platform.runLater(this::iniciarMonitoramentoInatividade);
+    }
+
+    /**
+     * Registra os listeners de mouse e teclado na cena para rastrear atividade
+     * e inicia o InactivityWatcher com redirecionamento para Login ao expirar.
+     */
+    private void iniciarMonitoramentoInatividade() {
+        Scene scene = contentArea.getScene();
+        if (scene != null) {
+            scene.setOnMouseMoved(e   -> SessionManager.registrarAtividade());
+            scene.setOnMouseClicked(e -> SessionManager.registrarAtividade());
+            scene.setOnKeyPressed(e   -> SessionManager.registrarAtividade());
+        }
+
+        inactivityWatcher.iniciar(() -> NavigationUtil.navegar(
+            "/fxml/Login.fxml",
+            "CondoManager",
+            480, 360,
+            false
+        ));
     }
 
     /** Carrega um FXML na area de conteudo central */
@@ -54,6 +82,7 @@ public class MainLayoutController {
 
     @FXML
     private void onSair() {
+        inactivityWatcher.parar();
         SessionManager.encerrarSessao();
         NavigationUtil.navegar(
             "/fxml/Login.fxml",
