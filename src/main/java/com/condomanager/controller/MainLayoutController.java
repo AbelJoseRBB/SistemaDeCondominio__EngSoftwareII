@@ -1,5 +1,6 @@
-﻿package com.condomanager.controller;
+package com.condomanager.controller;
 
+import com.condomanager.util.NavigationUtil;
 import com.condomanager.util.SessionManager;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -54,6 +55,12 @@ public class MainLayoutController {
     @FXML
     private void onSair() {
         SessionManager.encerrarSessao();
-        // TODO: voltar para a tela de Login
+        NavigationUtil.navegar(
+            "/fxml/Login.fxml",
+            "CondoManager",
+            480, 360,
+            false
+        );
     }
 }
+

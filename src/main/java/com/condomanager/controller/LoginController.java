@@ -1,6 +1,7 @@
 package com.condomanager.controller;
 
 import com.condomanager.service.AuthService;
+import com.condomanager.util.NavigationUtil;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
@@ -56,8 +57,12 @@ public class LoginController {
         boolean autenticado = authService.autenticar(login, senha);
 
         if (autenticado) {
-            // TODO (Commit 3): redirecionar para o Dashboard apos login bem-sucedido
-            System.out.println("Login bem-sucedido para: " + login);
+            NavigationUtil.navegar(
+                "/fxml/MainLayout.fxml",
+                "CondoManager",
+                1280, 720,
+                true
+            );
         } else {
             setErro(true);
             senhaField.clear();
