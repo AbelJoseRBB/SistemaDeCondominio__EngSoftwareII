@@ -60,6 +60,9 @@
                </children>
             </VBox>
 
+            <!-- Mensagem de erro de autenticacao -->
+            <Label fx:id="erroLabel" styleClass="error-label" text="Usuário ou senha inválidos." visible="false" managed="false" />
+
             <!-- Checkbox Manter conectado -->
             <HBox>
                <children>

@@ -3,6 +3,7 @@ package com.condomanager.controller;
 import com.condomanager.service.AuthService;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
@@ -21,6 +22,9 @@ public class LoginController {
 
     @FXML
     private CheckBox manterConectadoCheckBox;
+
+    @FXML
+    private Label erroLabel;
 
     private final AuthService authService = new AuthService();
 
@@ -41,7 +45,11 @@ public class LoginController {
         String login = usuarioField.getText().trim();
         String senha = senhaField.getText();
 
+        // Esconde qualquer erro anterior e limpa borda de erro
+        setErro(false);
+
         if (login.isEmpty() || senha.isEmpty()) {
+            setErro(true);
             return;
         }
 
@@ -51,8 +59,23 @@ public class LoginController {
             // TODO (Commit 3): redirecionar para o Dashboard apos login bem-sucedido
             System.out.println("Login bem-sucedido para: " + login);
         } else {
-            // TODO (Commit 2): exibir mensagem de erro na tela
-            System.out.println("Credenciais invalidas para: " + login);
+            setErro(true);
+            senhaField.clear();
+        }
+    }
+
+    /**
+     * Exibe ou oculta a mensagem de erro e aplica/remove o estilo de borda vermelha nos campos.
+     */
+    private void setErro(boolean visivel) {
+        erroLabel.setVisible(visivel);
+        erroLabel.setManaged(visivel);
+        if (visivel) {
+            usuarioField.getStyleClass().add("field-error");
+            senhaField.getStyleClass().add("field-error");
+        } else {
+            usuarioField.getStyleClass().remove("field-error");
+            senhaField.getStyleClass().remove("field-error");
         }
     }
 

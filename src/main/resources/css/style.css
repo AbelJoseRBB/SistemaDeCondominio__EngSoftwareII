@@ -1,4 +1,4 @@
-﻿/* Fundo geral da aplicação */
+/* Fundo geral da aplicação */
 .root-pane {
     -fx-background-color: #f4f6f9;
 }
@@ -93,4 +93,21 @@
 
 .forgot-password-link:hover {
     -fx-underline: true;
+}
+
+/* Mensagem de erro de autenticacao */
+.error-label {
+    -fx-text-fill: #dc2626;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-background-color: #fef2f2;
+    -fx-background-radius: 5;
+    -fx-border-color: #fca5a5;
+    -fx-border-radius: 5;
+    -fx-padding: 8 12 8 12;
+}
+
+/* Campos com erro de validacao */
+.field-error {
+    -fx-border-color: #dc2626;
 }
