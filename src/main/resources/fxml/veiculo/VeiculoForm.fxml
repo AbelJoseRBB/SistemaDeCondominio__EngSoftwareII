@@ -1,5 +1,3 @@
-﻿<!-- Tela de formulario de Veiculo - construa manualmente -->
+<!-- Tela de formulario de Veiculo - construa manualmente -->
 <!-- Controller: com.condomanager.controller.veiculo.VeiculoFormController -->
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.condomanager.controller.veiculo.VeiculoFormController"/>
-
-
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1"/>
