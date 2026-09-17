@@ -1,4 +1,4 @@
-﻿package com.condomanager.model;
+package com.condomanager.model;
 
 import java.time.LocalDate;
 import java.time.LocalTime;

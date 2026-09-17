@@ -1,4 +1,4 @@
-﻿package com.condomanager.dao;
+package com.condomanager.dao;
 
 import com.condomanager.model.Morador;
 import java.util.List;

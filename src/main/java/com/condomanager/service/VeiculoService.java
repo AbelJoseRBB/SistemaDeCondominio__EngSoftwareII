@@ -1,4 +1,4 @@
-﻿package com.condomanager.service;
+package com.condomanager.service;
 
 /** Service com regras de negocio para Veiculo - implemente conforme necessario */
 public class VeiculoService {

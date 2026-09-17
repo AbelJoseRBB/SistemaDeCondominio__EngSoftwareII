@@ -1,4 +1,4 @@
-﻿package com.condomanager.controller.taxa;
+package com.condomanager.controller.taxa;
 
 import javafx.fxml.FXML;
 

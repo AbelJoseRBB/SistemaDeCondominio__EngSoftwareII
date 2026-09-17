@@ -1,4 +1,4 @@
-﻿package com.condomanager.controller.ocorrencia;
+package com.condomanager.controller.ocorrencia;
 
 import javafx.fxml.FXML;
 

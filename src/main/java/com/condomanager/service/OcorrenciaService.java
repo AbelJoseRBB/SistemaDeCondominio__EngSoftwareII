@@ -1,4 +1,4 @@
-﻿package com.condomanager.service;
+package com.condomanager.service;
 
 import com.condomanager.dao.OcorrenciaDAO;
 import com.condomanager.model.Ocorrencia;

@@ -1,4 +1,4 @@
-﻿package com.condomanager.model;
+package com.condomanager.model;
 
 /**
  * Representa um usuario do sistema (administrador ou operador).

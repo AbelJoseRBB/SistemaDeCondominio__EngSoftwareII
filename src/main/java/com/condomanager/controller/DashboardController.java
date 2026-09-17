@@ -1,4 +1,4 @@
-﻿package com.condomanager.controller;
+package com.condomanager.controller;
 
 import javafx.fxml.FXML;
 
