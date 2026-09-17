@@ -13,6 +13,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
@@ -38,6 +39,7 @@ public class OcorrenciaListController {
     @FXML private TextField                        txtBusca;
     @FXML private ComboBox<String>                 cmbSituacao;
     @FXML private Label                            lblContagem;
+    @FXML private Label                            lblDataAtual;
 
     // ------------------------------------------------------------------
     // Estado interno
@@ -54,6 +56,9 @@ public class OcorrenciaListController {
 
     @FXML
     public void initialize() {
+        if (lblDataAtual != null) {
+            lblDataAtual.setText(LocalDate.now().format(DateTimeFormatter.ofPattern("EEEE, d 'de' MMMM 'de' yyyy", new java.util.Locale("pt", "BR"))));
+        }
         configurarFiltroSituacao();
         configurarColunas();
         configurarBusca();
@@ -66,7 +71,7 @@ public class OcorrenciaListController {
 
     private void configurarFiltroSituacao() {
         cmbSituacao.setItems(FXCollections.observableArrayList(
-            "Todos", "ABERTA", "EM_ANDAMENTO", "ENCERRADA"
+            "Todos", "Aberta", "Em andamento", "Em análise", "Resolvida"
         ));
         cmbSituacao.getSelectionModel().selectFirst(); // "Todos" por padrao
     }
@@ -151,11 +156,11 @@ public class OcorrenciaListController {
         colAcoes.setCellFactory(col -> new TableCell<>() {
             private final Button btnEditar  = new Button("✎");
             private final Button btnExcluir = new Button("🗑");
-            private final HBox   caixa      = new HBox(4, btnEditar, btnExcluir);
+            private final HBox   caixa      = new HBox(8, btnEditar, btnExcluir);
 
             {
-                btnEditar .getStyleClass().add("btn-acao-editar");
-                btnExcluir.getStyleClass().add("btn-acao-excluir");
+                btnEditar.setStyle("-fx-background-color: #dcfce7; -fx-text-fill: #15803d; -fx-background-radius: 4; -fx-padding: 4 8; -fx-cursor: hand; -fx-border-color: transparent;");
+                btnExcluir.setStyle("-fx-background-color: #fee2e2; -fx-text-fill: #b91c1c; -fx-background-radius: 4; -fx-padding: 4 8; -fx-cursor: hand; -fx-border-color: transparent;");
 
                 btnEditar.setOnAction(e -> {
                     Ocorrencia o = getTableView().getItems().get(getIndex());
@@ -297,40 +302,50 @@ public class OcorrenciaListController {
     // ------------------------------------------------------------------
 
     private String situacaoExibicao(String situacao) {
-        return switch (situacao == null ? "" : situacao.toUpperCase()) {
+        if (situacao == null) return "";
+        return switch (situacao.toUpperCase()) {
             case "ABERTA"       -> "Aberta";
-            case "EM_ANDAMENTO" -> "Em andamento";
-            case "ENCERRADA"    -> "Encerrada";
+            case "EM_ANDAMENTO", "EM ANDAMENTO" -> "Em andamento";
+            case "EM_ANALISE", "EM ANÁLISE" -> "Em análise";
+            case "ENCERRADA", "RESOLVIDA"    -> "Resolvida";
             default             -> situacao;
         };
     }
 
     private String badgeCssSituacao(String situacao) {
-        return switch (situacao == null ? "" : situacao.toUpperCase()) {
+        if (situacao == null) return "badge-ocorrencia-aberta";
+        return switch (situacao.toUpperCase()) {
             case "ABERTA"       -> "badge-ocorrencia-aberta";
-            case "EM_ANDAMENTO" -> "badge-ocorrencia-em-andamento";
-            case "ENCERRADA"    -> "badge-ocorrencia-encerrada";
-            default             -> "badge-desocupada";
+            case "EM_ANDAMENTO", "EM ANDAMENTO" -> "badge-ocorrencia-em-andamento";
+            case "EM_ANALISE", "EM ANÁLISE" -> "badge-ocorrencia-analise";
+            case "ENCERRADA", "RESOLVIDA"    -> "badge-ocorrencia-encerrada";
+            default             -> "badge-ocorrencia-aberta";
         };
     }
 
     private String categoriaExibicao(String categoria) {
-        return switch (categoria == null ? "" : categoria.toUpperCase()) {
-            case "RECLAMACAO" -> "Reclamação";
-            case "INFORMACAO" -> "Informação";
-            case "MANUTENCAO" -> "Manutenção";
-            case "SEGURANCA"  -> "Segurança";
-            default           -> categoria;
+        if (categoria == null) return "";
+        return switch (categoria.toUpperCase()) {
+            case "INFRAESTRUTURA" -> "Infraestrutura";
+            case "CONVIVÊNCIA", "CONVIVENCIA" -> "Convivência";
+            case "ELÉTRICA", "ELETRICA" -> "Elétrica";
+            case "EQUIPAMENTO" -> "Equipamento";
+            case "SEGURANÇA", "SEGURANCA" -> "Segurança";
+            case "HIDRÁULICA", "HIDRAULICA" -> "Hidráulica";
+            default -> categoria;
         };
     }
 
     private String badgeCssTipo(String categoria) {
-        return switch (categoria == null ? "" : categoria.toUpperCase()) {
-            case "RECLAMACAO" -> "badge-tipo-reclamacao";
-            case "INFORMACAO" -> "badge-tipo-informacao";
-            case "MANUTENCAO" -> "badge-tipo-manutencao";
-            case "SEGURANCA"  -> "badge-tipo-seguranca";
-            default           -> "badge-desocupada";
+        if (categoria == null) return "badge-tipo-infra";
+        return switch (categoria.toUpperCase()) {
+            case "INFRAESTRUTURA" -> "badge-tipo-infra";
+            case "CONVIVÊNCIA", "CONVIVENCIA" -> "badge-tipo-convivencia";
+            case "ELÉTRICA", "ELETRICA" -> "badge-tipo-eletrica";
+            case "EQUIPAMENTO" -> "badge-tipo-equipamento";
+            case "SEGURANÇA", "SEGURANCA" -> "badge-tipo-seguranca";
+            case "HIDRÁULICA", "HIDRAULICA" -> "badge-tipo-hidraulica";
+            default -> "badge-tipo-infra";
         };
     }
 

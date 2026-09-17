@@ -190,71 +190,149 @@
 /* ============================================================ */
 
 .badge-ocorrencia-aberta {
-    -fx-background-color: #dbeafe;
-    -fx-text-fill: #1d4ed8;
-    -fx-font-size: 11px;
-    -fx-font-weight: bold;
-    -fx-background-radius: 20;
-    -fx-padding: 3 10 3 10;
-}
-
-.badge-ocorrencia-em-andamento {
-    -fx-background-color: #fef9c3;
-    -fx-text-fill: #854d0e;
-    -fx-font-size: 11px;
-    -fx-font-weight: bold;
-    -fx-background-radius: 20;
-    -fx-padding: 3 10 3 10;
-}
-
-.badge-ocorrencia-encerrada {
     -fx-background-color: #f1f5f9;
     -fx-text-fill: #475569;
     -fx-font-size: 11px;
     -fx-font-weight: bold;
-    -fx-background-radius: 20;
-    -fx-padding: 3 10 3 10;
+    -fx-background-radius: 4;
+    -fx-padding: 2 8 2 8;
+}
+
+.badge-ocorrencia-em-andamento {
+    -fx-background-color: #dbeafe;
+    -fx-text-fill: #1d4ed8;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 4;
+    -fx-padding: 2 8 2 8;
+}
+
+.badge-ocorrencia-encerrada {
+    -fx-background-color: #dcfce7;
+    -fx-text-fill: #15803d;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 4;
+    -fx-padding: 2 8 2 8;
+}
+
+.badge-ocorrencia-analise {
+    -fx-background-color: #fef9c3;
+    -fx-text-fill: #a16207;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 4;
+    -fx-padding: 2 8 2 8;
 }
 
 /* ============================================================ */
 /* Badges de tipo / categoria de Ocorrencias                    */
 /* ============================================================ */
 
-.badge-tipo-reclamacao {
-    -fx-background-color: #fee2e2;
-    -fx-text-fill: #b91c1c;
+.badge-tipo-infra {
+    -fx-background-color: #dbeafe;
+    -fx-text-fill: #1d4ed8;
     -fx-font-size: 11px;
     -fx-font-weight: bold;
-    -fx-background-radius: 20;
-    -fx-padding: 3 10 3 10;
+    -fx-background-radius: 4;
+    -fx-padding: 2 8 2 8;
 }
 
-.badge-tipo-informacao {
-    -fx-background-color: #e0f2fe;
-    -fx-text-fill: #0369a1;
+.badge-tipo-convivencia {
+    -fx-background-color: #fef9c3;
+    -fx-text-fill: #a16207;
     -fx-font-size: 11px;
     -fx-font-weight: bold;
-    -fx-background-radius: 20;
-    -fx-padding: 3 10 3 10;
+    -fx-background-radius: 4;
+    -fx-padding: 2 8 2 8;
 }
 
-.badge-tipo-manutencao {
-    -fx-background-color: #ffedd5;
-    -fx-text-fill: #c2410c;
+.badge-tipo-eletrica {
+    -fx-background-color: #dcfce7;
+    -fx-text-fill: #15803d;
     -fx-font-size: 11px;
     -fx-font-weight: bold;
-    -fx-background-radius: 20;
-    -fx-padding: 3 10 3 10;
+    -fx-background-radius: 4;
+    -fx-padding: 2 8 2 8;
+}
+
+.badge-tipo-equipamento {
+    -fx-background-color: #dbeafe;
+    -fx-text-fill: #1d4ed8;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 4;
+    -fx-padding: 2 8 2 8;
 }
 
 .badge-tipo-seguranca {
-    -fx-background-color: #f3e8ff;
-    -fx-text-fill: #7e22ce;
+    -fx-background-color: #f1f5f9;
+    -fx-text-fill: #475569;
     -fx-font-size: 11px;
     -fx-font-weight: bold;
-    -fx-background-radius: 20;
-    -fx-padding: 3 10 3 10;
+    -fx-background-radius: 4;
+    -fx-padding: 2 8 2 8;
 }
+
+.badge-tipo-hidraulica {
+    -fx-background-color: #dcfce7;
+    -fx-text-fill: #15803d;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 4;
+    -fx-padding: 2 8 2 8;
+}
+
+/* ============================================================ */
+/* Customizacoes TableView de Ocorrencias                       */
+/* ============================================================ */
+
+.table-view-ocorrencias {
+    -fx-background-color: white;
+    -fx-border-color: #e5e7eb;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-padding: 0;
+}
+.table-view-ocorrencias .column-header-background {
+    -fx-background-color: #f8fafc;
+    -fx-background-radius: 8 8 0 0;
+    -fx-padding: 10 0 10 0;
+    -fx-border-color: transparent transparent #e5e7eb transparent;
+    -fx-border-width: 0.8px;
+}
+.table-view-ocorrencias .column-header {
+    -fx-background-color: transparent;
+    -fx-size: 40px;
+    -fx-border-color: transparent;
+}
+.table-view-ocorrencias .column-header .label {
+    -fx-text-fill: #6b7280;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+}
+.table-view-ocorrencias .table-row-cell {
+    -fx-background-color: white;
+    -fx-border-color: transparent transparent #f1f5f9 transparent;
+    -fx-border-width: 0.8px;
+    -fx-cell-size: 50px;
+}
+.table-view-ocorrencias .table-row-cell:empty {
+    -fx-border-color: transparent;
+}
+.table-view-ocorrencias .table-cell {
+    -fx-border-color: transparent;
+    -fx-text-fill: #374151;
+    -fx-font-size: 13px;
+    -fx-alignment: center-left;
+}
+.table-view-ocorrencias .table-row-cell:hover {
+    -fx-background-color: #f8fafc;
+}
+.table-view-ocorrencias .table-cell:empty {
+    -fx-border-color: transparent;
+}
+
 
 /* ============================================================ */
 /* Badges de situacao de Reservas                               */
