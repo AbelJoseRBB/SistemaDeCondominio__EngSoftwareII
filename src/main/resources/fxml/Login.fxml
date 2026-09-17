@@ -19,8 +19,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.SVGPath?>
 
-<!-- Contêiner principal (Fundo da tela) -->
-<VBox alignment="CENTER" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" styleClass="root-pane" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.condomanager.controller.LoginController">
+<VBox alignment="CENTER" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" styleClass="root-pane" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.condomanager.controller.LoginController">
    <children>
       <!-- Cartão de Login (Card branco) -->
       <VBox alignment="TOP_CENTER" maxWidth="448.0" spacing="20.0" styleClass="login-card">
