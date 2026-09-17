@@ -105,7 +105,9 @@
                          -fx-padding: 8 12 8 12;
                          -fx-font-size: 13px;
                          -fx-text-fill: #334155;
-                         -fx-prompt-text-fill: #9ca3af;"/>
+                         -fx-prompt-text-fill: #9ca3af;
+                         -fx-focus-color: transparent;
+                         -fx-faint-focus-color: transparent;"/>
     </VBox>
 
     <!-- ============================================================ -->
@@ -126,7 +128,9 @@
                          -fx-padding: 8 12 8 12;
                          -fx-font-size: 13px;
                          -fx-text-fill: #334155;
-                         -fx-prompt-text-fill: #9ca3af;"/>
+                         -fx-prompt-text-fill: #9ca3af;
+                         -fx-focus-color: transparent;
+                         -fx-faint-focus-color: transparent;"/>
     </VBox>
 
     <!-- ============================================================ -->

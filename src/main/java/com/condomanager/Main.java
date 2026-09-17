@@ -28,18 +28,15 @@ public class Main extends Application {
         Parent root = loader.load();
 
         primaryStage.setTitle("CondoManager");
-        // Inicializa em modo janela com resolução confortável
-        primaryStage.setScene(new Scene(root, 1024, 768));
-        
-        // Habilita redimensionamento e o botão de maximizar do Windows
-        primaryStage.setResizable(true);
+        // Aumentei um pouquinho a altura inicial de 360 para 420 para o botao Entrar nao ficar cortado
+        primaryStage.setScene(new Scene(root, 780, 720));
+        primaryStage.setResizable(false); // Permite redimensionar a janela
 
-        // Filtro global de atalhos do teclado no Stage
+        // Filtro global de atalhos do teclado no Stage para Fullscreen (F11)
         primaryStage.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
             if (event.getCode() == KeyCode.F11) {
-                // Alterna o modo tela cheia
                 primaryStage.setFullScreen(!primaryStage.isFullScreen());
-                event.consume(); // Evita que o evento propague
+                event.consume();
             }
         });
 
