@@ -16,6 +16,13 @@ public class Reserva {
     private String situacao; // "CONFIRMADA", "CANCELADA", "PENDENTE"
     private String observacoes;
 
+    /**
+     * Campo transiente (nao persiste no banco).
+     * Preenchido pelo DAO via JOIN com a tabela unidade.
+     * Exibe "Bloco X – NNN" na TableView de reservas.
+     */
+    private String unidadeFormatada;
+
     public Reserva() {}
 
     // Getters e Setters
@@ -35,5 +42,7 @@ public class Reserva {
     public void setSituacao(String situacao) { this.situacao = situacao; }
     public String getObservacoes() { return observacoes; }
     public void setObservacoes(String observacoes) { this.observacoes = observacoes; }
+    public String getUnidadeFormatada() { return unidadeFormatada; }
+    public void setUnidadeFormatada(String unidadeFormatada) { this.unidadeFormatada = unidadeFormatada; }
 }
 
