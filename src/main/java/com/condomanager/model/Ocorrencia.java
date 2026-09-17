@@ -16,6 +16,14 @@ public class Ocorrencia {
     private LocalDateTime dataEncerramento;
     private String resposta;
 
+    /**
+     * Campo transiente (nao persiste no banco).
+     * Preenchido pelo DAO via JOIN com a tabela unidade.
+     * Exibe "Bloco X – NNN" quando vinculado a uma unidade,
+     * ou vazio quando a ocorrencia se refere a uma area comum.
+     */
+    private String localFormatado;
+
     public Ocorrencia() {}
 
     // Getters e Setters
@@ -37,5 +45,7 @@ public class Ocorrencia {
     public void setDataEncerramento(LocalDateTime dataEncerramento) { this.dataEncerramento = dataEncerramento; }
     public String getResposta() { return resposta; }
     public void setResposta(String resposta) { this.resposta = resposta; }
+    public String getLocalFormatado() { return localFormatado; }
+    public void setLocalFormatado(String localFormatado) { this.localFormatado = localFormatado; }
 }
 

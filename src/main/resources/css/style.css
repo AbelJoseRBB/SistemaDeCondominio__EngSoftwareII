@@ -184,3 +184,105 @@
 .btn-acao-excluir:hover {
     -fx-background-color: #ffe4e6;
 }
+
+/* ============================================================ */
+/* Badges de situacao de Ocorrencias                            */
+/* ============================================================ */
+
+.badge-ocorrencia-aberta {
+    -fx-background-color: #dbeafe;
+    -fx-text-fill: #1d4ed8;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 20;
+    -fx-padding: 3 10 3 10;
+}
+
+.badge-ocorrencia-em-andamento {
+    -fx-background-color: #fef9c3;
+    -fx-text-fill: #854d0e;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 20;
+    -fx-padding: 3 10 3 10;
+}
+
+.badge-ocorrencia-encerrada {
+    -fx-background-color: #f1f5f9;
+    -fx-text-fill: #475569;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 20;
+    -fx-padding: 3 10 3 10;
+}
+
+/* ============================================================ */
+/* Badges de tipo / categoria de Ocorrencias                    */
+/* ============================================================ */
+
+.badge-tipo-reclamacao {
+    -fx-background-color: #fee2e2;
+    -fx-text-fill: #b91c1c;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 20;
+    -fx-padding: 3 10 3 10;
+}
+
+.badge-tipo-informacao {
+    -fx-background-color: #e0f2fe;
+    -fx-text-fill: #0369a1;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 20;
+    -fx-padding: 3 10 3 10;
+}
+
+.badge-tipo-manutencao {
+    -fx-background-color: #ffedd5;
+    -fx-text-fill: #c2410c;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 20;
+    -fx-padding: 3 10 3 10;
+}
+
+.badge-tipo-seguranca {
+    -fx-background-color: #f3e8ff;
+    -fx-text-fill: #7e22ce;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 20;
+    -fx-padding: 3 10 3 10;
+}
+
+/* ============================================================ */
+/* Badges de situacao de Reservas                               */
+/* ============================================================ */
+
+.badge-reserva-confirmada {
+    -fx-background-color: #dcfce7;
+    -fx-text-fill: #15803d;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 20;
+    -fx-padding: 3 10 3 10;
+}
+
+.badge-reserva-pendente {
+    -fx-background-color: #fef9c3;
+    -fx-text-fill: #854d0e;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 20;
+    -fx-padding: 3 10 3 10;
+}
+
+.badge-reserva-cancelada {
+    -fx-background-color: #f1f5f9;
+    -fx-text-fill: #64748b;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 20;
+    -fx-padding: 3 10 3 10;
+}
