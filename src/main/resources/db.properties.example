@@ -4,4 +4,4 @@
 
 db.url=jdbc:mysql://localhost:3306/condominio_db
 db.user=root
-db.password=Arthur
+db.password=
