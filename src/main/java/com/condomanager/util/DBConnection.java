@@ -1,4 +1,4 @@
-﻿package com.condomanager.util;
+package com.condomanager.util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

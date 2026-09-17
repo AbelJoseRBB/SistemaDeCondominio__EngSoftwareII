@@ -1,4 +1,4 @@
-﻿-- ============================================================
+-- ============================================================
 -- Schema do Banco de Dados - Sistema de Gestao de Condominio
 -- Banco: MySQL 8.0+
 -- Execute este script para criar todas as tabelas.
@@ -112,4 +112,4 @@ CREATE TABLE IF NOT EXISTS veiculo (
 -- Senha: admin123 (hash BCrypt - TROQUE em producao!)
 -- ============================================================
 INSERT INTO usuario (nome, login, senha_hash, perfil)
-VALUES ('Administrador', 'admin', '$2a$10$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36WQoeG6Lruj3vjPGga31lW', 'ADMIN');
+VALUES ('Administrador', 'admin', '$2a$10$tyWUHDECdFpz9iZr2aZyJ..QWWRIzttF4yhXkCk4lU8umqjL0xxTa', 'ADMIN');

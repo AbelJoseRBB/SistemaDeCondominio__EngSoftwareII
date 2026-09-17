@@ -1,4 +1,4 @@
-﻿package com.condomanager.model;
+package com.condomanager.model;
 
 /**
  * Representa um morador vinculado a uma unidade do condominio.

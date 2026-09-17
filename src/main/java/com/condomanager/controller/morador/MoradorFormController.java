@@ -1,4 +1,4 @@
-﻿package com.condomanager.controller.morador;
+package com.condomanager.controller.morador;
 
 import javafx.fxml.FXML;
 

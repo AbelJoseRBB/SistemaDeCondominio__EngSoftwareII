@@ -1,4 +1,4 @@
-﻿package com.condomanager.service;
+package com.condomanager.service;
 
 import com.condomanager.dao.UsuarioDAO;
 import com.condomanager.model.Usuario;
@@ -21,6 +21,10 @@ public class AuthService {
         if (usuario == null) {
             return false;
         }
+
+        System.out.println("Senha recebida: " + senha);
+        System.out.println("BCrypt confere: " + BCrypt.checkpw(senha, usuario.getSenhaHash()));
+        System.out.println("Hash: " + BCrypt.hashpw("admin123", BCrypt.gensalt()));
         // Verifica a senha usando BCrypt
         if (BCrypt.checkpw(senha, usuario.getSenhaHash())) {
             SessionManager.setUsuarioLogado(usuario);

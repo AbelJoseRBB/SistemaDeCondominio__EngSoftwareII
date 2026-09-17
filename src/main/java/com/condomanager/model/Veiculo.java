@@ -1,4 +1,4 @@
-﻿package com.condomanager.model;
+package com.condomanager.model;
 
 /**
  * Representa um veiculo vinculado a uma unidade do condominio.
