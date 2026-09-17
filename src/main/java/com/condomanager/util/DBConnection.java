@@ -1,30 +1,41 @@
 package com.condomanager.util;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Properties;
 
 /**
  * Utilitario de conexao com o banco de dados.
  * Utiliza o padrao Singleton para manter uma unica conexao ativa.
+ * As credenciais sao lidas do arquivo db.properties (fora do controle de versao).
  */
 public class DBConnection {
 
-    // TODO: Mova estas configuracoes para um arquivo .properties
-    private static final String URL      = "jdbc:mysql://localhost:3306/condominio_db";
-    private static final String USER     = "root";
-    private static final String PASSWORD = "sua_senha_aqui";
+    private static final String PROPERTIES_FILE = "/db.properties";
+
+    private static String url;
+    private static String user;
+    private static String password;
 
     private static Connection instance;
+
+    static {
+        carregarPropriedades();
+    }
 
     private DBConnection() {}
 
     /**
-     * Retorna a conexao ativa. Cria uma nova se nao existir ou estiver fechada.
+     * Retorna a conexao ativa com o banco. Cria uma nova se nao existir ou estiver fechada.
+     *
+     * @throws RuntimeException se o db.properties nao for encontrado ou a conexao falhar
      */
     public static Connection getConnection() throws SQLException {
         if (instance == null || instance.isClosed()) {
-            instance = DriverManager.getConnection(URL, USER, PASSWORD);
+            instance = DriverManager.getConnection(url, user, password);
         }
         return instance;
     }
@@ -41,5 +52,28 @@ public class DBConnection {
             e.printStackTrace();
         }
     }
-}
 
+    /**
+     * Carrega as propriedades de conexao do arquivo db.properties.
+     * O arquivo deve estar em src/main/resources/db.properties.
+     * Copie db.properties.example e preencha com suas credenciais locais.
+     */
+    private static void carregarPropriedades() {
+        Properties props = new Properties();
+
+        try (InputStream input = DBConnection.class.getResourceAsStream(PROPERTIES_FILE)) {
+            if (input == null) {
+                throw new RuntimeException(
+                    "Arquivo db.properties nao encontrado em resources/.\n" +
+                    "Copie db.properties.example para db.properties e preencha sua senha."
+                );
+            }
+            props.load(input);
+            url      = props.getProperty("db.url");
+            user     = props.getProperty("db.user");
+            password = props.getProperty("db.password");
+        } catch (IOException e) {
+            throw new RuntimeException("Erro ao carregar db.properties: " + e.getMessage(), e);
+        }
+    }
+}
