@@ -96,6 +96,9 @@
             <TableView fx:id="tabelaOcorrencias"
                        VBox.vgrow="ALWAYS"
                        styleClass="table-view-ocorrencias">
+                <columnResizePolicy>
+                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+                </columnResizePolicy>
                 <placeholder>
                     <Label text="Nenhuma ocorrência registrada."
                            style="-fx-text-fill: #9ca3af; -fx-font-size: 14px; -fx-font-family: 'Inter';"/>
@@ -104,24 +107,28 @@
                     <!-- Descricao da ocorrencia -->
                     <TableColumn fx:id="colDescricao"
                                  text="DESCRIÇÃO"
+                                 reorderable="false"
                                  prefWidth="380"
                                  style="-fx-font-weight: bold; -fx-text-fill: #374151;"/>
 
                     <!-- Local / Unidade vinculada -->
                     <TableColumn fx:id="colLocal"
                                  text="LOCAL / UNIDADE"
+                                 reorderable="false"
                                  prefWidth="180"
                                  style="-fx-text-fill: #9ca3af;"/>
 
                     <!-- Data de abertura -->
                     <TableColumn fx:id="colData"
                                  text="DATA"
+                                 reorderable="false"
                                  prefWidth="130"
                                  style="-fx-alignment: CENTER-LEFT; -fx-text-fill: #9ca3af;"/>
 
                     <!-- Tipo / Categoria - badge colorido -->
                     <TableColumn fx:id="colTipo"
                                  text="TIPO"
+                                 reorderable="false"
                                  prefWidth="160"
                                  sortable="true"
                                  style="-fx-alignment: CENTER-LEFT;"/>
@@ -129,6 +136,7 @@
                     <!-- Situacao - badge colorido -->
                     <TableColumn fx:id="colSituacao"
                                  text="SITUAÇÃO"
+                                 reorderable="false"
                                  prefWidth="160"
                                  sortable="true"
                                  style="-fx-alignment: CENTER-LEFT;"/>
@@ -136,6 +144,7 @@
                     <!-- Acoes: editar + excluir -->
                     <TableColumn fx:id="colAcoes"
                                  text="AÇÕES"
+                                 reorderable="false"
                                  prefWidth="100"
                                  sortable="false"
                                  style="-fx-alignment: CENTER-LEFT;"/>
