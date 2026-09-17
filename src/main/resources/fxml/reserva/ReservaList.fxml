@@ -1,3 +1,148 @@
-<!-- Tela de lista de Reserva - construa manualmente -->
-<!-- Controller: com.condomanager.controller.reserva.ReservaListController -->
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+
+<!--
+    TELA DE LISTAGEM DE RESERVAS
+    Exibe tabela com todas as reservas, busca em tempo real,
+    filtro por situacao e botao para abrir o formulario modal de cadastro/edicao.
+    Controller: com.condomanager.controller.reserva.ReservaListController
+-->
+<VBox xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.condomanager.controller.reserva.ReservaListController"
+      spacing="0"
+      style="-fx-background-color: #f5f7fa;">
+
+    <!-- ================================================================ -->
+    <!-- CABECALHO DA PAGINA                                               -->
+    <!-- ================================================================ -->
+    <HBox alignment="CENTER_LEFT"
+          style="-fx-padding: 24 28 16 28; -fx-background-color: #f5f7fa;">
+
+        <!-- Titulo e subtitulo -->
+        <VBox spacing="2" HBox.hgrow="ALWAYS">
+            <Label text="Reservas"
+                   style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #1a2332;"/>
+            <Label text="Gerenciamento de reservas de areas comuns"
+                   style="-fx-font-size: 13px; -fx-text-fill: #7a8b9a;"/>
+        </VBox>
+
+        <!-- Campo de busca -->
+        <TextField fx:id="txtBusca"
+                   promptText="Buscar por area ou unidade..."
+                   prefWidth="260"
+                   style="-fx-background-color: white;
+                          -fx-border-color: #d1d5db;
+                          -fx-border-radius: 5;
+                          -fx-background-radius: 5;
+                          -fx-padding: 8 12 8 12;
+                          -fx-font-size: 13px;
+                          -fx-text-fill: #334155;
+                          -fx-prompt-text-fill: #9ca3af;">
+            <HBox.margin>
+                <Insets right="10"/>
+            </HBox.margin>
+        </TextField>
+
+        <!-- Filtro por situacao -->
+        <ComboBox fx:id="cmbSituacao"
+                  prefWidth="150"
+                  style="-fx-background-color: white;
+                         -fx-border-color: #d1d5db;
+                         -fx-border-radius: 5;
+                         -fx-background-radius: 5;
+                         -fx-font-size: 13px;">
+            <HBox.margin>
+                <Insets right="10"/>
+            </HBox.margin>
+        </ComboBox>
+
+        <!-- Botao Nova Reserva -->
+        <Button fx:id="btnNovaReserva"
+                text="+ Nova Reserva"
+                onAction="#onNovaReserva"
+                style="-fx-background-color: #203a5c;
+                       -fx-text-fill: white;
+                       -fx-font-size: 13px;
+                       -fx-font-weight: bold;
+                       -fx-background-radius: 5;
+                       -fx-padding: 9 18 9 18;
+                       -fx-cursor: hand;"/>
+    </HBox>
+
+    <!-- ================================================================ -->
+    <!-- TABELA DE RESERVAS                                                -->
+    <!-- ================================================================ -->
+    <VBox VBox.vgrow="ALWAYS"
+          style="-fx-padding: 0 28 0 28;">
+
+        <TableView fx:id="tabelaReservas"
+                   VBox.vgrow="ALWAYS"
+                   style="-fx-background-color: white;
+                          -fx-border-color: #e5e7eb;
+                          -fx-border-radius: 8;
+                          -fx-background-radius: 8;">
+            <placeholder>
+                <Label text="Nenhuma reserva cadastrada."
+                       style="-fx-text-fill: #9ca3af; -fx-font-size: 14px;"/>
+            </placeholder>
+            <columns>
+
+                <!-- Unidade responsavel pela reserva -->
+                <TableColumn fx:id="colUnidade"
+                             text="UNIDADE"
+                             prefWidth="150"/>
+
+                <!-- Area comum reservada -->
+                <TableColumn fx:id="colArea"
+                             text="ÁREA COMUM"
+                             prefWidth="170"/>
+
+                <!-- Data da reserva -->
+                <TableColumn fx:id="colData"
+                             text="DATA"
+                             prefWidth="110"
+                             style="-fx-alignment: CENTER;"/>
+
+                <!-- Hora de inicio -->
+                <TableColumn fx:id="colHoraInicio"
+                             text="HORA INÍCIO"
+                             prefWidth="100"
+                             style="-fx-alignment: CENTER;"/>
+
+                <!-- Hora de fim -->
+                <TableColumn fx:id="colHoraFim"
+                             text="HORA FIM"
+                             prefWidth="100"
+                             style="-fx-alignment: CENTER;"/>
+
+                <!-- Situacao - badge colorido -->
+                <TableColumn fx:id="colSituacao"
+                             text="SITUAÇÃO"
+                             prefWidth="120"
+                             sortable="true"
+                             style="-fx-alignment: CENTER;"/>
+
+                <!-- Acoes: editar + cancelar -->
+                <TableColumn fx:id="colAcoes"
+                             text="AÇÕES"
+                             prefWidth="90"
+                             sortable="false"
+                             style="-fx-alignment: CENTER;"/>
+
+            </columns>
+        </TableView>
+    </VBox>
+
+    <!-- ================================================================ -->
+    <!-- RODAPE COM CONTAGEM DE REGISTROS                                  -->
+    <!-- ================================================================ -->
+    <HBox style="-fx-padding: 10 28 16 28;">
+        <Label fx:id="lblContagem"
+               text="0 registro(s)"
+               style="-fx-font-size: 12px; -fx-text-fill: #7a8b9a;"/>
+    </HBox>
+
+</VBox>
+
