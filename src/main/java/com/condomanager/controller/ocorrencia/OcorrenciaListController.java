@@ -282,6 +282,7 @@ public class OcorrenciaListController {
     /** Confirma e executa a exclusao de uma ocorrencia. */
     private void onExcluir(Ocorrencia ocorrencia) {
         Alert confirmacao = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmacao.getDialogPane().getStylesheets().add(getClass().getResource("/css/style.css").toExternalForm());
         confirmacao.setTitle("Confirmar exclusão");
         confirmacao.setHeaderText("Excluir ocorrência: " + ocorrencia.getTitulo() + "?");
         confirmacao.setContentText("Esta acao nao pode ser desfeita.");
@@ -351,6 +352,7 @@ public class OcorrenciaListController {
 
     private void mostrarErro(String titulo, String mensagem) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.getDialogPane().getStylesheets().add(getClass().getResource("/css/style.css").toExternalForm());
         alert.setTitle(titulo);
         alert.setHeaderText(titulo);
         alert.setContentText(mensagem);

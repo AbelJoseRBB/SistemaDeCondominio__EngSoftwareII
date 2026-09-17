@@ -364,3 +364,49 @@
     -fx-background-radius: 20;
     -fx-padding: 3 10 3 10;
 }
+
+/* ============================================================ */
+/* Customizacoes dos Popups (Alertas nativos do JavaFX)         */
+/* ============================================================ */
+
+.dialog-pane {
+    -fx-background-color: white;
+    -fx-font-family: "Inter", "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-min-width: 400px;
+}
+
+.dialog-pane > .content.label {
+    -fx-padding: 10 15 15 15;
+    -fx-text-fill: #4b5563;
+    -fx-font-size: 14px;
+    -fx-wrap-text: true;
+}
+
+.dialog-pane:header .header-panel {
+    -fx-background-color: #f8fafc;
+    -fx-padding: 15;
+}
+
+.dialog-pane:header .header-panel .label {
+    -fx-text-fill: #1f375b;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+.dialog-pane > .button-bar > .container {
+    -fx-padding: 15;
+}
+
+.dialog-pane > .button-bar > .container > .button {
+    -fx-background-color: #203a5c;
+    -fx-text-fill: white;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 5;
+    -fx-padding: 8 20 8 20;
+    -fx-cursor: hand;
+}
+
+.dialog-pane > .button-bar > .container > .button:hover {
+    -fx-background-color: #172a43;
+}

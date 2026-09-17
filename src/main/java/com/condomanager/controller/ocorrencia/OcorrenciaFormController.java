@@ -240,6 +240,7 @@ public class OcorrenciaFormController {
 
     private void mostrarAlerta(Alert.AlertType tipo, String titulo, String mensagem) {
         Alert alert = new Alert(tipo);
+        alert.getDialogPane().getStylesheets().add(getClass().getResource("/css/style.css").toExternalForm());
         alert.setTitle(titulo);
         alert.setHeaderText(titulo);
         alert.setContentText(mensagem);

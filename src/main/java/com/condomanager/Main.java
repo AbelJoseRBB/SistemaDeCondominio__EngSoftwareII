@@ -28,8 +28,18 @@ public class Main extends Application {
         Parent root = loader.load();
 
         primaryStage.setTitle("CondoManager");
-        primaryStage.setScene(new Scene(root, 480, 360));
-        primaryStage.setResizable(false);
+        // Aumentei um pouquinho a altura inicial de 360 para 420 para o botao Entrar nao ficar cortado
+        primaryStage.setScene(new Scene(root, 780, 720));
+        primaryStage.setResizable(false); // Permite redimensionar a janela
+
+        // Filtro global de atalhos do teclado no Stage para Fullscreen (F11)
+        primaryStage.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+            if (event.getCode() == KeyCode.F11) {
+                primaryStage.setFullScreen(!primaryStage.isFullScreen());
+                event.consume();
+            }
+        });
+
         primaryStage.show();
     }
 
