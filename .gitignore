@@ -30,6 +30,7 @@ src/main/resources/db.properties
 # Arquivos de config antigos (legado)
 src/main/resources/database.properties
 src/main/resources/config.properties
+src/main/resources/db.properties
 
 # Logs
 *.log
