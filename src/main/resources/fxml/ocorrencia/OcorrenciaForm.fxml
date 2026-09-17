@@ -1,3 +1,167 @@
-<!-- Tela de formulario de Ocorrencia - construa manualmente -->
-<!-- Controller: com.condomanager.controller.ocorrencia.OcorrenciaFormController -->
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+
+<!--
+    FORMULARIO DE CADASTRO / EDICAO DE OCORRENCIA
+    Carregado como conteudo de um Dialog pelo OcorrenciaListController.
+    Controller: com.condomanager.controller.ocorrencia.OcorrenciaFormController
+-->
+<VBox xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.condomanager.controller.ocorrencia.OcorrenciaFormController"
+      spacing="16"
+      prefWidth="520"
+      style="-fx-padding: 24 28 8 28; -fx-background-color: white;">
+
+    <!-- ============================================================ -->
+    <!-- LINHA 1: Categoria + Situacao                                 -->
+    <!-- ============================================================ -->
+    <HBox spacing="16">
+
+        <!-- Tipo / Categoria -->
+        <VBox spacing="6" HBox.hgrow="ALWAYS">
+            <Label text="Tipo / Categoria *"
+                   style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #334155;"/>
+            <ComboBox fx:id="cmbCategoria"
+                      maxWidth="Infinity"
+                      style="-fx-background-color: white;
+                             -fx-border-color: #d1d5db;
+                             -fx-border-radius: 5;
+                             -fx-background-radius: 5;
+                             -fx-font-size: 13px;"/>
+        </VBox>
+
+        <!-- Situacao (bloqueada no cadastro; editavel na edicao) -->
+        <VBox spacing="6" HBox.hgrow="ALWAYS">
+            <Label text="Situação"
+                   style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #334155;"/>
+            <ComboBox fx:id="cmbSituacao"
+                      maxWidth="Infinity"
+                      style="-fx-background-color: white;
+                             -fx-border-color: #d1d5db;
+                             -fx-border-radius: 5;
+                             -fx-background-radius: 5;
+                             -fx-font-size: 13px;"/>
+        </VBox>
+
+    </HBox>
+
+    <!-- ============================================================ -->
+    <!-- LINHA 2: Titulo (largura total)                               -->
+    <!-- ============================================================ -->
+    <VBox spacing="6">
+        <Label text="Título da Ocorrência *"
+               style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #334155;"/>
+        <TextField fx:id="txtTitulo"
+                   promptText="Descreva brevemente a ocorrencia"
+                   maxWidth="Infinity"
+                   style="-fx-background-color: white;
+                          -fx-border-color: #d1d5db;
+                          -fx-border-radius: 5;
+                          -fx-background-radius: 5;
+                          -fx-padding: 8 12 8 12;
+                          -fx-font-size: 13px;
+                          -fx-text-fill: #334155;
+                          -fx-prompt-text-fill: #9ca3af;"/>
+    </VBox>
+
+    <!-- ============================================================ -->
+    <!-- LINHA 3: Local / Unidade (largura total)                      -->
+    <!-- ============================================================ -->
+    <VBox spacing="6">
+        <Label text="Local / Unidade"
+               style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #334155;"/>
+        <TextField fx:id="txtLocal"
+                   promptText="Ex: Garagem B2, Bloco A - 3° andar, Area externa..."
+                   maxWidth="Infinity"
+                   style="-fx-background-color: white;
+                          -fx-border-color: #d1d5db;
+                          -fx-border-radius: 5;
+                          -fx-background-radius: 5;
+                          -fx-padding: 8 12 8 12;
+                          -fx-font-size: 13px;
+                          -fx-text-fill: #334155;
+                          -fx-prompt-text-fill: #9ca3af;"/>
+        <Label text="Deixe em branco para ocorrencias sem local especifico."
+               style="-fx-font-size: 11px; -fx-text-fill: #9ca3af;"/>
+    </VBox>
+
+    <!-- ============================================================ -->
+    <!-- LINHA 4: Descricao (TextArea obrigatoria)                     -->
+    <!-- ============================================================ -->
+    <VBox spacing="6">
+        <Label text="Descrição *"
+               style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #334155;"/>
+        <TextArea fx:id="txtDescricao"
+                  promptText="Descreva detalhadamente a ocorrencia..."
+                  prefRowCount="4"
+                  wrapText="true"
+                  maxWidth="Infinity"
+                  style="-fx-background-color: white;
+                         -fx-border-color: #d1d5db;
+                         -fx-border-radius: 5;
+                         -fx-background-radius: 5;
+                         -fx-padding: 8 12 8 12;
+                         -fx-font-size: 13px;
+                         -fx-text-fill: #334155;
+                         -fx-prompt-text-fill: #9ca3af;"/>
+    </VBox>
+
+    <!-- ============================================================ -->
+    <!-- LINHA 5: Observacoes (opcional)                               -->
+    <!-- ============================================================ -->
+    <VBox spacing="6">
+        <Label text="Observações (opcional)"
+               style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #334155;"/>
+        <TextArea fx:id="txtObservacoes"
+                  promptText="Informacoes adicionais, resposta ou encaminhamento..."
+                  prefRowCount="3"
+                  wrapText="true"
+                  maxWidth="Infinity"
+                  style="-fx-background-color: white;
+                         -fx-border-color: #d1d5db;
+                         -fx-border-radius: 5;
+                         -fx-background-radius: 5;
+                         -fx-padding: 8 12 8 12;
+                         -fx-font-size: 13px;
+                         -fx-text-fill: #334155;
+                         -fx-prompt-text-fill: #9ca3af;"/>
+    </VBox>
+
+    <!-- ============================================================ -->
+    <!-- SEPARADOR + BOTOES                                            -->
+    <!-- ============================================================ -->
+    <Separator style="-fx-padding: 4 0 0 0;"/>
+
+    <HBox alignment="CENTER_RIGHT" spacing="12"
+          style="-fx-padding: 0 0 4 0;">
+
+        <Button fx:id="btnCancelar"
+                text="Cancelar"
+                onAction="#onCancelar"
+                style="-fx-background-color: white;
+                       -fx-text-fill: #374151;
+                       -fx-font-size: 13px;
+                       -fx-border-color: #d1d5db;
+                       -fx-border-radius: 5;
+                       -fx-background-radius: 5;
+                       -fx-padding: 8 20 8 20;
+                       -fx-cursor: hand;"/>
+
+        <Button fx:id="btnSalvar"
+                text="Salvar"
+                onAction="#onSalvar"
+                defaultButton="true"
+                style="-fx-background-color: #203a5c;
+                       -fx-text-fill: white;
+                       -fx-font-size: 13px;
+                       -fx-font-weight: bold;
+                       -fx-border-radius: 5;
+                       -fx-background-radius: 5;
+                       -fx-padding: 8 20 8 20;
+                       -fx-cursor: hand;"/>
+    </HBox>
+
+</VBox>
+
