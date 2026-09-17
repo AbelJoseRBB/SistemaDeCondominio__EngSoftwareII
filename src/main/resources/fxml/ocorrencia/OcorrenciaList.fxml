@@ -1,3 +1,144 @@
-<!-- Tela de lista de Ocorrencia - construa manualmente -->
-<!-- Controller: com.condomanager.controller.ocorrencia.OcorrenciaListController -->
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+
+<!--
+    TELA DE LISTAGEM DE OCORRENCIAS
+    Exibe tabela com todas as ocorrencias, busca em tempo real,
+    filtro por situacao e botao para abrir o formulario modal de cadastro/edicao.
+    Controller: com.condomanager.controller.ocorrencia.OcorrenciaListController
+-->
+<VBox xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.condomanager.controller.ocorrencia.OcorrenciaListController"
+      spacing="0"
+      style="-fx-background-color: #f5f7fa;">
+
+    <!-- ================================================================ -->
+    <!-- CABECALHO DA PAGINA                                               -->
+    <!-- ================================================================ -->
+    <HBox alignment="CENTER_LEFT"
+          style="-fx-padding: 24 28 16 28; -fx-background-color: #f5f7fa;">
+
+        <!-- Titulo e subtitulo -->
+        <VBox spacing="2" HBox.hgrow="ALWAYS">
+            <Label text="Ocorrências"
+                   style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #1a2332;"/>
+            <Label text="Registro e acompanhamento de ocorrencias"
+                   style="-fx-font-size: 13px; -fx-text-fill: #7a8b9a;"/>
+        </VBox>
+
+        <!-- Campo de busca -->
+        <TextField fx:id="txtBusca"
+                   promptText="Buscar por descricao ou local..."
+                   prefWidth="280"
+                   style="-fx-background-color: white;
+                          -fx-border-color: #d1d5db;
+                          -fx-border-radius: 5;
+                          -fx-background-radius: 5;
+                          -fx-padding: 8 12 8 12;
+                          -fx-font-size: 13px;
+                          -fx-text-fill: #334155;
+                          -fx-prompt-text-fill: #9ca3af;">
+            <HBox.margin>
+                <Insets right="10"/>
+            </HBox.margin>
+        </TextField>
+
+        <!-- Filtro por situacao -->
+        <ComboBox fx:id="cmbSituacao"
+                  prefWidth="140"
+                  style="-fx-background-color: white;
+                         -fx-border-color: #d1d5db;
+                         -fx-border-radius: 5;
+                         -fx-background-radius: 5;
+                         -fx-font-size: 13px;">
+            <HBox.margin>
+                <Insets right="10"/>
+            </HBox.margin>
+        </ComboBox>
+
+        <!-- Botao Nova Ocorrencia -->
+        <Button fx:id="btnNovaOcorrencia"
+                text="+ Nova Ocorrência"
+                onAction="#onNovaOcorrencia"
+                style="-fx-background-color: #203a5c;
+                       -fx-text-fill: white;
+                       -fx-font-size: 13px;
+                       -fx-font-weight: bold;
+                       -fx-background-radius: 5;
+                       -fx-padding: 9 18 9 18;
+                       -fx-cursor: hand;"/>
+    </HBox>
+
+    <!-- ================================================================ -->
+    <!-- TABELA DE OCORRENCIAS                                             -->
+    <!-- ================================================================ -->
+    <VBox VBox.vgrow="ALWAYS"
+          style="-fx-padding: 0 28 0 28;">
+
+        <TableView fx:id="tabelaOcorrencias"
+                   VBox.vgrow="ALWAYS"
+                   style="-fx-background-color: white;
+                          -fx-border-color: #e5e7eb;
+                          -fx-border-radius: 8;
+                          -fx-background-radius: 8;">
+            <placeholder>
+                <Label text="Nenhuma ocorrencia registrada."
+                       style="-fx-text-fill: #9ca3af; -fx-font-size: 14px;"/>
+            </placeholder>
+            <columns>
+
+                <!-- Descricao da ocorrencia -->
+                <TableColumn fx:id="colDescricao"
+                             text="DESCRIÇÃO"
+                             prefWidth="240"/>
+
+                <!-- Local / Unidade vinculada -->
+                <TableColumn fx:id="colLocal"
+                             text="LOCAL / UNIDADE"
+                             prefWidth="160"
+                             style="-fx-text-fill: #9ca3af;"/>
+
+                <!-- Data de abertura -->
+                <TableColumn fx:id="colData"
+                             text="DATA"
+                             prefWidth="110"
+                             style="-fx-alignment: CENTER;"/>
+
+                <!-- Tipo / Categoria - badge colorido -->
+                <TableColumn fx:id="colTipo"
+                             text="TIPO"
+                             prefWidth="130"
+                             sortable="true"
+                             style="-fx-alignment: CENTER;"/>
+
+                <!-- Situacao - badge colorido -->
+                <TableColumn fx:id="colSituacao"
+                             text="SITUAÇÃO"
+                             prefWidth="130"
+                             sortable="true"
+                             style="-fx-alignment: CENTER;"/>
+
+                <!-- Acoes: editar + excluir -->
+                <TableColumn fx:id="colAcoes"
+                             text="AÇÕES"
+                             prefWidth="90"
+                             sortable="false"
+                             style="-fx-alignment: CENTER;"/>
+
+            </columns>
+        </TableView>
+    </VBox>
+
+    <!-- ================================================================ -->
+    <!-- RODAPE COM CONTAGEM DE REGISTROS                                  -->
+    <!-- ================================================================ -->
+    <HBox style="-fx-padding: 10 28 16 28;">
+        <Label fx:id="lblContagem"
+               text="0 registro(s)"
+               style="-fx-font-size: 12px; -fx-text-fill: #7a8b9a;"/>
+    </HBox>
+
+</VBox>
+
