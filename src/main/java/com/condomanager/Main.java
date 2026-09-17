@@ -4,6 +4,8 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 /**
@@ -26,8 +28,21 @@ public class Main extends Application {
         Parent root = loader.load();
 
         primaryStage.setTitle("CondoManager");
-        primaryStage.setScene(new Scene(root, 480, 360));
-        primaryStage.setResizable(false);
+        // Inicializa em modo janela com resolução confortável
+        primaryStage.setScene(new Scene(root, 1024, 768));
+        
+        // Habilita redimensionamento e o botão de maximizar do Windows
+        primaryStage.setResizable(true);
+
+        // Filtro global de atalhos do teclado no Stage
+        primaryStage.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+            if (event.getCode() == KeyCode.F11) {
+                // Alterna o modo tela cheia
+                primaryStage.setFullScreen(!primaryStage.isFullScreen());
+                event.consume(); // Evita que o evento propague
+            }
+        });
+
         primaryStage.show();
     }
 

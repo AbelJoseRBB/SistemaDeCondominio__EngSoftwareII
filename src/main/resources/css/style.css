@@ -1,6 +1,6 @@
 /* Fundo geral da aplicação */
 .root-pane {
-    -fx-background-color: #f4f6f9;
+    -fx-background-color: #f1f5f9;
 }
 
 /* Cartão branco central */
@@ -285,4 +285,4 @@
     -fx-font-weight: bold;
     -fx-background-radius: 20;
     -fx-padding: 3 10 3 10;
-}
+}
