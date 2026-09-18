@@ -110,6 +110,8 @@ CREATE TABLE IF NOT EXISTS veiculo (
 -- ============================================================
 -- Dados iniciais: usuario administrador padrao
 -- Senha: admin123 (hash BCrypt - TROQUE em producao!)
+-- INSERT IGNORE: seguro para executar multiplas vezes;
+-- ignora silenciosamente se o login 'admin' ja existir.
 -- ============================================================
-INSERT INTO usuario (nome, login, senha_hash, perfil)
+INSERT IGNORE INTO usuario (nome, login, senha_hash, perfil)
 VALUES ('Administrador', 'admin', '$2a$10$tyWUHDECdFpz9iZr2aZyJ..QWWRIzttF4yhXkCk4lU8umqjL0xxTa', 'ADMIN');
