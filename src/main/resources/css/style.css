@@ -426,88 +426,166 @@
 }
 
 /* ============================================================ */
-/* Menu Lateral / Sidebar (MainLayout)                         */
+/* Novo Design da Sidebar (Menu Lateral)                        */
 /* ============================================================ */
 
-.sidebar-container {
-    -fx-background-color: #1a2332;
+.sidebar {
+    -fx-background-color: #1e3a5f;
+    -fx-pref-width: 220px;
+    -fx-padding: 0;
 }
 
-.sidebar-logo-title {
-    -fx-text-fill: #ffffff;
-    -fx-font-size: 18px;
+.sidebar-header {
+    -fx-padding: 24 20 20 20;
+    -fx-border-width: 0 0 0.8 0;
+    -fx-border-color: transparent transparent #ffffff14 transparent;
+}
+
+.sidebar-logo-container {
+    -fx-spacing: 12px;
+    -fx-alignment: center-left;
+}
+
+.sidebar-logo-icon {
+    -fx-background-color: #ffffff26;
+    -fx-background-radius: 7px;
+    -fx-pref-width: 36px;
+    -fx-pref-height: 36px;
+    -fx-min-width: 36px;
+    -fx-min-height: 36px;
+    -fx-alignment: center;
+}
+
+.sidebar-logo-svg {
+    -fx-fill: white;
+}
+
+.sidebar-title-container {
+    -fx-spacing: 0px;
+}
+
+.sidebar-title {
+    -fx-font-family: "Inter", "Segoe UI", Helvetica, Arial, sans-serif;
     -fx-font-weight: bold;
-    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 15px;
 }
 
-.sidebar-logo-subtitle {
-    -fx-text-fill: #8899aa;
+.sidebar-subtitle {
+    -fx-font-family: "Inter", "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-text-fill: #ffffff80;
     -fx-font-size: 11px;
 }
 
-.sidebar-nav-btn {
+.sidebar-nav {
+    -fx-padding: 12 10 12 10;
+    -fx-spacing: 2px;
+}
+
+.sidebar-btn {
     -fx-background-color: transparent;
-    -fx-text-fill: #cbd5e1;
+    -fx-text-fill: #ffffffa6;
     -fx-font-size: 13px;
-    -fx-font-weight: normal;
-    -fx-alignment: CENTER_LEFT;
-    -fx-padding: 10 16 10 16;
-    -fx-background-radius: 6;
+    -fx-font-family: "Inter", "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-padding: 9 12 9 12;
+    -fx-alignment: center-left;
+    -fx-graphic-text-gap: 10px;
+    -fx-background-radius: 6px;
     -fx-cursor: hand;
-    -fx-border-color: transparent;
 }
 
-.sidebar-nav-btn:hover {
-    -fx-background-color: #26354a;
+.sidebar-btn:hover {
+    -fx-background-color: #ffffff1f;
     -fx-text-fill: #ffffff;
 }
 
-.sidebar-nav-btn-active {
-    -fx-background-color: #203a5c;
-    -fx-text-fill: #ffffff;
-    -fx-font-weight: bold;
-    -fx-background-radius: 6;
-    -fx-border-width: 0 0 0 4;
-    -fx-border-color: #38bdf8;
-}
-
-.sidebar-user-box {
-    -fx-background-color: #151c28;
-    -fx-background-radius: 8;
-    -fx-padding: 12 14 12 14;
-    -fx-border-color: #222e42;
-    -fx-border-radius: 8;
-}
-
-.sidebar-user-name {
+.sidebar-btn-active {
+    -fx-background-color: #ffffff1f;
     -fx-text-fill: #ffffff;
     -fx-font-weight: bold;
-    -fx-font-size: 13px;
+    -fx-border-width: 0 0 0 3px;
+    -fx-border-color: transparent transparent transparent #60a5fa;
+    -fx-border-radius: 2px;
+    -fx-background-radius: 6px;
 }
 
-.sidebar-user-role {
-    -fx-text-fill: #94a3b8;
+.graphic-container {
+    -fx-min-width: 24px;
+    -fx-pref-width: 24px;
+    -fx-max-width: 24px;
+    -fx-alignment: center;
+}
+
+.sidebar-btn .svg-icon, .sidebar-btn-active .svg-icon {
+    -fx-fill: #ffffffa6;
+}
+
+.sidebar-btn:hover .svg-icon, .sidebar-btn-active .svg-icon {
+    -fx-fill: #ffffff;
+}
+
+.sidebar-footer {
+    -fx-padding: 14 10 14 10;
+    -fx-border-width: 0.8 0 0 0;
+    -fx-border-color: #ffffff14 transparent transparent transparent;
+}
+
+.sidebar-user-container {
+    -fx-padding: 8 12 8 12;
+    -fx-spacing: 10px;
+    -fx-alignment: center-left;
+}
+
+.sidebar-avatar {
+    -fx-background-color: #2563eb;
+    -fx-background-radius: 15px;
+    -fx-pref-width: 30px;
+    -fx-pref-height: 30px;
+    -fx-min-width: 30px;
+    -fx-min-height: 30px;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-alignment: center;
+}
+
+.sidebar-username {
+    -fx-font-family: "Inter", "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-weight: bold;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 12px;
+}
+
+.sidebar-userrole {
+    -fx-font-family: "Inter", "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-text-fill: #ffffff73;
     -fx-font-size: 11px;
 }
 
 .sidebar-logout-btn {
-    -fx-background-color: #2d1a24;
-    -fx-text-fill: #fca5a5;
-    -fx-border-color: #7f1d1d;
-    -fx-border-radius: 5;
-    -fx-background-radius: 5;
-    -fx-font-size: 12px;
-    -fx-font-weight: bold;
-    -fx-padding: 7 12 7 12;
+    -fx-background-color: transparent;
+    -fx-text-fill: #ffffff8c;
+    -fx-font-size: 13px;
+    -fx-font-family: "Inter", "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-padding: 8 12 8 12;
+    -fx-alignment: center-left;
+    -fx-graphic-text-gap: 10px;
+    -fx-background-radius: 6px;
     -fx-cursor: hand;
 }
 
 .sidebar-logout-btn:hover {
-    -fx-background-color: #dc2626;
+    -fx-background-color: #ffffff1f;
     -fx-text-fill: #ffffff;
-    -fx-border-color: #dc2626;
 }
 
+.sidebar-logout-btn .svg-icon {
+    -fx-fill: #ffffff8c;
+}
+
+.sidebar-logout-btn:hover .svg-icon {
+    -fx-fill: #ffffff;
+}
 /* ============================================================ */
 /* Dashboard e Cards de Resumo                                  */
 /* ============================================================ */

@@ -12,7 +12,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
-
 import java.util.List;
 
 /**
@@ -25,6 +24,9 @@ public class MainLayoutController {
     @FXML private StackPane contentArea;
     @FXML private Label lblUsuario;
     @FXML private Label lblPerfil;
+    @FXML private Label lblIniciais;
+
+    private List<Button> menuButtons;
 
     @FXML private Button btnDashboard;
     @FXML private Button btnUnidades;
@@ -41,14 +43,14 @@ public class MainLayoutController {
 
     @FXML
     public void initialize() {
-        // 1. Verificacao estrita de sessao: impede acesso de usuario nao autenticado
+      // Verifica se existe usuario autenticado
         if (!SessionManager.isLogado()) {
             System.err.println("[Seguranca] Acesso negado a tela principal: nenhum usuario autenticado.");
             Platform.runLater(this::redirecionarParaLogin);
             return;
         }
 
-        // 2. Verificacao de sessao expirada
+        // Verifica se a sessao expirou
         if (SessionManager.isSessionExpirada(InactivityWatcher.TIMEOUT_PADRAO_MS)) {
             System.err.println("[Seguranca] Sessao expirada por tempo de inatividade.");
             SessionManager.encerrarSessao();
@@ -56,14 +58,31 @@ public class MainLayoutController {
             return;
         }
 
-        // 3. Exibe dados do usuario autenticado na barra lateral
+        // Exibe os dados do usuario na sidebar
         Usuario usuario = SessionManager.getUsuarioLogado();
-        if (usuario != null) {
-            lblUsuario.setText(usuario.getNome() != null ? usuario.getNome() : "Usuário");
-            lblPerfil.setText(usuario.getPerfil() != null ? usuario.getPerfil() : "OPERADOR");
-        }
 
-        // 4. Carrega o Dashboard como tela inicial e destaca o botao
+        if (usuario != null) {
+            String nome = usuario.getNome();
+
+            lblUsuario.setText(nome != null ? nome : "Usuário");
+            lblPerfil.setText(usuario.getPerfil() != null ? usuario.getPerfil() : "OPERADOR");
+
+            // Define as iniciais do usuario (ate 2 caracteres)
+            if (nome != null && !nome.isEmpty()) {
+                String[] partes = nome.trim().split("\\s+");
+                String iniciais = partes[0].substring(0, 1).toUpperCase();
+
+                if (partes.length > 1) {
+                    iniciais += partes[partes.length - 1]
+                            .substring(0, 1)
+                            .toUpperCase();
+                }
+
+                if (lblIniciais != null) {
+                    lblIniciais.setText(iniciais);
+                }
+            }
+        } 
         onDashboard();
 
         // 5. Inicia o monitoramento de inatividade apos a cena estar associada
@@ -131,12 +150,12 @@ public class MainLayoutController {
 
         for (Button btn : botoes) {
             if (btn != null) {
-                btn.getStyleClass().remove("sidebar-nav-btn-active");
+                btn.getStyleClass().remove("sidebar-btn-active");
             }
         }
 
-        if (botaoAtivo != null && !botaoAtivo.getStyleClass().contains("sidebar-nav-btn-active")) {
-            botaoAtivo.getStyleClass().add("sidebar-nav-btn-active");
+        if (botaoAtivo != null && !botaoAtivo.getStyleClass().contains("sidebar-btn-active")) {
+            botaoAtivo.getStyleClass().add("sidebar-btn-active");
         }
     }
 
