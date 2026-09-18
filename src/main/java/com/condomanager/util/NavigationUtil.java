@@ -35,7 +35,17 @@ public class NavigationUtil {
             Stage stage = Main.getStage();
             if (stage != null) {
                 stage.setTitle(titulo);
-                stage.setScene(new Scene(root, largura, altura));
+                if (stage.getScene() == null) {
+                    stage.setScene(new Scene(root, largura, altura));
+                } else {
+                    stage.getScene().setRoot(root);
+                    // Se houver mudanca intencional de resolucao (ex: tela de login 780 -> layout 1280)
+                    if (largura > 0 && altura > 0 && Math.abs(stage.getWidth() - largura) > 100) {
+                        stage.setWidth(largura);
+                        stage.setHeight(altura);
+                        stage.centerOnScreen();
+                    }
+                }
                 stage.setResizable(redimensionavel);
                 stage.show();
             }

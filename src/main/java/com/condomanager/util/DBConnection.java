@@ -86,19 +86,29 @@ public class DBConnection {
     private static void carregarPropriedades() {
         Properties props = new Properties();
 
-        try (InputStream input = DBConnection.class.getResourceAsStream(PROPERTIES_FILE)) {
-            if (input == null) {
-                throw new RuntimeException(
-                    "Arquivo db.properties nao encontrado em resources/.\n" +
-                    "Copie db.properties.example para db.properties e preencha sua senha."
-                );
+        InputStream input = DBConnection.class.getResourceAsStream(PROPERTIES_FILE);
+        if (input == null) {
+            input = DBConnection.class.getResourceAsStream("/database.properties");
+        }
+
+        if (input != null) {
+            try (InputStream is = input) {
+                props.load(is);
+                url      = props.getProperty("db.url", "jdbc:mysql://localhost:3306/condominio_db");
+                user     = props.getProperty("db.user", "root");
+                password = props.getProperty("db.password", "root");
+            } catch (IOException e) {
+                throw new RuntimeException("Erro ao carregar propriedades de conexao: " + e.getMessage(), e);
             }
-            props.load(input);
-            url      = props.getProperty("db.url");
-            user     = props.getProperty("db.user");
-            password = props.getProperty("db.password");
-        } catch (IOException e) {
-            throw new RuntimeException("Erro ao carregar db.properties: " + e.getMessage(), e);
+        } else {
+            url      = "jdbc:mysql://localhost:3306/condominio_db";
+            user     = "root";
+            password = "sua_senha_aqui";
+        }
+
+        String envPass = System.getenv("DB_PASSWORD");
+        if (envPass != null && !envPass.isBlank()) {
+            password = envPass;
         }
     }
 }
