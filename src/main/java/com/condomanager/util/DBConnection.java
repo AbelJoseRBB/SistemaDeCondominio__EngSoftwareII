@@ -92,8 +92,8 @@ public class DBConnection {
         }
 
         if (input != null) {
-            try (input) {
-                props.load(input);
+            try (InputStream is = input) {
+                props.load(is);
                 url      = props.getProperty("db.url", "jdbc:mysql://localhost:3306/condominio_db");
                 user     = props.getProperty("db.user", "root");
                 password = props.getProperty("db.password", "root");
