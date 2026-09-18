@@ -72,6 +72,7 @@ CREATE TABLE IF NOT EXISTS reserva (
 CREATE TABLE IF NOT EXISTS ocorrencia (
     id                 INT AUTO_INCREMENT PRIMARY KEY,
     id_unidade         INT,                               -- Nullable (pode ser area comum)
+    local              VARCHAR(100),
     titulo             VARCHAR(150) NOT NULL,
     descricao          TEXT,
     categoria          ENUM('RECLAMACAO','INFORMACAO','MANUTENCAO','SEGURANCA') NOT NULL,

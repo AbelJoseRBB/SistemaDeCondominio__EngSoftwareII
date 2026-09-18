@@ -22,33 +22,39 @@ import java.util.Optional;
  * Controller da tela de listagem de Ocorrencias.
  * Gerencia a TableView, busca em tempo real, filtro por situacao
  * e abertura do formulario modal de cadastro/edicao.
- * Segue o mesmo padrao do UnidadeListController.
  */
 public class OcorrenciaListController {
 
     // ------------------------------------------------------------------
     // Componentes injetados pelo FXMLLoader
     // ------------------------------------------------------------------
-    @FXML private TableView<Ocorrencia>           tabelaOcorrencias;
+
+    @FXML private TableView<Ocorrencia> tabelaOcorrencias;
     @FXML private TableColumn<Ocorrencia, String> colDescricao;
     @FXML private TableColumn<Ocorrencia, String> colLocal;
     @FXML private TableColumn<Ocorrencia, String> colData;
     @FXML private TableColumn<Ocorrencia, String> colTipo;
     @FXML private TableColumn<Ocorrencia, String> colSituacao;
-    @FXML private TableColumn<Ocorrencia, Void>   colAcoes;
-    @FXML private TextField                        txtBusca;
-    @FXML private ComboBox<String>                 cmbSituacao;
-    @FXML private Label                            lblContagem;
-    @FXML private Label                            lblDataAtual;
+    @FXML private TableColumn<Ocorrencia, Void> colAcoes;
+    @FXML private TextField txtBusca;
+    @FXML private ComboBox<String> cmbSituacao;
+    @FXML private Label lblContagem;
+    @FXML private Label lblDataAtual;
 
     // ------------------------------------------------------------------
     // Estado interno
     // ------------------------------------------------------------------
-    private final OcorrenciaService service = new OcorrenciaService();
-    private final ObservableList<Ocorrencia> todasOcorrencias = FXCollections.observableArrayList();
+
+    private final OcorrenciaService service =
+            new OcorrenciaService();
+
+    private final ObservableList<Ocorrencia> todasOcorrencias =
+            FXCollections.observableArrayList();
+
     private FilteredList<Ocorrencia> ocorrenciasFiltradas;
 
-    private static final DateTimeFormatter FMT_DATA = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    private static final DateTimeFormatter FMT_DATA =
+            DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     // ------------------------------------------------------------------
     // Inicializacao
@@ -56,9 +62,19 @@ public class OcorrenciaListController {
 
     @FXML
     public void initialize() {
+
         if (lblDataAtual != null) {
-            lblDataAtual.setText(LocalDate.now().format(DateTimeFormatter.ofPattern("EEEE, d 'de' MMMM 'de' yyyy", new java.util.Locale("pt", "BR"))));
+
+            lblDataAtual.setText(
+                    LocalDate.now().format(
+                            DateTimeFormatter.ofPattern(
+                                    "EEEE, d 'de' MMMM 'de' yyyy",
+                                    new java.util.Locale("pt", "BR")
+                            )
+                    )
+            );
         }
+
         configurarFiltroSituacao();
         configurarColunas();
         configurarBusca();
@@ -66,299 +82,725 @@ public class OcorrenciaListController {
     }
 
     // ------------------------------------------------------------------
-    // Configuracao do ComboBox de situacao
+    // Filtro por situacao
     // ------------------------------------------------------------------
 
     private void configurarFiltroSituacao() {
-        cmbSituacao.setItems(FXCollections.observableArrayList(
-            "Todos", "Aberta", "Em andamento", "Em análise", "Resolvida"
-        ));
-        cmbSituacao.getSelectionModel().selectFirst(); // "Todos" por padrao
+
+        cmbSituacao.setItems(
+                FXCollections.observableArrayList(
+                        "Todos",
+                        "Aberta",
+                        "Em andamento",
+                        "Em análise",
+                        "Resolvida"
+                )
+        );
+
+        cmbSituacao
+                .getSelectionModel()
+                .selectFirst();
     }
 
     // ------------------------------------------------------------------
-    // Configuracao das colunas da TableView
+    // Colunas
     // ------------------------------------------------------------------
 
     private void configurarColunas() {
 
-        // Coluna DESCRICAO: exibe o titulo da ocorrencia
+        // Apesar do nome colDescricao, esta coluna exibe o titulo.
+        // O fx:id pode permanecer assim para evitar quebrar o FXML.
         colDescricao.setCellValueFactory(
-            data -> new SimpleStringProperty(data.getValue().getTitulo()));
+                data -> new SimpleStringProperty(
+                        data.getValue().getTitulo()
+                )
+        );
 
-        // Coluna LOCAL/UNIDADE: exibe o campo transiente montado pelo DAO
+        // Local digitado no formulario e persistido no banco.
         colLocal.setCellValueFactory(
-            data -> new SimpleStringProperty(
-                data.getValue().getLocalFormatado() != null
-                    ? data.getValue().getLocalFormatado() : ""));
-        colLocal.setCellFactory(col -> new TableCell<>() {
-            @Override
-            protected void updateItem(String valor, boolean empty) {
-                super.updateItem(valor, empty);
-                if (empty || valor == null || valor.isBlank()) {
-                    setText(null);
-                    setStyle("-fx-text-fill: #9ca3af;");
-                } else {
-                    setText(valor);
-                    setStyle("-fx-text-fill: #9ca3af;");
+                data -> new SimpleStringProperty(
+                        data.getValue().getLocal() != null
+                                ? data.getValue().getLocal()
+                                : ""
+                )
+        );
+
+        colLocal.setCellFactory(
+                col -> new TableCell<>() {
+
+                    @Override
+                    protected void updateItem(
+                            String valor,
+                            boolean empty
+                    ) {
+
+                        super.updateItem(
+                                valor,
+                                empty
+                        );
+
+                        if (
+                                empty ||
+                                        valor == null ||
+                                        valor.isBlank()
+                        ) {
+
+                            setText(null);
+                            setStyle(
+                                    "-fx-text-fill: #9ca3af;"
+                            );
+
+                        } else {
+
+                            setText(valor);
+                            setStyle(
+                                    "-fx-text-fill: #9ca3af;"
+                            );
+                        }
+                    }
                 }
-            }
-        });
+        );
 
-        // Coluna DATA: formata LocalDateTime → "yyyy-MM-dd"
-        colData.setCellValueFactory(data -> {
-            Ocorrencia o = data.getValue();
-            String dataStr = (o.getDataAbertura() != null)
-                ? o.getDataAbertura().format(FMT_DATA)
-                : "";
-            return new SimpleStringProperty(dataStr);
-        });
+        // DATA
+        colData.setCellValueFactory(
+                data -> {
 
-        // Coluna TIPO: badge colorido por categoria
+                    Ocorrencia o =
+                            data.getValue();
+
+                    String dataStr =
+                            o.getDataAbertura() != null
+                                    ? o.getDataAbertura()
+                                    .format(FMT_DATA)
+                                    : "";
+
+                    return new SimpleStringProperty(
+                            dataStr
+                    );
+                }
+        );
+
+        // TIPO
         colTipo.setCellValueFactory(
-            data -> new SimpleStringProperty(data.getValue().getCategoria()));
-        colTipo.setCellFactory(col -> new TableCell<>() {
-            private final Label badge = new Label();
-            @Override
-            protected void updateItem(String categoria, boolean empty) {
-                super.updateItem(categoria, empty);
-                if (empty || categoria == null) {
-                    setGraphic(null);
-                    return;
-                }
-                badge.setText(categoriaExibicao(categoria));
-                badge.getStyleClass().removeIf(c -> c.startsWith("badge-tipo-"));
-                badge.getStyleClass().add(badgeCssTipo(categoria));
-                setGraphic(badge);
-            }
-        });
+                data -> new SimpleStringProperty(
+                        data.getValue().getCategoria()
+                )
+        );
 
-        // Coluna SITUACAO: badge colorido por situacao
+        colTipo.setCellFactory(
+                col -> new TableCell<>() {
+
+                    private final Label badge =
+                            new Label();
+
+                    @Override
+                    protected void updateItem(
+                            String categoria,
+                            boolean empty
+                    ) {
+
+                        super.updateItem(
+                                categoria,
+                                empty
+                        );
+
+                        if (
+                                empty ||
+                                        categoria == null
+                        ) {
+
+                            setGraphic(null);
+                            return;
+                        }
+
+                        badge.setText(
+                                categoriaExibicao(categoria)
+                        );
+
+                        badge.getStyleClass()
+                                .removeIf(
+                                        c -> c.startsWith(
+                                                "badge-tipo-"
+                                        )
+                                );
+
+                        badge.getStyleClass()
+                                .add(
+                                        badgeCssTipo(categoria)
+                                );
+
+                        setGraphic(badge);
+                    }
+                }
+        );
+
+        // SITUACAO
         colSituacao.setCellValueFactory(
-            data -> new SimpleStringProperty(data.getValue().getSituacao()));
-        colSituacao.setCellFactory(col -> new TableCell<>() {
-            private final Label badge = new Label();
-            @Override
-            protected void updateItem(String situacao, boolean empty) {
-                super.updateItem(situacao, empty);
-                if (empty || situacao == null) {
-                    setGraphic(null);
-                    return;
+                data -> new SimpleStringProperty(
+                        data.getValue().getSituacao()
+                )
+        );
+
+        colSituacao.setCellFactory(
+                col -> new TableCell<>() {
+
+                    private final Label badge =
+                            new Label();
+
+                    @Override
+                    protected void updateItem(
+                            String situacao,
+                            boolean empty
+                    ) {
+
+                        super.updateItem(
+                                situacao,
+                                empty
+                        );
+
+                        if (
+                                empty ||
+                                        situacao == null
+                        ) {
+
+                            setGraphic(null);
+                            return;
+                        }
+
+                        badge.setText(
+                                situacaoExibicao(situacao)
+                        );
+
+                        badge.getStyleClass()
+                                .removeIf(
+                                        c -> c.startsWith(
+                                                "badge-ocorrencia-"
+                                        )
+                                );
+
+                        badge.getStyleClass()
+                                .add(
+                                        badgeCssSituacao(situacao)
+                                );
+
+                        setGraphic(badge);
+                    }
                 }
-                badge.setText(situacaoExibicao(situacao));
-                badge.getStyleClass().removeIf(c -> c.startsWith("badge-ocorrencia-"));
-                badge.getStyleClass().add(badgeCssSituacao(situacao));
-                setGraphic(badge);
-            }
-        });
+        );
 
-        // Coluna ACOES: botoes editar + excluir
-        colAcoes.setCellFactory(col -> new TableCell<>() {
-            private final Button btnEditar  = new Button("✎");
-            private final Button btnExcluir = new Button("🗑");
-            private final HBox   caixa      = new HBox(8, btnEditar, btnExcluir);
+        // ACOES
+        colAcoes.setCellFactory(
+                col -> new TableCell<>() {
 
-            {
-                btnEditar.setStyle("-fx-background-color: #dcfce7; -fx-text-fill: #15803d; -fx-background-radius: 4; -fx-padding: 4 8; -fx-cursor: hand; -fx-border-color: transparent;");
-                btnExcluir.setStyle("-fx-background-color: #fee2e2; -fx-text-fill: #b91c1c; -fx-background-radius: 4; -fx-padding: 4 8; -fx-cursor: hand; -fx-border-color: transparent;");
+                    private final Button btnEditar =
+                            new Button("✎");
 
-                btnEditar.setOnAction(e -> {
-                    Ocorrencia o = getTableView().getItems().get(getIndex());
-                    abrirFormulario(o);
-                });
-                btnExcluir.setOnAction(e -> {
-                    Ocorrencia o = getTableView().getItems().get(getIndex());
-                    onExcluir(o);
-                });
-            }
+                    private final Button btnExcluir =
+                            new Button("🗑");
 
-            @Override
-            protected void updateItem(Void item, boolean empty) {
-                super.updateItem(item, empty);
-                setGraphic(empty ? null : caixa);
-            }
-        });
+                    private final HBox caixa =
+                            new HBox(
+                                    8,
+                                    btnEditar,
+                                    btnExcluir
+                            );
+
+                    {
+                        btnEditar.setStyle(
+                                "-fx-background-color: #dcfce7; " +
+                                        "-fx-text-fill: #15803d; " +
+                                        "-fx-background-radius: 4; " +
+                                        "-fx-padding: 4 8; " +
+                                        "-fx-cursor: hand; " +
+                                        "-fx-border-color: transparent;"
+                        );
+
+                        btnExcluir.setStyle(
+                                "-fx-background-color: #fee2e2; " +
+                                        "-fx-text-fill: #b91c1c; " +
+                                        "-fx-background-radius: 4; " +
+                                        "-fx-padding: 4 8; " +
+                                        "-fx-cursor: hand; " +
+                                        "-fx-border-color: transparent;"
+                        );
+
+                        btnEditar.setOnAction(
+                                e -> {
+
+                                    Ocorrencia o =
+                                            getTableView()
+                                                    .getItems()
+                                                    .get(getIndex());
+
+                                    abrirFormulario(o);
+                                }
+                        );
+
+                        btnExcluir.setOnAction(
+                                e -> {
+
+                                    Ocorrencia o =
+                                            getTableView()
+                                                    .getItems()
+                                                    .get(getIndex());
+
+                                    onExcluir(o);
+                                }
+                        );
+                    }
+
+                    @Override
+                    protected void updateItem(
+                            Void item,
+                            boolean empty
+                    ) {
+
+                        super.updateItem(
+                                item,
+                                empty
+                        );
+
+                        setGraphic(
+                                empty
+                                        ? null
+                                        : caixa
+                        );
+                    }
+                }
+        );
     }
 
     // ------------------------------------------------------------------
-    // Busca em tempo real + filtro por situacao
+    // Busca
     // ------------------------------------------------------------------
 
     private void configurarBusca() {
-        ocorrenciasFiltradas = new FilteredList<>(todasOcorrencias, o -> true);
 
-        // Atualiza o predicado sempre que o texto OU a situacao mudar
-        txtBusca.textProperty().addListener((obs, antigo, novo) -> aplicarFiltro());
-        cmbSituacao.valueProperty().addListener((obs, antigo, novo) -> aplicarFiltro());
+        ocorrenciasFiltradas =
+                new FilteredList<>(
+                        todasOcorrencias,
+                        o -> true
+                );
 
-        tabelaOcorrencias.setItems(ocorrenciasFiltradas);
+        txtBusca
+                .textProperty()
+                .addListener(
+                        (obs, antigo, novo) ->
+                                aplicarFiltro()
+                );
+
+        cmbSituacao
+                .valueProperty()
+                .addListener(
+                        (obs, antigo, novo) ->
+                                aplicarFiltro()
+                );
+
+        tabelaOcorrencias.setItems(
+                ocorrenciasFiltradas
+        );
     }
 
     private void aplicarFiltro() {
-        String termo     = txtBusca.getText() == null ? "" : txtBusca.getText().toLowerCase().trim();
-        String situacao  = cmbSituacao.getValue();
 
-        ocorrenciasFiltradas.setPredicate(o -> {
-            // Filtro por situacao
-            if (situacao != null && !"Todos".equals(situacao)
-                    && !situacao.equals(o.getSituacao())) {
-                return false;
-            }
-            // Filtro por texto (titulo ou local)
-            if (!termo.isEmpty()) {
-                boolean matchTitulo = o.getTitulo() != null
-                    && o.getTitulo().toLowerCase().contains(termo);
-                boolean matchLocal  = o.getLocalFormatado() != null
-                    && o.getLocalFormatado().toLowerCase().contains(termo);
-                return matchTitulo || matchLocal;
-            }
-            return true;
-        });
+        String termo =
+                txtBusca.getText() == null
+                        ? ""
+                        : txtBusca
+                        .getText()
+                        .toLowerCase()
+                        .trim();
+
+        String situacao =
+                cmbSituacao.getValue();
+
+        ocorrenciasFiltradas.setPredicate(
+                o -> {
+
+                    if (
+                            situacao != null &&
+                                    !"Todos".equals(situacao) &&
+                                    !situacao.equals(
+                                            o.getSituacao()
+                                    )
+                    ) {
+
+                        return false;
+                    }
+
+                    if (!termo.isEmpty()) {
+
+                        boolean matchTitulo =
+                                o.getTitulo() != null &&
+                                        o.getTitulo()
+                                                .toLowerCase()
+                                                .contains(termo);
+
+                        boolean matchLocal =
+                                o.getLocal() != null &&
+                                        o.getLocal()
+                                                .toLowerCase()
+                                                .contains(termo);
+
+                        return (
+                                matchTitulo ||
+                                        matchLocal
+                        );
+                    }
+
+                    return true;
+                }
+        );
+
         atualizarContagem();
     }
 
     // ------------------------------------------------------------------
-    // Carregamento de dados
+    // Carregamento
     // ------------------------------------------------------------------
 
     private void carregarOcorrencias() {
+
         try {
-            List<Ocorrencia> lista = service.listarTodas();
-            todasOcorrencias.setAll(lista);
+
+            List<Ocorrencia> lista =
+                    service.listarTodas();
+
+            todasOcorrencias.setAll(
+                    lista
+            );
+
             atualizarContagem();
+
         } catch (Exception e) {
-            mostrarErro("Erro ao carregar ocorrencias", e.getMessage());
+
+            mostrarErro(
+                    "Erro ao carregar ocorrencias",
+                    e.getMessage()
+            );
         }
     }
 
     private void atualizarContagem() {
-        int qtd = ocorrenciasFiltradas != null
-            ? ocorrenciasFiltradas.size()
-            : todasOcorrencias.size();
-        lblContagem.setText(qtd + " registro(s)");
+
+        int qtd =
+                ocorrenciasFiltradas != null
+                        ? ocorrenciasFiltradas.size()
+                        : todasOcorrencias.size();
+
+        lblContagem.setText(
+                qtd + " registro(s)"
+        );
     }
 
     // ------------------------------------------------------------------
-    // Acoes de botoes
+    // Acoes
     // ------------------------------------------------------------------
 
-    /** Abre o formulario em modo cadastro (sem ocorrencia pre-carregada). */
     @FXML
     private void onNovaOcorrencia() {
         abrirFormulario(null);
     }
 
-    /** Abre o formulario em modo edicao. */
-    private void abrirFormulario(Ocorrencia ocorrencia) {
+    private void abrirFormulario(
+            Ocorrencia ocorrencia
+    ) {
+
         try {
-            FXMLLoader loader = new FXMLLoader(
-                getClass().getResource("/fxml/ocorrencia/OcorrenciaForm.fxml")
-            );
-            VBox conteudo = loader.load();
-            OcorrenciaFormController formCtrl = loader.getController();
+
+            FXMLLoader loader =
+                    new FXMLLoader(
+                            getClass().getResource(
+                                    "/fxml/ocorrencia/OcorrenciaForm.fxml"
+                            )
+                    );
+
+            VBox conteudo =
+                    loader.load();
+
+            OcorrenciaFormController formCtrl =
+                    loader.getController();
 
             if (ocorrencia != null) {
-                formCtrl.setOcorrencia(ocorrencia);
+                formCtrl.setOcorrencia(
+                        ocorrencia
+                );
             }
 
-            Dialog<Void> dialog = new Dialog<>();
-            dialog.setTitle(ocorrencia == null ? "Nova Ocorrência" : "Editar Ocorrência");
-            dialog.getDialogPane().setContent(conteudo);
-            dialog.getDialogPane().getButtonTypes().add(ButtonType.CLOSE);
-            dialog.getDialogPane().lookupButton(ButtonType.CLOSE).setVisible(false);
-            dialog.getDialogPane().lookupButton(ButtonType.CLOSE).setManaged(false);
+            Dialog<Void> dialog =
+                    new Dialog<>();
+
+            dialog.setTitle(
+                    ocorrencia == null
+                            ? "Nova Ocorrência"
+                            : "Editar Ocorrência"
+            );
+
+            dialog
+                    .getDialogPane()
+                    .setContent(conteudo);
+
+            dialog
+                    .getDialogPane()
+                    .getButtonTypes()
+                    .add(ButtonType.CLOSE);
+
+            dialog
+                    .getDialogPane()
+                    .lookupButton(ButtonType.CLOSE)
+                    .setVisible(false);
+
+            dialog
+                    .getDialogPane()
+                    .lookupButton(ButtonType.CLOSE)
+                    .setManaged(false);
 
             formCtrl.setDialog(dialog);
+
             dialog.showAndWait();
 
-            // Recarrega a lista apos fechar (cadastro ou edicao realizada)
             carregarOcorrencias();
 
         } catch (IOException e) {
-            mostrarErro("Erro ao abrir formulario", e.getMessage());
+
+            mostrarErro(
+                    "Erro ao abrir formulario",
+                    e.getMessage()
+            );
         }
     }
 
-    /** Confirma e executa a exclusao de uma ocorrencia. */
-    private void onExcluir(Ocorrencia ocorrencia) {
-        Alert confirmacao = new Alert(Alert.AlertType.CONFIRMATION);
-        confirmacao.getDialogPane().getStylesheets().add(getClass().getResource("/css/style.css").toExternalForm());
-        confirmacao.setTitle("Confirmar exclusão");
-        confirmacao.setHeaderText("Excluir ocorrência: " + ocorrencia.getTitulo() + "?");
-        confirmacao.setContentText("Esta acao nao pode ser desfeita.");
+    private void onExcluir(
+            Ocorrencia ocorrencia
+    ) {
 
-        Optional<ButtonType> resposta = confirmacao.showAndWait();
-        if (resposta.isPresent() && resposta.get() == ButtonType.OK) {
+        Alert confirmacao =
+                new Alert(
+                        Alert.AlertType.CONFIRMATION
+                );
+
+        confirmacao
+                .getDialogPane()
+                .getStylesheets()
+                .add(
+                        getClass()
+                                .getResource(
+                                        "/css/style.css"
+                                )
+                                .toExternalForm()
+                );
+
+        confirmacao.setTitle(
+                "Confirmar exclusão"
+        );
+
+        confirmacao.setHeaderText(
+                "Excluir ocorrência: "
+                        + ocorrencia.getTitulo()
+                        + "?"
+        );
+
+        confirmacao.setContentText(
+                "Esta acao nao pode ser desfeita."
+        );
+
+        Optional<ButtonType> resposta =
+                confirmacao.showAndWait();
+
+        if (
+                resposta.isPresent() &&
+                        resposta.get() == ButtonType.OK
+        ) {
+
             try {
-                service.remover(ocorrencia.getId());
+
+                service.remover(
+                        ocorrencia.getId()
+                );
+
                 carregarOcorrencias();
+
             } catch (Exception e) {
-                mostrarErro("Erro ao excluir ocorrencia", e.getMessage());
+
+                mostrarErro(
+                        "Erro ao excluir ocorrencia",
+                        e.getMessage()
+                );
             }
         }
     }
 
     // ------------------------------------------------------------------
-    // Helpers de exibicao e CSS
+    // Helpers
     // ------------------------------------------------------------------
 
-    private String situacaoExibicao(String situacao) {
-        if (situacao == null) return "";
-        return switch (situacao.toUpperCase()) {
-            case "ABERTA"       -> "Aberta";
-            case "EM_ANDAMENTO", "EM ANDAMENTO" -> "Em andamento";
-            case "EM_ANALISE", "EM ANÁLISE" -> "Em análise";
-            case "ENCERRADA", "RESOLVIDA"    -> "Resolvida";
-            default             -> situacao;
+    private String situacaoExibicao(
+            String situacao
+    ) {
+
+        if (situacao == null) {
+            return "";
+        }
+
+        return switch (
+                situacao.toUpperCase()
+                ) {
+
+            case "ABERTA" ->
+                    "Aberta";
+
+            case "EM_ANDAMENTO",
+                 "EM ANDAMENTO" ->
+                    "Em andamento";
+
+            case "EM_ANALISE",
+                 "EM ANÁLISE" ->
+                    "Em análise";
+
+            case "ENCERRADA",
+                 "RESOLVIDA" ->
+                    "Resolvida";
+
+            default ->
+                    situacao;
         };
     }
 
-    private String badgeCssSituacao(String situacao) {
-        if (situacao == null) return "badge-ocorrencia-aberta";
-        return switch (situacao.toUpperCase()) {
-            case "ABERTA"       -> "badge-ocorrencia-aberta";
-            case "EM_ANDAMENTO", "EM ANDAMENTO" -> "badge-ocorrencia-em-andamento";
-            case "EM_ANALISE", "EM ANÁLISE" -> "badge-ocorrencia-analise";
-            case "ENCERRADA", "RESOLVIDA"    -> "badge-ocorrencia-encerrada";
-            default             -> "badge-ocorrencia-aberta";
+    private String badgeCssSituacao(
+            String situacao
+    ) {
+
+        if (situacao == null) {
+            return "badge-ocorrencia-aberta";
+        }
+
+        return switch (
+                situacao.toUpperCase()
+                ) {
+
+            case "ABERTA" ->
+                    "badge-ocorrencia-aberta";
+
+            case "EM_ANDAMENTO",
+                 "EM ANDAMENTO" ->
+                    "badge-ocorrencia-em-andamento";
+
+            case "EM_ANALISE",
+                 "EM ANÁLISE" ->
+                    "badge-ocorrencia-analise";
+
+            case "ENCERRADA",
+                 "RESOLVIDA" ->
+                    "badge-ocorrencia-encerrada";
+
+            default ->
+                    "badge-ocorrencia-aberta";
         };
     }
 
-    private String categoriaExibicao(String categoria) {
-        if (categoria == null) return "";
-        return switch (categoria.toUpperCase()) {
-            case "INFRAESTRUTURA" -> "Infraestrutura";
-            case "CONVIVÊNCIA", "CONVIVENCIA" -> "Convivência";
-            case "ELÉTRICA", "ELETRICA" -> "Elétrica";
-            case "EQUIPAMENTO" -> "Equipamento";
-            case "SEGURANÇA", "SEGURANCA" -> "Segurança";
-            case "HIDRÁULICA", "HIDRAULICA" -> "Hidráulica";
-            default -> categoria;
+    private String categoriaExibicao(
+            String categoria
+    ) {
+
+        if (categoria == null) {
+            return "";
+        }
+
+        return switch (
+                categoria.toUpperCase()
+                ) {
+
+            case "INFRAESTRUTURA" ->
+                    "Infraestrutura";
+
+            case "CONVIVÊNCIA",
+                 "CONVIVENCIA" ->
+                    "Convivência";
+
+            case "ELÉTRICA",
+                 "ELETRICA" ->
+                    "Elétrica";
+
+            case "EQUIPAMENTO" ->
+                    "Equipamento";
+
+            case "SEGURANÇA",
+                 "SEGURANCA" ->
+                    "Segurança";
+
+            case "HIDRÁULICA",
+                 "HIDRAULICA" ->
+                    "Hidráulica";
+
+            default ->
+                    categoria;
         };
     }
 
-    private String badgeCssTipo(String categoria) {
-        if (categoria == null) return "badge-tipo-infra";
-        return switch (categoria.toUpperCase()) {
-            case "INFRAESTRUTURA" -> "badge-tipo-infra";
-            case "CONVIVÊNCIA", "CONVIVENCIA" -> "badge-tipo-convivencia";
-            case "ELÉTRICA", "ELETRICA" -> "badge-tipo-eletrica";
-            case "EQUIPAMENTO" -> "badge-tipo-equipamento";
-            case "SEGURANÇA", "SEGURANCA" -> "badge-tipo-seguranca";
-            case "HIDRÁULICA", "HIDRAULICA" -> "badge-tipo-hidraulica";
-            default -> "badge-tipo-infra";
+    private String badgeCssTipo(
+            String categoria
+    ) {
+
+        if (categoria == null) {
+            return "badge-tipo-infra";
+        }
+
+        return switch (
+                categoria.toUpperCase()
+                ) {
+
+            case "INFRAESTRUTURA" ->
+                    "badge-tipo-infra";
+
+            case "CONVIVÊNCIA",
+                 "CONVIVENCIA" ->
+                    "badge-tipo-convivencia";
+
+            case "ELÉTRICA",
+                 "ELETRICA" ->
+                    "badge-tipo-eletrica";
+
+            case "EQUIPAMENTO" ->
+                    "badge-tipo-equipamento";
+
+            case "SEGURANÇA",
+                 "SEGURANCA" ->
+                    "badge-tipo-seguranca";
+
+            case "HIDRÁULICA",
+                 "HIDRAULICA" ->
+                    "badge-tipo-hidraulica";
+
+            default ->
+                    "badge-tipo-infra";
         };
     }
 
-    private void mostrarErro(String titulo, String mensagem) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.getDialogPane().getStylesheets().add(getClass().getResource("/css/style.css").toExternalForm());
+    private void mostrarErro(
+            String titulo,
+            String mensagem
+    ) {
+
+        Alert alert =
+                new Alert(
+                        Alert.AlertType.ERROR
+                );
+
+        alert
+                .getDialogPane()
+                .getStylesheets()
+                .add(
+                        getClass()
+                                .getResource(
+                                        "/css/style.css"
+                                )
+                                .toExternalForm()
+                );
+
         alert.setTitle(titulo);
         alert.setHeaderText(titulo);
         alert.setContentText(mensagem);
+
         alert.showAndWait();
     }
 }
-
-
-

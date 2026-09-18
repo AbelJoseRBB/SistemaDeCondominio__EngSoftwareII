@@ -154,7 +154,7 @@ public class DashboardController {
             new SimpleStringProperty(d.getValue().getTitulo() != null ? d.getValue().getTitulo() : "-"));
 
         colOcorrLocal.setCellValueFactory(d ->
-            new SimpleStringProperty(d.getValue().getLocalFormatado() != null ? d.getValue().getLocalFormatado() : "Área Comum"));
+            new SimpleStringProperty(d.getValue().getLocal() != null ? d.getValue().getLocal() : "Área Comum"));
 
         colOcorrData.setCellValueFactory(d -> {
             Ocorrencia o = d.getValue();

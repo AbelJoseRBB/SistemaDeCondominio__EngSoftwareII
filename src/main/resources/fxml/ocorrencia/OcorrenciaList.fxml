@@ -106,7 +106,7 @@
                 <columns>
                     <!-- Descricao da ocorrencia -->
                     <TableColumn fx:id="colDescricao"
-                                 text="DESCRIÇÃO"
+                                 text="TÍTULO"
                                  reorderable="false"
                                  prefWidth="380"
                                  style="-fx-font-weight: bold; -fx-text-fill: #374151;"/>

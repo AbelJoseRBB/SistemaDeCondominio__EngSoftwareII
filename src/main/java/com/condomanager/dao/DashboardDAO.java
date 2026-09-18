@@ -128,9 +128,9 @@ public class DashboardDAO {
                     String bloco = rs.getString("bloco");
                     String numero = rs.getString("numero");
                     if (bloco != null && numero != null) {
-                        o.setLocalFormatado("Bloco " + bloco + " – " + numero);
+                        o.setLocal("Bloco " + bloco + " – " + numero);
                     } else {
-                        o.setLocalFormatado("Área Comum");
+                        o.setLocal("Área Comum");
                     }
 
                     lista.add(o);

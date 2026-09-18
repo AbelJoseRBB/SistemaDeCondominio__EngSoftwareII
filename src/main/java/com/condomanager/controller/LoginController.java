@@ -11,7 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.TextField;
-
+import com.condomanager.Main;
 import java.util.Optional;
 
 /**
@@ -69,6 +69,8 @@ public class LoginController {
                 1280, 720,
                 true
             );
+
+            Main.getStage().setMaximized(true);
         } else {
             setErro(true);
             senhaField.clear();

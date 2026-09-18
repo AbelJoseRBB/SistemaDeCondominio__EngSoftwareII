@@ -100,7 +100,7 @@ public class OcorrenciaFormController {
 
         txtTitulo.setText(ocorrencia.getTitulo());
         txtLocal.setText(
-            ocorrencia.getLocalFormatado() != null ? ocorrencia.getLocalFormatado() : "");
+            ocorrencia.getLocal() != null ? ocorrencia.getLocal() : "");
         txtDescricao.setText(ocorrencia.getDescricao());
         txtObservacoes.setText(ocorrencia.getResposta() != null ? ocorrencia.getResposta() : "");
     }
@@ -200,7 +200,7 @@ public class OcorrenciaFormController {
         o.setCategoria(cmbCategoria.getValue());
         o.setSituacao(cmbSituacao.getValue());
         o.setTitulo(txtTitulo.getText().trim());
-        o.setLocalFormatado(emptyToNull(txtLocal.getText()));
+        o.setLocal(emptyToNull(txtLocal.getText()));
         o.setDescricao(txtDescricao.getText().trim());
         o.setResposta(emptyToNull(txtObservacoes.getText()));
         return o;
