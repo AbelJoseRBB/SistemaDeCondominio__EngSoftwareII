@@ -36,7 +36,8 @@ class NavigationViewsTest {
         "/fxml/taxa/TaxaList.fxml",
         "/fxml/manutencao/ManutencaoList.fxml",
         "/fxml/veiculo/VeiculoList.fxml",
-        "/fxml/relatorio/RelatorioList.fxml"
+        "/fxml/relatorio/RelatorioList.fxml",
+        "/fxml/usuario/UsuarioCadastro.fxml"
     );
 
     @BeforeAll
@@ -122,5 +123,28 @@ class NavigationViewsTest {
 
         Object root = future.get(10, TimeUnit.SECONDS);
         assertNotNull(root, "Dashboard deve ser instanciado com sucesso");
+    }
+
+    @Test
+    @DisplayName("Valida que o UsuarioCadastro.fxml e carregado com sucesso pelo FXMLLoader")
+    void testCarregamentoUsuarioCadastro() throws Exception {
+        if (!jfxInitialized) return;
+
+        URL resource = getClass().getResource("/fxml/usuario/UsuarioCadastro.fxml");
+        assertNotNull(resource);
+
+        CompletableFuture<Object> future = new CompletableFuture<>();
+        Platform.runLater(() -> {
+            try {
+                FXMLLoader loader = new FXMLLoader(resource);
+                Object root = loader.load();
+                future.complete(root);
+            } catch (Throwable t) {
+                future.completeExceptionally(t);
+            }
+        });
+
+        Object root = future.get(10, TimeUnit.SECONDS);
+        assertNotNull(root, "UsuarioCadastro deve ser instanciado com sucesso");
     }
 }

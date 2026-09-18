@@ -215,4 +215,18 @@ public class LoginController {
 
         confirmDialog.showAndWait();
     }
+
+    /**
+     * Acao executada ao clicar no link "Cadastre-se".
+     * Redireciona para o formulario de criacao de novo usuario / perfil de acesso.
+     */
+    @FXML
+    private void handleCadastrar() {
+        NavigationUtil.navegar(
+            "/fxml/usuario/UsuarioCadastro.fxml",
+            "CondoManager - Cadastro de Usuário",
+            780, 720,
+            false
+        );
+    }
 }

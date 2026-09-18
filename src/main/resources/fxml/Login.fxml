@@ -13,6 +13,7 @@
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
@@ -74,6 +75,16 @@
 
             <!-- Link Esqueci minha senha -->
             <Hyperlink styleClass="forgot-password-link" text="Esqueci minha senha" onAction="#handleEsqueciSenha" />
+
+            <Separator />
+
+            <!-- Link Criar Conta / Cadastre-se -->
+            <HBox alignment="CENTER" spacing="4.0">
+               <children>
+                  <Label text="Não possui acesso?" style="-fx-text-fill: #6b7280; -fx-font-size: 13px;" />
+                  <Hyperlink text="Cadastre-se" styleClass="registration-link" onAction="#handleCadastrar" />
+               </children>
+            </HBox>
  
          </children>
          <padding>

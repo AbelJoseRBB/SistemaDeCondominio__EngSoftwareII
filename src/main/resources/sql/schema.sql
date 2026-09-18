@@ -15,6 +15,7 @@ CREATE TABLE IF NOT EXISTS usuario (
     id         INT AUTO_INCREMENT PRIMARY KEY,
     nome       VARCHAR(100) NOT NULL,
     login      VARCHAR(50)  NOT NULL UNIQUE,
+    email      VARCHAR(100) NOT NULL UNIQUE,
     senha_hash VARCHAR(255) NOT NULL,          -- Hash BCrypt
     perfil     ENUM('ADMIN', 'OPERADOR') NOT NULL DEFAULT 'OPERADOR'
 );
@@ -111,5 +112,5 @@ CREATE TABLE IF NOT EXISTS veiculo (
 -- Dados iniciais: usuario administrador padrao
 -- Senha: admin123 (hash BCrypt - TROQUE em producao!)
 -- ============================================================
-INSERT INTO usuario (nome, login, senha_hash, perfil)
-VALUES ('Administrador', 'admin', '$2a$10$tyWUHDECdFpz9iZr2aZyJ..QWWRIzttF4yhXkCk4lU8umqjL0xxTa', 'ADMIN');
+INSERT INTO usuario (nome, login, email, senha_hash, perfil)
+VALUES ('Administrador', 'admin', 'admin@condomanager.com', '$2a$10$tyWUHDECdFpz9iZr2aZyJ..QWWRIzttF4yhXkCk4lU8umqjL0xxTa', 'ADMIN');

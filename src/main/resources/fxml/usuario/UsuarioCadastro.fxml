@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.SVGPath?>
+
+<VBox alignment="CENTER" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" styleClass="root-pane" stylesheets="@../../css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.condomanager.controller.usuario.UsuarioCadastroController">
+   <children>
+      <VBox alignment="TOP_CENTER" maxWidth="448.0" spacing="14.0" styleClass="login-card">
+         <children>
+            <!-- Icone de Cadastro (User Plus SVG) -->
+            <StackPane maxHeight="50.0" maxWidth="50.0" prefHeight="50.0" prefWidth="50.0" styleClass="icon-container">
+               <children>
+                  <SVGPath content="M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-9-2V7H4v3H1v2h3v3h2v-3h3v-2H6zm9 4c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" styleClass="icon-svg" />
+               </children>
+            </StackPane>
+
+            <!-- Titulo e Subtitulo -->
+            <VBox alignment="CENTER" spacing="4.0">
+               <children>
+                  <Label styleClass="title-label" text="CondoManager" />
+                  <Label styleClass="subtitle-label" text="Cadastro de Perfil de Acesso" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="6.0" top="4.0" />
+               </VBox.margin>
+            </VBox>
+
+            <!-- Campo: Nome Completo -->
+            <VBox spacing="4.0">
+               <children>
+                  <Label styleClass="field-label" text="Nome Completo *" />
+                  <TextField fx:id="nomeField" promptText="Ex: Carlos Eduardo Silva" styleClass="text-field" />
+               </children>
+            </VBox>
+
+            <!-- Campo: Usuario (Login) -->
+            <VBox spacing="4.0">
+               <children>
+                  <Label styleClass="field-label" text="Usuário (login de acesso) *" />
+                  <TextField fx:id="usuarioField" promptText="Ex: carlos.silva" styleClass="text-field" />
+               </children>
+            </VBox>
+
+            <!-- Campo: E-mail -->
+            <VBox spacing="4.0">
+               <children>
+                  <Label styleClass="field-label" text="E-mail *" />
+                  <TextField fx:id="emailField" promptText="Ex: carlos@email.com" styleClass="text-field" />
+               </children>
+            </VBox>
+
+            <!-- Campo: Senha -->
+            <VBox spacing="4.0">
+               <children>
+                  <Label styleClass="field-label" text="Senha *" />
+                  <PasswordField fx:id="senhaField" promptText="••••••••" styleClass="password-field" />
+               </children>
+            </VBox>
+
+            <!-- Campo: Perfil de Acesso -->
+            <VBox spacing="4.0">
+               <children>
+                  <Label styleClass="field-label" text="Perfil de Acesso" />
+                  <ComboBox fx:id="perfilComboBox" maxWidth="Infinity" styleClass="combo-box" />
+               </children>
+            </VBox>
+
+            <!-- Mensagem de erro dinamica -->
+            <Label fx:id="erroLabel" styleClass="error-label" text="Preencha os campos obrigatórios." visible="false" managed="false" wrapText="true" />
+
+            <!-- Botao Cadastrar -->
+            <Button fx:id="btnCadastrar" maxWidth="Infinity" styleClass="login-button" text="Cadastrar Usuário" onAction="#handleCadastrar" />
+
+            <!-- Link Voltar ao Login -->
+            <Hyperlink styleClass="forgot-password-link" text="Já possui uma conta? Entrar" onAction="#handleVoltarLogin" />
+         </children>
+         <padding>
+            <Insets bottom="30.0" left="50.0" right="50.0" top="30.0" />
+         </padding>
+      </VBox>
+   </children>
+</VBox>

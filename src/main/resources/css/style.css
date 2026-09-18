@@ -95,6 +95,20 @@
     -fx-underline: true;
 }
 
+/* Link de cadastro alinhado ao texto do rodape */
+.registration-link {
+    -fx-text-fill: #3b82f6;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-border-color: transparent;
+    -fx-padding: 0;
+    -fx-cursor: hand;
+}
+
+.registration-link:hover {
+    -fx-underline: true;
+}
+
 /* Mensagem de erro de autenticacao */
 .error-label {
     -fx-text-fill: #dc2626;
