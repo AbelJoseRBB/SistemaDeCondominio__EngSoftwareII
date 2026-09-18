@@ -33,10 +33,12 @@ public class NavigationUtil {
             Parent root = loader.load();
 
             Stage stage = Main.getStage();
-            stage.setTitle(titulo);
-            stage.setScene(new Scene(root, largura, altura));
-            stage.setResizable(redimensionavel);
-            stage.show();
+            if (stage != null) {
+                stage.setTitle(titulo);
+                stage.setScene(new Scene(root, largura, altura));
+                stage.setResizable(redimensionavel);
+                stage.show();
+            }
         } catch (Exception e) {
             System.err.println("Erro ao navegar para " + fxmlPath + ": " + e.getMessage());
             e.printStackTrace();

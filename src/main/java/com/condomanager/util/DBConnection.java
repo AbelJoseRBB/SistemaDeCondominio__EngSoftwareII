@@ -28,6 +28,31 @@ public class DBConnection {
 
     private DBConnection() {}
 
+    private static void carregarConfiguracoes() {
+        try (InputStream is = DBConnection.class.getResourceAsStream("/database.properties")) {
+            if (is != null) {
+                Properties props = new Properties();
+                props.load(is);
+                if (props.getProperty("db.url") != null && !props.getProperty("db.url").isBlank()) {
+                    url = props.getProperty("db.url").trim();
+                }
+                if (props.getProperty("db.user") != null && !props.getProperty("db.user").isBlank()) {
+                    user = props.getProperty("db.user").trim();
+                }
+                if (props.getProperty("db.password") != null) {
+                    password = props.getProperty("db.password").trim();
+                }
+            }
+        } catch (Exception e) {
+            System.err.println("Aviso: Nao foi possivel carregar database.properties: " + e.getMessage());
+        }
+
+        String envPass = System.getenv("DB_PASSWORD");
+        if (envPass != null && !envPass.isBlank()) {
+            password = envPass;
+        }
+    }
+
     /**
      * Retorna a conexao ativa com o banco. Cria uma nova se nao existir ou estiver fechada.
      *

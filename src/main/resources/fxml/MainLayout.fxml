@@ -1,54 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.geometry.*?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 
 <!--
-    TELA PRINCIPAL - Container com sidebar fixa
+    TELA PRINCIPAL - Layout Base com Sidebar Fixa e Area Central Responsiva
     Carrega os modulos na area de conteudo dinamicamente.
     Controller: com.condomanager.controller.MainLayoutController
 -->
 <BorderPane xmlns:fx="http://javafx.com/fxml/1"
+            xmlns="http://javafx.com/javafx/21"
             fx:controller="com.condomanager.controller.MainLayoutController"
-            prefWidth="1024" prefHeight="680">
+            prefWidth="1280" prefHeight="720" minWidth="1000" minHeight="650"
+            stylesheets="@../css/style.css">
 
-    <!-- SIDEBAR ESQUERDA (fixa) -->
+    <!-- ================================================================ -->
+    <!-- SIDEBAR ESQUERDA (Menu Lateral de Navegacao)                     -->
+    <!-- ================================================================ -->
     <left>
-        <VBox fx:id="sidebar" prefWidth="200" spacing="4"
-              style="-fx-background-color: #1a2332; -fx-padding: 0;">
+        <VBox fx:id="sidebar" prefWidth="230" spacing="6"
+              styleClass="sidebar-container"
+              style="-fx-background-color: #1a2332; -fx-padding: 16 12 16 12;">
 
-            <!-- Logo / Nome do sistema -->
-            <VBox style="-fx-padding: 20 16 16 16;">
-                <Label text="CondoManager" style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;"/>
-                <Label text="v1.0" style="-fx-text-fill: #8899aa; -fx-font-size: 11px;"/>
+            <!-- Logo e Cabecalho do Sistema -->
+            <VBox spacing="3" style="-fx-padding: 8 6 14 6;">
+                <HBox alignment="CENTER_LEFT" spacing="8">
+                    <Label text="CondoManager" styleClass="sidebar-logo-title"/>
+                </HBox>
+                <Label text="Gestão de Condomínio • v1.0" styleClass="sidebar-logo-subtitle"/>
             </VBox>
 
-            <!-- Itens do menu -->
-            <Button fx:id="btnDashboard"   text="Dashboard"   onAction="#onDashboard"   maxWidth="Infinity"/>
-            <Button fx:id="btnUnidades"    text="Unidades"    onAction="#onUnidades"    maxWidth="Infinity"/>
-            <Button fx:id="btnMoradores"   text="Moradores"   onAction="#onMoradores"   maxWidth="Infinity"/>
-            <Button fx:id="btnTaxas"       text="Taxas"       onAction="#onTaxas"       maxWidth="Infinity"/>
-            <Button fx:id="btnReservas"    text="Reservas"    onAction="#onReservas"    maxWidth="Infinity"/>
-            <Button fx:id="btnOcorrencias" text="Ocorrencias" onAction="#onOcorrencias" maxWidth="Infinity"/>
-            <Button fx:id="btnManutencoes" text="Manutencoes" onAction="#onManutencoes" maxWidth="Infinity"/>
-            <Button fx:id="btnVeiculos"    text="Veiculos"    onAction="#onVeiculos"    maxWidth="Infinity"/>
-            <Button fx:id="btnRelatorios"  text="Relatorios"  onAction="#onRelatorios"  maxWidth="Infinity"/>
+            <Separator opacity="0.15" style="-fx-padding: 0 0 6 0;"/>
 
+            <!-- Links de Navegacao para Todos os Modulos -->
+            <Button fx:id="btnDashboard"   text="🏠  Dashboard"     onAction="#onDashboard"   maxWidth="Infinity" styleClass="sidebar-nav-btn"/>
+            <Button fx:id="btnUnidades"    text="🏢  Unidades"      onAction="#onUnidades"    maxWidth="Infinity" styleClass="sidebar-nav-btn"/>
+            <Button fx:id="btnReservas"    text="📅  Áreas Comuns"  onAction="#onReservas"    maxWidth="Infinity" styleClass="sidebar-nav-btn"/>
+            <Button fx:id="btnOcorrencias" text="⚠️  Ocorrências"   onAction="#onOcorrencias" maxWidth="Infinity" styleClass="sidebar-nav-btn"/>
+            <Button fx:id="btnMoradores"   text="👥  Moradores"     onAction="#onMoradores"   maxWidth="Infinity" styleClass="sidebar-nav-btn"/>
+            <Button fx:id="btnTaxas"       text="💰  Taxas"         onAction="#onTaxas"       maxWidth="Infinity" styleClass="sidebar-nav-btn"/>
+            <Button fx:id="btnManutencoes" text="🔧  Manutenções"   onAction="#onManutencoes" maxWidth="Infinity" styleClass="sidebar-nav-btn"/>
+            <Button fx:id="btnVeiculos"    text="🚗  Veículos"      onAction="#onVeiculos"    maxWidth="Infinity" styleClass="sidebar-nav-btn"/>
+            <Button fx:id="btnRelatorios"  text="📊  Relatórios"    onAction="#onRelatorios"  maxWidth="Infinity" styleClass="sidebar-nav-btn"/>
+
+            <!-- Espacador Flexivel que empurra a secao de usuario para o rodape -->
             <Pane VBox.vgrow="ALWAYS"/>
 
-            <!-- Info do usuario logado + Sair -->
-            <VBox style="-fx-padding: 12 16 16 16;" spacing="8">
-                <Label fx:id="lblUsuario" text="Usuario" style="-fx-text-fill: white; -fx-font-weight: bold;"/>
-                <Label fx:id="lblPerfil"  text="Perfil"  style="-fx-text-fill: #8899aa; -fx-font-size: 11px;"/>
-                <Button fx:id="btnSair"   text="Sair"    onAction="#onSair" maxWidth="Infinity"/>
+            <!-- Informacoes do Usuario Logado e Acao de Logout -->
+            <VBox styleClass="sidebar-user-box" spacing="8">
+                <VBox spacing="2">
+                    <Label fx:id="lblUsuario" text="Administrador" styleClass="sidebar-user-name"/>
+                    <Label fx:id="lblPerfil"  text="ADMIN" styleClass="sidebar-user-role"/>
+                </VBox>
+                <Button fx:id="btnSair" text="🚪  Encerrar Sessão" onAction="#onSair" maxWidth="Infinity" styleClass="sidebar-logout-btn"/>
             </VBox>
         </VBox>
     </left>
 
-    <!-- AREA DE CONTEUDO (troca dinamicamente) -->
+    <!-- ================================================================ -->
+    <!-- AREA CENTRAL DE CONTEUDO (Troca de Modulos Dinamica)             -->
+    <!-- ================================================================ -->
     <center>
-        <StackPane fx:id="contentArea">
-            <!-- Cada modulo sera carregado aqui via FXMLLoader -->
+        <StackPane fx:id="contentArea" style="-fx-background-color: #f1f5f9;">
+            <!-- O conteudo de cada modulo e carregado aqui via FXMLLoader -->
         </StackPane>
     </center>
 
