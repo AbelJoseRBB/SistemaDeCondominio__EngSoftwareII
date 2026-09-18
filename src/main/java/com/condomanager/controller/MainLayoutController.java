@@ -9,6 +9,9 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.scene.control.Label;
+import javafx.scene.control.Button;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Controller do layout principal.
@@ -19,6 +22,19 @@ public class MainLayoutController {
     @FXML private StackPane contentArea;
     @FXML private Label lblUsuario;
     @FXML private Label lblPerfil;
+    @FXML private Label lblIniciais;
+
+    @FXML private Button btnDashboard;
+    @FXML private Button btnUnidades;
+    @FXML private Button btnMoradores;
+    @FXML private Button btnTaxas;
+    @FXML private Button btnReservas;
+    @FXML private Button btnOcorrencias;
+    @FXML private Button btnManutencoes;
+    @FXML private Button btnVeiculos;
+    @FXML private Button btnRelatorios;
+
+    private List<Button> menuButtons;
 
     private final InactivityWatcher inactivityWatcher = new InactivityWatcher();
 
@@ -26,9 +42,27 @@ public class MainLayoutController {
     public void initialize() {
         // Exibe o nome do usuario logado na sidebar
         if (SessionManager.getUsuarioLogado() != null) {
-            lblUsuario.setText(SessionManager.getUsuarioLogado().getNome());
+            String nome = SessionManager.getUsuarioLogado().getNome();
+            lblUsuario.setText(nome);
             lblPerfil.setText(SessionManager.getUsuarioLogado().getPerfil());
+            
+            // Define as iniciais (ate 2 caracteres)
+            if (nome != null && !nome.isEmpty()) {
+                String[] partes = nome.trim().split("\\s+");
+                String iniciais = partes[0].substring(0, 1).toUpperCase();
+                if (partes.length > 1) {
+                    iniciais += partes[partes.length - 1].substring(0, 1).toUpperCase();
+                }
+                if (lblIniciais != null) {
+                    lblIniciais.setText(iniciais);
+                }
+            }
         }
+        
+        // Inicializa a lista de botoes do menu para facilitar iteracao
+        menuButtons = Arrays.asList(btnDashboard, btnUnidades, btnMoradores, btnTaxas, 
+                                    btnReservas, btnOcorrencias, btnManutencoes, btnVeiculos, btnRelatorios);
+
         // Carrega o Dashboard como tela inicial
         onDashboard();
 
@@ -70,15 +104,29 @@ public class MainLayoutController {
         }
     }
 
-    @FXML private void onDashboard()   { carregarTela("/fxml/Dashboard.fxml"); }
-    @FXML private void onUnidades()    { carregarTela("/fxml/unidade/UnidadeList.fxml"); }
-    @FXML private void onMoradores()   { carregarTela("/fxml/morador/MoradorList.fxml"); }
-    @FXML private void onTaxas()       { carregarTela("/fxml/taxa/TaxaList.fxml"); }
-    @FXML private void onReservas()    { carregarTela("/fxml/reserva/ReservaList.fxml"); }
-    @FXML private void onOcorrencias() { carregarTela("/fxml/ocorrencia/OcorrenciaList.fxml"); }
-    @FXML private void onManutencoes() { carregarTela("/fxml/manutencao/ManutencaoList.fxml"); }
-    @FXML private void onVeiculos()    { carregarTela("/fxml/veiculo/VeiculoList.fxml"); }
-    @FXML private void onRelatorios()  { carregarTela("/fxml/relatorio/RelatorioList.fxml"); }
+    private void setActiveButton(Button activeBtn) {
+        if (menuButtons == null) return;
+        for (Button btn : menuButtons) {
+            if (btn != null) {
+                btn.getStyleClass().remove("sidebar-btn-active");
+                if (btn == activeBtn) {
+                    if (!btn.getStyleClass().contains("sidebar-btn-active")) {
+                        btn.getStyleClass().add("sidebar-btn-active");
+                    }
+                }
+            }
+        }
+    }
+
+    @FXML private void onDashboard()   { setActiveButton(btnDashboard); carregarTela("/fxml/Dashboard.fxml"); }
+    @FXML private void onUnidades()    { setActiveButton(btnUnidades); carregarTela("/fxml/unidade/UnidadeList.fxml"); }
+    @FXML private void onMoradores()   { setActiveButton(btnMoradores); carregarTela("/fxml/morador/MoradorList.fxml"); }
+    @FXML private void onTaxas()       { setActiveButton(btnTaxas); carregarTela("/fxml/taxa/TaxaList.fxml"); }
+    @FXML private void onReservas()    { setActiveButton(btnReservas); carregarTela("/fxml/reserva/ReservaList.fxml"); }
+    @FXML private void onOcorrencias() { setActiveButton(btnOcorrencias); carregarTela("/fxml/ocorrencia/OcorrenciaList.fxml"); }
+    @FXML private void onManutencoes() { setActiveButton(btnManutencoes); carregarTela("/fxml/manutencao/ManutencaoList.fxml"); }
+    @FXML private void onVeiculos()    { setActiveButton(btnVeiculos); carregarTela("/fxml/veiculo/VeiculoList.fxml"); }
+    @FXML private void onRelatorios()  { setActiveButton(btnRelatorios); carregarTela("/fxml/relatorio/RelatorioList.fxml"); }
 
     @FXML
     private void onSair() {
