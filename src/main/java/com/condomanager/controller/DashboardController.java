@@ -1,4 +1,4 @@
-package com.condomanager.controller;
+cpackage com.condomanager.controller;
 
 import com.condomanager.model.DashboardResumo;
 import com.condomanager.model.Ocorrencia;
