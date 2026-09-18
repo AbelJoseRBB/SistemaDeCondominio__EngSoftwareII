@@ -1,21 +1,23 @@
 package com.condomanager.controller;
 
+import com.condomanager.model.Usuario;
 import com.condomanager.util.InactivityWatcher;
 import com.condomanager.util.NavigationUtil;
 import com.condomanager.util.SessionManager;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.layout.StackPane;
-import javafx.scene.control.Label;
 import javafx.scene.control.Button;
-import java.util.Arrays;
+import javafx.scene.control.Label;
+import javafx.scene.layout.StackPane;
 import java.util.List;
 
 /**
- * Controller do layout principal.
- * Gerencia a sidebar e carrega cada modulo na area de conteudo.
+ * Controller do layout principal (Painel de Navegacao Central).
+ * Gerencia a sidebar, verificacao de autenticacao de sessao, monitoramento
+ * de inatividade e carregamento dinamico dos modulos na area de conteudo central.
  */
 public class MainLayoutController {
 
@@ -24,120 +26,173 @@ public class MainLayoutController {
     @FXML private Label lblPerfil;
     @FXML private Label lblIniciais;
 
+    private List<Button> menuButtons;
+
     @FXML private Button btnDashboard;
     @FXML private Button btnUnidades;
-    @FXML private Button btnMoradores;
-    @FXML private Button btnTaxas;
     @FXML private Button btnReservas;
     @FXML private Button btnOcorrencias;
+    @FXML private Button btnMoradores;
+    @FXML private Button btnTaxas;
     @FXML private Button btnManutencoes;
     @FXML private Button btnVeiculos;
     @FXML private Button btnRelatorios;
-
-    private List<Button> menuButtons;
+    @FXML private Button btnSair;
 
     private final InactivityWatcher inactivityWatcher = new InactivityWatcher();
 
     @FXML
     public void initialize() {
-        // Exibe o nome do usuario logado na sidebar
-        if (SessionManager.getUsuarioLogado() != null) {
-            String nome = SessionManager.getUsuarioLogado().getNome();
-            lblUsuario.setText(nome);
-            lblPerfil.setText(SessionManager.getUsuarioLogado().getPerfil());
-            
-            // Define as iniciais (ate 2 caracteres)
+      // Verifica se existe usuario autenticado
+        if (!SessionManager.isLogado()) {
+            System.err.println("[Seguranca] Acesso negado a tela principal: nenhum usuario autenticado.");
+            Platform.runLater(this::redirecionarParaLogin);
+            return;
+        }
+
+        // Verifica se a sessao expirou
+        if (SessionManager.isSessionExpirada(InactivityWatcher.TIMEOUT_PADRAO_MS)) {
+            System.err.println("[Seguranca] Sessao expirada por tempo de inatividade.");
+            SessionManager.encerrarSessao();
+            Platform.runLater(this::redirecionarParaLogin);
+            return;
+        }
+
+        // Exibe os dados do usuario na sidebar
+        Usuario usuario = SessionManager.getUsuarioLogado();
+
+        if (usuario != null) {
+            String nome = usuario.getNome();
+
+            lblUsuario.setText(nome != null ? nome : "Usuário");
+            lblPerfil.setText(usuario.getPerfil() != null ? usuario.getPerfil() : "OPERADOR");
+
+            // Define as iniciais do usuario (ate 2 caracteres)
             if (nome != null && !nome.isEmpty()) {
                 String[] partes = nome.trim().split("\\s+");
                 String iniciais = partes[0].substring(0, 1).toUpperCase();
+
                 if (partes.length > 1) {
-                    iniciais += partes[partes.length - 1].substring(0, 1).toUpperCase();
+                    iniciais += partes[partes.length - 1]
+                            .substring(0, 1)
+                            .toUpperCase();
                 }
+
                 if (lblIniciais != null) {
                     lblIniciais.setText(iniciais);
                 }
             }
-        }
-        
-        // Inicializa a lista de botoes do menu para facilitar iteracao
-        menuButtons = Arrays.asList(btnDashboard, btnUnidades, btnMoradores, btnTaxas, 
-                                    btnReservas, btnOcorrencias, btnManutencoes, btnVeiculos, btnRelatorios);
-
-        // Carrega o Dashboard como tela inicial
+        } 
         onDashboard();
 
-        // Inicia o monitoramento de inatividade apos a cena estar disponivel
-        // Usamos Platform.runLater para garantir que a Scene ja foi atribuida ao Stage
-        javafx.application.Platform.runLater(this::iniciarMonitoramentoInatividade);
+        // 5. Inicia o monitoramento de inatividade apos a cena estar associada
+        Platform.runLater(this::iniciarMonitoramentoInatividade);
     }
 
     /**
      * Registra os listeners de mouse e teclado na cena para rastrear atividade
-     * e inicia o InactivityWatcher com redirecionamento para Login ao expirar.
+     * e inicia o InactivityWatcher com redirecionamento automatico para Login.
      */
     private void iniciarMonitoramentoInatividade() {
-        Scene scene = contentArea.getScene();
-        if (scene != null) {
-            scene.setOnMouseMoved(e   -> SessionManager.registrarAtividade());
-            scene.setOnMouseClicked(e -> SessionManager.registrarAtividade());
-            scene.setOnKeyPressed(e   -> SessionManager.registrarAtividade());
+        if (contentArea != null) {
+            Scene scene = contentArea.getScene();
+            if (scene != null) {
+                scene.setOnMouseMoved(e   -> SessionManager.registrarAtividade());
+                scene.setOnMouseClicked(e -> SessionManager.registrarAtividade());
+                scene.setOnKeyPressed(e   -> SessionManager.registrarAtividade());
+            }
         }
 
-        inactivityWatcher.iniciar(() -> NavigationUtil.navegar(
-            "/fxml/Login.fxml",
-            "CondoManager",
-            480, 360,
-            false
-        ));
+        inactivityWatcher.iniciar(() -> {
+            System.out.println("[Seguranca] Sessao encerrada por inatividade.");
+            SessionManager.encerrarSessao();
+            Platform.runLater(this::redirecionarParaLogin);
+        });
     }
 
-    /** Carrega um FXML na area de conteudo central */
-    private void carregarTela(String fxmlPath) {
+    /**
+     * Carrega um FXML na area de conteudo central e atualiza o botao ativo.
+     * Realiza verificacao de sessao antes de qualquer transicao.
+     */
+    public void carregarTela(String fxmlPath, Button botaoAtivo) {
+        if (!SessionManager.isLogado()) {
+            System.err.println("[Seguranca] Sessao invalida ao tentar navegar para " + fxmlPath);
+            redirecionarParaLogin();
+            return;
+        }
+
         try {
-            FXMLLoader loader = new FXMLLoader(
-                getClass().getResource(fxmlPath)
-            );
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
             Node tela = loader.load();
+
+            // Integra o DashboardController com o MainLayoutController para permitir navegacao via cards
+            Object controller = loader.getController();
+            if (controller instanceof DashboardController dashboardController) {
+                dashboardController.setMainLayoutController(this);
+            }
+
             contentArea.getChildren().setAll(tela);
+            destacarBotaoAtivo(botaoAtivo);
         } catch (Exception e) {
+            System.err.println("Erro ao carregar tela [" + fxmlPath + "]: " + e.getMessage());
             e.printStackTrace();
         }
     }
 
-    private void setActiveButton(Button activeBtn) {
-        if (menuButtons == null) return;
-        for (Button btn : menuButtons) {
+    /**
+     * Destaca visualmente o botao do modulo atualmente exibido.
+     */
+    private void destacarBotaoAtivo(Button botaoAtivo) {
+        List<Button> botoes = List.of(
+            btnDashboard, btnUnidades, btnReservas, btnOcorrencias,
+            btnMoradores, btnTaxas, btnManutencoes, btnVeiculos, btnRelatorios
+        );
+
+        for (Button btn : botoes) {
             if (btn != null) {
                 btn.getStyleClass().remove("sidebar-btn-active");
-                if (btn == activeBtn) {
-                    if (!btn.getStyleClass().contains("sidebar-btn-active")) {
-                        btn.getStyleClass().add("sidebar-btn-active");
-                    }
-                }
             }
+        }
+
+        if (botaoAtivo != null && !botaoAtivo.getStyleClass().contains("sidebar-btn-active")) {
+            botaoAtivo.getStyleClass().add("sidebar-btn-active");
         }
     }
 
-    @FXML private void onDashboard()   { setActiveButton(btnDashboard); carregarTela("/fxml/Dashboard.fxml"); }
-    @FXML private void onUnidades()    { setActiveButton(btnUnidades); carregarTela("/fxml/unidade/UnidadeList.fxml"); }
-    @FXML private void onMoradores()   { setActiveButton(btnMoradores); carregarTela("/fxml/morador/MoradorList.fxml"); }
-    @FXML private void onTaxas()       { setActiveButton(btnTaxas); carregarTela("/fxml/taxa/TaxaList.fxml"); }
-    @FXML private void onReservas()    { setActiveButton(btnReservas); carregarTela("/fxml/reserva/ReservaList.fxml"); }
-    @FXML private void onOcorrencias() { setActiveButton(btnOcorrencias); carregarTela("/fxml/ocorrencia/OcorrenciaList.fxml"); }
-    @FXML private void onManutencoes() { setActiveButton(btnManutencoes); carregarTela("/fxml/manutencao/ManutencaoList.fxml"); }
-    @FXML private void onVeiculos()    { setActiveButton(btnVeiculos); carregarTela("/fxml/veiculo/VeiculoList.fxml"); }
-    @FXML private void onRelatorios()  { setActiveButton(btnRelatorios); carregarTela("/fxml/relatorio/RelatorioList.fxml"); }
-
-    @FXML
-    private void onSair() {
+    /**
+     * Redireciona o usuario para a tela de autenticacao (Login).
+     */
+    private void redirecionarParaLogin() {
         inactivityWatcher.parar();
-        SessionManager.encerrarSessao();
         NavigationUtil.navegar(
             "/fxml/Login.fxml",
             "CondoManager",
-            480, 360,
-            false
+            1024, 768,
+            true
         );
     }
-}
 
+    // ------------------------------------------------------------------
+    // Acoes do Menu de Navegacao Lateral
+    // ------------------------------------------------------------------
+
+    @FXML public void onDashboard()   { carregarTela("/fxml/Dashboard.fxml", btnDashboard); }
+    @FXML public void onUnidades()    { carregarTela("/fxml/unidade/UnidadeList.fxml", btnUnidades); }
+    @FXML public void onReservas()    { carregarTela("/fxml/reserva/ReservaList.fxml", btnReservas); }
+    @FXML public void onOcorrencias() { carregarTela("/fxml/ocorrencia/OcorrenciaList.fxml", btnOcorrencias); }
+    @FXML public void onMoradores()   { carregarTela("/fxml/morador/MoradorList.fxml", btnMoradores); }
+    @FXML public void onTaxas()       { carregarTela("/fxml/taxa/TaxaList.fxml", btnTaxas); }
+    @FXML public void onManutencoes() { carregarTela("/fxml/manutencao/ManutencaoList.fxml", btnManutencoes); }
+    @FXML public void onVeiculos()    { carregarTela("/fxml/veiculo/VeiculoList.fxml", btnVeiculos); }
+    @FXML public void onRelatorios()  { carregarTela("/fxml/relatorio/RelatorioList.fxml", btnRelatorios); }
+
+    /**
+     * Encerra a sessao ativa do usuario e retorna a tela de Login.
+     */
+    @FXML
+    public void onSair() {
+        inactivityWatcher.parar();
+        SessionManager.encerrarSessao();
+        redirecionarParaLogin();
+    }
+}

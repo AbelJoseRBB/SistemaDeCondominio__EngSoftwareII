@@ -572,3 +572,70 @@
 .sidebar-logout-btn:hover .svg-icon {
     -fx-fill: #ffffff;
 }
+/* ============================================================ */
+/* Dashboard e Cards de Resumo                                  */
+/* ============================================================ */
+
+.dashboard-root {
+    -fx-background-color: #f1f5f9;
+}
+
+.summary-card {
+    -fx-background-color: white;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-border-color: #e2e8f0;
+    -fx-padding: 16 20 16 20;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.04), 10, 0, 0, 3);
+    -fx-cursor: hand;
+}
+
+.summary-card:hover {
+    -fx-border-color: #cbd5e1;
+    -fx-effect: dropshadow(three-pass-box, rgba(32, 58, 92, 0.12), 12, 0, 0, 4);
+}
+
+.card-label {
+    -fx-text-fill: #64748b;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+}
+
+.card-value {
+    -fx-text-fill: #1e293b;
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+}
+
+.card-subtext {
+    -fx-text-fill: #94a3b8;
+    -fx-font-size: 11px;
+}
+
+.dashboard-table-card {
+    -fx-background-color: white;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-border-color: #e2e8f0;
+    -fx-padding: 16;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.04), 10, 0, 0, 3);
+}
+
+.dashboard-refresh-btn {
+    -fx-background-color: white;
+    -fx-text-fill: #203a5c;
+    -fx-border-color: #cbd5e1;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-padding: 8 16 8 16;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
+
+.dashboard-refresh-btn:hover {
+    -fx-background-color: #f8fafc;
+    -fx-border-color: #94a3b8;
+}

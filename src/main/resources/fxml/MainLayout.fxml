@@ -1,21 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.geometry.*?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 
 <?import javafx.scene.shape.*?>
 
 <!--
-    TELA PRINCIPAL - Container com sidebar fixa
+    TELA PRINCIPAL - Layout Base com Sidebar Fixa e Area Central Responsiva
     Carrega os modulos na area de conteudo dinamicamente.
     Controller: com.condomanager.controller.MainLayoutController
 -->
 <BorderPane xmlns:fx="http://javafx.com/fxml/1"
+            xmlns="http://javafx.com/javafx/21"
             fx:controller="com.condomanager.controller.MainLayoutController"
-            stylesheets="@../css/style.css"
-            prefWidth="1024" prefHeight="680">
+            prefWidth="1280" prefHeight="720" minWidth="1000" minHeight="650"
+            stylesheets="@../css/style.css">
 
-    <!-- SIDEBAR ESQUERDA (fixa) -->
+    <!-- ================================================================ -->
+    <!-- SIDEBAR ESQUERDA (Menu Lateral de Navegacao)                     -->
+    <!-- ================================================================ -->
     <left>
         <VBox fx:id="sidebar" styleClass="sidebar">
             
@@ -117,10 +127,12 @@
         </VBox>
     </left>
 
-    <!-- AREA DE CONTEUDO (troca dinamicamente) -->
+    <!-- ================================================================ -->
+    <!-- AREA CENTRAL DE CONTEUDO (Troca de Modulos Dinamica)             -->
+    <!-- ================================================================ -->
     <center>
-        <StackPane fx:id="contentArea">
-            <!-- Cada modulo sera carregado aqui via FXMLLoader -->
+        <StackPane fx:id="contentArea" style="-fx-background-color: #f1f5f9;">
+            <!-- O conteudo de cada modulo e carregado aqui via FXMLLoader -->
         </StackPane>
     </center>
 
