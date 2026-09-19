@@ -40,7 +40,8 @@ CREATE TABLE IF NOT EXISTS morador (
     cpf        VARCHAR(14)  UNIQUE,
     telefone   VARCHAR(20),
     email      VARCHAR(100),
-    tipo       ENUM('PROPRIETARIO','INQUILINO','DEPENDENTE') NOT NULL,
+    tipo       ENUM('PROPRIETARIO','INQUILINO','LOCATARIO','DEPENDENTE') NOT NULL,
+    situacao   ENUM('ATIVO','INATIVO') NOT NULL DEFAULT 'ATIVO',
     FOREIGN KEY (id_unidade) REFERENCES unidade(id) ON DELETE CASCADE
 );
 
