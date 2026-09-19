@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefWidth="500.0" stylesheets="@../css/moradores.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.condomanager.controller.morador.MoradorFormController">
+<AnchorPane prefWidth="500.0" stylesheets="/css/moradores.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.condomanager.controller.morador.MoradorFormController">
    <children>
       <VBox spacing="20.0" styleClass="modal-container" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
