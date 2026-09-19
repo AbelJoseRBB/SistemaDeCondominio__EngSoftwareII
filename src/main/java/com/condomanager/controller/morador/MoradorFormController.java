@@ -115,8 +115,18 @@ public class MoradorFormController {
     }
 
     private boolean validarCampos() {
-        if (txtNome.getText().trim().isEmpty() || txtCpf.getText().trim().isEmpty() || cbUnidade.getValue() == null) {
-            exibirAlertaErro("Nome, CPF e Unidade são obrigatórios.");
+        if (txtNome.getText().trim().isEmpty()) {
+            exibirAlertaErro("O campo Nome é obrigatório.");
+            return false;
+        }
+        
+        if (txtCpf.getText().trim().isEmpty()) {
+            exibirAlertaErro("O campo CPF é obrigatório.");
+            return false;
+        }
+        
+        if (cbUnidade.getValue() == null) {
+            exibirAlertaErro("Você precisa selecionar uma Unidade.");
             return false;
         }
 
@@ -128,7 +138,7 @@ public class MoradorFormController {
 
         int idAtual = moradorAtual != null ? moradorAtual.getId() : 0;
         if (moradorDAO.existeCpf(cpfNumeros, idAtual)) {
-            exibirAlertaErro("Este CPF já está cadastrado no sistema.");
+            exibirAlertaErro("Este CPF já está cadastrado no sistema para outro morador.");
             return false;
         }
 
