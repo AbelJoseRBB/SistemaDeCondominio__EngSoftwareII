@@ -10,7 +10,8 @@ public class Morador {
     private String cpf;
     private String telefone;
     private String email;
-    private String tipo; // "PROPRIETARIO", "INQUILINO", "DEPENDENTE"
+    private String tipo; // "PROPRIETARIO", "INQUILINO", "LOCATARIO", "DEPENDENTE"
+    private String situacao; // "ATIVO", "INATIVO"
 
     public Morador() {}
 
@@ -29,5 +30,7 @@ public class Morador {
     public void setEmail(String email) { this.email = email; }
     public String getTipo() { return tipo; }
     public void setTipo(String tipo) { this.tipo = tipo; }
+    public String getSituacao() { return situacao; }
+    public void setSituacao(String situacao) { this.situacao = situacao; }
 }
 

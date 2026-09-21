@@ -1,0 +1,191 @@
+/* =======================================================
+   moradores.css - Estilos convertidos para JavaFX
+   Baseado no mockup web fornecido
+======================================================= */
+
+.container {
+    -fx-background-color: #f1f5f9; /* fundo geral da pagina */
+    -fx-padding: 28px;
+}
+
+.heading {
+    -fx-font-family: "Inter", "Helvetica", "Arial", sans-serif;
+    -fx-font-weight: bold;
+    -fx-font-size: 20px;
+    -fx-text-fill: #111827;
+}
+
+.subheading {
+    -fx-font-family: "Inter", "Helvetica", "Arial", sans-serif;
+    -fx-font-size: 13px;
+    -fx-text-fill: #6b7280;
+}
+
+.search-field {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #d1d5db;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-padding: 8px 10px;
+    -fx-font-size: 13px;
+    -fx-text-fill: #374151;
+}
+
+.btn-primary {
+    -fx-background-color: #1e3a5f;
+    -fx-text-fill: #ffffff;
+    -fx-font-family: "Inter", sans-serif;
+    -fx-font-weight: bold;
+    -fx-font-size: 13px;
+    -fx-background-radius: 5px;
+    -fx-border-radius: 5px;
+    -fx-padding: 8px 14px;
+    -fx-cursor: hand;
+}
+
+.btn-primary:hover {
+    -fx-background-color: #2b5082;
+}
+
+.btn-secondary {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #d1d5db;
+    -fx-text-fill: #374151;
+    -fx-font-family: "Inter", sans-serif;
+    -fx-font-weight: bold;
+    -fx-font-size: 13px;
+    -fx-background-radius: 5px;
+    -fx-border-radius: 5px;
+    -fx-padding: 8px 14px;
+    -fx-cursor: hand;
+}
+
+.btn-secondary:hover {
+    -fx-background-color: #f3f4f6;
+}
+
+/* Tabela baseada no mockup */
+.table-view {
+    -fx-background-color: transparent;
+    -fx-border-color: #e5e7eb;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: #f8fafc;
+    -fx-border-color: transparent transparent #e5e7eb transparent;
+    -fx-border-width: 1px;
+}
+
+.table-view .column-header {
+    -fx-background-color: transparent;
+    -fx-padding: 10px 14px;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: #6b7280;
+    -fx-font-family: "Inter", sans-serif;
+    -fx-font-weight: bold;
+    -fx-font-size: 11px;
+    -fx-alignment: center-left;
+}
+
+.table-view .table-row-cell {
+    -fx-background-color: #ffffff;
+    -fx-border-color: transparent transparent #f1f5f9 transparent;
+    -fx-border-width: 1px;
+    -fx-padding: 5px 0px;
+}
+
+.table-view .table-row-cell:hover {
+    -fx-background-color: #f8fafc;
+}
+
+.table-view .table-cell {
+    -fx-text-fill: #374151;
+    -fx-font-size: 13px;
+    -fx-font-family: "Inter", sans-serif;
+    -fx-alignment: center-left;
+    -fx-padding: 0px 14px;
+}
+
+/* Badges de Tipo e Situação (Aplicados no Controller via CellFactory) */
+.badge-proprietario {
+    -fx-background-color: #dbeafe;
+    -fx-text-fill: #1d4ed8;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 4px;
+    -fx-padding: 2px 8px;
+}
+
+.badge-dependente {
+    -fx-background-color: #f1f5f9;
+    -fx-text-fill: #475569;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 4px;
+    -fx-padding: 2px 8px;
+}
+
+.badge-locatario {
+    -fx-background-color: #ffedd5;
+    -fx-text-fill: #c2410c;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 4px;
+    -fx-padding: 2px 8px;
+}
+
+.badge-ativo {
+    -fx-background-color: #dcfce7;
+    -fx-text-fill: #15803d;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 4px;
+    -fx-padding: 2px 8px;
+}
+
+.badge-inativo {
+    -fx-background-color: #fee2e2;
+    -fx-text-fill: #b91c1c;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 4px;
+    -fx-padding: 2px 8px;
+}
+
+/* Modal Form Styles */
+.modal-container {
+    -fx-background-color: #ffffff;
+    -fx-padding: 20px;
+}
+
+.modal-title {
+    -fx-font-family: "Inter", sans-serif;
+    -fx-font-weight: bold;
+    -fx-font-size: 18px;
+    -fx-text-fill: #111827;
+}
+
+.form-label {
+    -fx-font-family: "Inter", sans-serif;
+    -fx-font-size: 12px;
+    -fx-text-fill: #374151;
+    -fx-font-weight: bold;
+}
+
+.form-input {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #d1d5db;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-padding: 8px 10px;
+    -fx-font-size: 13px;
+    -fx-text-fill: #374151;
+}
+
+.form-input:focused {
+    -fx-border-color: #1e3a5f;
+}
