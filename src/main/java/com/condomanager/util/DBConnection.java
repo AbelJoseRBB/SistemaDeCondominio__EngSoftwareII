@@ -103,12 +103,30 @@ public class DBConnection {
         } else {
             url      = "jdbc:mysql://localhost:3306/condominio_db";
             user     = "root";
-            password = "sua_senha_aqui";
+            password = "root";
         }
 
+        String envUrl = System.getenv("DB_URL");
+        if (envUrl != null && !envUrl.isBlank()) {
+            url = envUrl.trim();
+        } else {
+            String envHost = System.getenv("DB_HOST");
+            if (envHost != null && !envHost.isBlank()) {
+                String envPort = System.getenv("DB_PORT");
+                String envName = System.getenv("DB_NAME");
+                String port = (envPort != null && !envPort.isBlank()) ? envPort.trim() : "3306";
+                String name = (envName != null && !envName.isBlank()) ? envName.trim() : "condominio_db";
+                url = "jdbc:mysql://" + envHost.trim() + ":" + port + "/" + name + "?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC";
+            }
+        }
+
+        String envUser = System.getenv("DB_USER");
+        if (envUser != null && !envUser.isBlank()) {
+            user = envUser.trim();
+        }
         String envPass = System.getenv("DB_PASSWORD");
         if (envPass != null && !envPass.isBlank()) {
-            password = envPass;
+            password = envPass.trim();
         }
     }
-}
+}

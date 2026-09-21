@@ -44,5 +44,11 @@ public class Ocorrencia {
     public String getLocal() {
         return local;
     }
+    public void setLocalFormatado(String localFormatado) {
+        this.local = localFormatado;
+    }
+    public String getLocalFormatado() {
+        return local != null ? local : "";
+    }
 }
 

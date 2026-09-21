@@ -92,6 +92,43 @@ Execute da mesma forma que o `schema.sql`. Inclui 7 unidades, moradores, taxas e
 
 ## 3. Executando o Projeto
 
+### 3.1 Via Docker (Banco de Dados Conteinerizado - Recomendado)
+
+Para máxima flexibilidade entre membros da equipe e facilidade de movimentação do banco de dados, o MySQL 8.0 roda no Docker pré-configurado com as tabelas e dados de teste.
+
+#### Iniciar o banco de dados:
+```bash
+docker compose up -d
+```
+ou no Windows:
+```cmd
+db.bat start
+```
+
+O MySQL subirá na porta `3306`, executando automaticamente:
+1. `src/main/resources/sql/schema.sql` (todas as tabelas e usuário admin)
+2. `src/main/resources/sql/dados_teste.sql` (unidades, moradores, taxas e reservas de exemplo)
+
+#### Executar a aplicação (Java 17 + JavaFX 21):
+```bash
+mvn javafx:run
+```
+
+#### Movimentação, Backup e Restauração do Banco:
+| Operação | Comando nativo Docker | Utilitário Windows (`db.bat`) |
+|---|---|---|
+| **Iniciar banco** | `docker compose up -d` | `db.bat start` |
+| **Parar banco** | `docker compose down` | `db.bat stop` |
+| **Status do banco** | `docker compose ps` | `db.bat status` |
+| **Resetar banco** *(apaga e recria do zero)* | `docker compose down -v && docker compose up -d` | `db.bat reset` |
+| **Exportar backup (Dump)** | `docker compose exec -T db mysqldump -u root -proot condominio_db > backup.sql` | `db.bat backup` |
+| **Restaurar backup** | `docker compose exec -T db mysql -u root -proot condominio_db < backup.sql` | `db.bat restore backup.sql` |
+| **Terminal MySQL (CLI)** | `docker compose exec -it db mysql -u root -proot condominio_db` | `db.bat cli` |
+
+> 💡 **Customização de porta e senhas:** copie `.env.example` para `.env` e altere a variável `MYSQL_PORT` caso a porta 3306 já esteja em uso no seu computador.
+
+### 3.2 Execução Local com MySQL Instalado no Sistema Operacional
+
 ```bash
 mvn javafx:run
 ```
