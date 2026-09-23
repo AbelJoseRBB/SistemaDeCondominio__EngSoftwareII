@@ -23,7 +23,7 @@ public class Main extends Application {
         primaryStage = stage;
 
         FXMLLoader loader = new FXMLLoader(
-            getClass().getResource("/fxml/Login.fxml")
+            getClass().getResource("/fxml/manutencao/ManutencaoList.fxml")
         );
         Parent root = loader.load();
 
