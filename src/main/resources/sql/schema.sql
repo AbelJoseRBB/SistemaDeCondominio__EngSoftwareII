@@ -29,6 +29,7 @@ CREATE TABLE IF NOT EXISTS unidade (
     situacao         ENUM('OCUPADO','DESOCUPADO','VENDA','ALUGUEL') NOT NULL DEFAULT 'DESOCUPADO',
     telefone_contato VARCHAR(20),
     email_contato    VARCHAR(100),
+    limite_veiculos INT NOT NULL DEFAULT 2 CHECK (limite_veiculos >= 0),
     UNIQUE KEY uk_bloco_numero (bloco, numero)
 );
 
@@ -104,9 +105,16 @@ CREATE TABLE IF NOT EXISTS veiculo (
     id           INT AUTO_INCREMENT PRIMARY KEY,
     id_unidade   INT NOT NULL,
     placa        VARCHAR(10) NOT NULL UNIQUE,
+    marca        VARCHAR(80),
+    id_proprietario INT,
     modelo       VARCHAR(80),
     cor          VARCHAR(30),
     numero_vaga  VARCHAR(10),                            -- Nullable
+    placa_normalizada VARCHAR(10) GENERATED ALWAYS AS (UPPER(REPLACE(TRIM(placa), '-', ''))) STORED,
+    vaga_normalizada VARCHAR(10) GENERATED ALWAYS AS (NULLIF(UPPER(TRIM(numero_vaga)), '')) STORED,
+    UNIQUE KEY uk_veiculo_placa_normalizada (placa_normalizada),
+    UNIQUE KEY uk_veiculo_vaga (vaga_normalizada),
+    FOREIGN KEY (id_proprietario) REFERENCES morador(id),
     FOREIGN KEY (id_unidade) REFERENCES unidade(id) ON DELETE CASCADE
 );
 
