@@ -328,12 +328,15 @@
                     <Region HBox.hgrow="ALWAYS"/>
 
                     <!-- O botao de exportacao sera ligado na proxima etapa -->
-                    <Button text="Exportar para Excel"
+                    <Button fx:id="btnExportar"
+                            text="Exportar para Excel"
+                            onAction="#onExportar"
                             disable="true"
                             style="-fx-background-color: #059669;
                                    -fx-text-fill: white;
                                    -fx-font-weight: bold;
-                                   -fx-background-radius: 5;"/>
+                                   -fx-background-radius: 5;
+                                   -fx-cursor: hand;"/>
                 </HBox>
 
                 <Label fx:id="lblMensagem"

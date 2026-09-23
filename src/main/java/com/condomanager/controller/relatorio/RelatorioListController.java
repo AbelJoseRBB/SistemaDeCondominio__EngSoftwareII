@@ -2,13 +2,16 @@ package com.condomanager.controller.relatorio;
 
 import com.condomanager.model.*;
 import com.condomanager.service.RelatorioService;
+import com.condomanager.util.ExcelExporter;
 
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.stage.FileChooser;
 
+import java.io.File;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -29,6 +32,9 @@ public class RelatorioListController {
 
     @FXML
     private Label lblMensagem;
+
+    @FXML
+    private Button btnExportar;
 
     private final RelatorioService relatorioService = new RelatorioService();
 
@@ -296,32 +302,55 @@ public class RelatorioListController {
     }
 
     private void exibirDados(List<?> dados, String titulo) {
-
         lblTituloRelatorio.setText(titulo);
-
-        tabelaRelatorio.setItems(
-                FXCollections.observableArrayList(dados)
-        );
+        tabelaRelatorio.setItems(FXCollections.observableArrayList(dados));
 
         if (dados.isEmpty()) {
-            lblMensagem.setText(
-                    "Nenhum registro encontrado para os critérios selecionados."
-            );
+            lblMensagem.setText("Nenhum registro encontrado para os critérios selecionados.");
+            btnExportar.setDisable(true);
         } else {
-            lblMensagem.setText(
-                    dados.size() + " registro(s) encontrado(s)."
-            );
+            lblMensagem.setText(dados.size() + " registro(s) encontrado(s).");
+            btnExportar.setDisable(false);
         }
     }
 
     private void exibirErro(String mensagem) {
         lblMensagem.setText(mensagem);
         tabelaRelatorio.getItems().clear();
+        btnExportar.setDisable(true);
     }
 
     private String formatarData(LocalDate data) {
-        return data != null
-                ? data.format(formatadorData)
-                : "";
+        return data != null ? data.format(formatadorData) : "";
     }
+
+    @FXML
+    private void onExportar() {
+        if (tabelaRelatorio.getItems().isEmpty()) {
+            lblMensagem.setText("Não há dados disponíveis para exportação.");
+            return;
+        }
+
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Salvar relatório");
+        fileChooser.getExtensionFilters().add(
+                new FileChooser.ExtensionFilter("Arquivo Excel (*.xlsx)", "*.xlsx")
+        );
+        fileChooser.setInitialFileName("relatorio.xlsx");
+
+        File arquivo = fileChooser.showSaveDialog(tabelaRelatorio.getScene().getWindow());
+
+        if (arquivo == null) {
+            return;
+        }
+
+        try {
+            ExcelExporter.exportar(tabelaRelatorio, arquivo);
+            lblMensagem.setText("Relatório exportado com sucesso.");
+        } catch (IOException e) {
+            lblMensagem.setText("Erro ao exportar o relatório.");
+            e.printStackTrace();
+        }
+    }
+
 }
