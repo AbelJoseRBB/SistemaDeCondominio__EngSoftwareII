@@ -146,10 +146,12 @@ public class ManutencaoListController {
             {
                 pane.setAlignment(javafx.geometry.Pos.CENTER);
                 
-                btnEditar.setStyle("-fx-background-color: #f0fdf4; -fx-text-fill: #15803d; -fx-border-color: #bbf7d0; -fx-border-radius: 4; -fx-background-radius: 4; -fx-cursor: hand; -fx-padding: 4 8;");
+                btnEditar.getStyleClass().add("btn-secondary");
+                btnEditar.setStyle("-fx-padding: 2 6;");
                 btnEditar.setOnAction(e -> abrirFormulario(getTableView().getItems().get(getIndex())));
 
-                btnExcluir.setStyle("-fx-background-color: #fef2f2; -fx-text-fill: #b91c1c; -fx-border-color: #fecaca; -fx-border-radius: 4; -fx-background-radius: 4; -fx-cursor: hand; -fx-padding: 4 8;");
+                btnExcluir.getStyleClass().add("btn-secondary");
+                btnExcluir.setStyle("-fx-padding: 2 6; -fx-text-fill: red;");
                 btnExcluir.setOnAction(e -> excluirManutencao(getTableView().getItems().get(getIndex())));
             }
 
