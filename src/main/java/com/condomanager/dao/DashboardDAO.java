@@ -127,7 +127,11 @@ public class DashboardDAO {
 
                     String bloco = rs.getString("bloco");
                     String numero = rs.getString("numero");
-                    if (bloco != null && numero != null) {
+                    String local = rs.getString("local");
+
+                    if (local != null && !local.isBlank()) {
+                        o.setLocal(local);
+                    } else if (bloco != null && numero != null) {
                         o.setLocal("Bloco " + bloco + " – " + numero);
                     } else {
                         o.setLocal("Área Comum");

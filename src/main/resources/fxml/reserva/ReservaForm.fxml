@@ -11,153 +11,96 @@
 <VBox xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="com.condomanager.controller.reserva.ReservaFormController"
       spacing="16"
-      prefWidth="500"
-      style="-fx-padding: 24 28 8 28; -fx-background-color: white;">
+      prefWidth="520"
+      styleClass="modal-container"
+      stylesheets="@../../css/style.css">
 
-    <!-- ============================================================ -->
-    <!-- LINHA 1: Unidade (largura total)                              -->
-    <!-- ============================================================ -->
-    <VBox spacing="6">
-        <Label text="Unidade *"
-               style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #334155;"/>
-        <ComboBox fx:id="cmbUnidade"
-                  maxWidth="Infinity"
-                  promptText="Selecione a unidade..."
-                  style="-fx-background-color: white;
-                         -fx-border-color: #d1d5db;
-                         -fx-border-radius: 5;
-                         -fx-background-radius: 5;
-                         -fx-font-size: 13px;"/>
-    </VBox>
+    <!-- Titulo do Formulario -->
+    <Label text="Dados da Reserva" styleClass="modal-title"/>
 
-    <!-- ============================================================ -->
-    <!-- LINHA 2: Area Comum (largura total)                           -->
-    <!-- ============================================================ -->
-    <VBox spacing="6">
-        <Label text="Área Comum *"
-               style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #334155;"/>
-        <ComboBox fx:id="cmbAreaComum"
-                  maxWidth="Infinity"
-                  promptText="Selecione a area..."
-                  style="-fx-background-color: white;
-                         -fx-border-color: #d1d5db;
-                         -fx-border-radius: 5;
-                         -fx-background-radius: 5;
-                         -fx-font-size: 13px;"/>
-    </VBox>
+    <!-- Formulario em Grade -->
+    <GridPane hgap="16" vgap="14">
+        <columnConstraints>
+            <ColumnConstraints percentWidth="50"/>
+            <ColumnConstraints percentWidth="50"/>
+        </columnConstraints>
 
-    <!-- ============================================================ -->
-    <!-- LINHA 3: Data + Hora Inicio + Hora Fim                        -->
-    <!-- ============================================================ -->
-    <HBox spacing="16">
+        <!-- LINHA 0: Unidade (largura total) -->
+        <VBox spacing="5" GridPane.columnSpan="2" GridPane.rowIndex="0">
+            <Label text="Unidade *" styleClass="field-label"/>
+            <ComboBox fx:id="cmbUnidade"
+                      maxWidth="Infinity"
+                      promptText="Selecione a unidade..."
+                      styleClass="combo-box"/>
+        </VBox>
 
-        <!-- Data da reserva -->
-        <VBox spacing="6" HBox.hgrow="ALWAYS">
-            <Label text="Data *"
-                   style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #334155;"/>
+        <!-- LINHA 1: Area Comum (largura total) -->
+        <VBox spacing="5" GridPane.columnSpan="2" GridPane.rowIndex="1">
+            <Label text="Área Comum *" styleClass="field-label"/>
+            <ComboBox fx:id="cmbAreaComum"
+                      maxWidth="Infinity"
+                      promptText="Selecione a área comum..."
+                      styleClass="combo-box"/>
+        </VBox>
+
+        <!-- LINHA 2: Data + Horarios -->
+        <VBox spacing="5" GridPane.columnIndex="0" GridPane.rowIndex="2">
+            <Label text="Data *" styleClass="field-label"/>
             <DatePicker fx:id="dpData"
                         maxWidth="Infinity"
                         promptText="dd/mm/aaaa"
-                        style="-fx-background-color: white;
-                               -fx-border-color: #d1d5db;
-                               -fx-border-radius: 5;
-                               -fx-background-radius: 5;
-                               -fx-font-size: 13px;"/>
+                        styleClass="date-picker"/>
         </VBox>
 
-        <!-- Hora de inicio -->
-        <VBox spacing="6" HBox.hgrow="ALWAYS">
-            <Label text="Hora Início *"
-                   style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #334155;"/>
-            <TextField fx:id="txtHoraInicio"
-                       promptText="08:00"
-                       maxWidth="Infinity"
-                       style="-fx-background-color: white;
-                              -fx-border-color: #d1d5db;
-                              -fx-border-radius: 5;
-                              -fx-background-radius: 5;
-                              -fx-padding: 8 12 8 12;
-                              -fx-font-size: 13px;
-                              -fx-text-fill: #334155;
-                              -fx-prompt-text-fill: #9ca3af;"/>
+        <!-- Horarios Lado a Lado -->
+        <HBox spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <VBox spacing="5" HBox.hgrow="ALWAYS">
+                <Label text="Início *" styleClass="field-label"/>
+                <TextField fx:id="txtHoraInicio"
+                           promptText="08:00"
+                           styleClass="text-field"/>
+            </VBox>
+            <VBox spacing="5" HBox.hgrow="ALWAYS">
+                <Label text="Fim *" styleClass="field-label"/>
+                <TextField fx:id="txtHoraFim"
+                           promptText="12:00"
+                           styleClass="text-field"/>
+            </VBox>
+        </HBox>
+
+        <!-- LINHA 3: Dica de Formato -->
+        <Label text="Formato dos horários: HH:mm (ex: 08:00, 14:30, 20:00)"
+               style="-fx-font-size: 11px; -fx-text-fill: #94a3b8;"
+               GridPane.columnSpan="2"
+               GridPane.rowIndex="3"/>
+
+        <!-- LINHA 4: Observacoes (largura total) -->
+        <VBox spacing="5" GridPane.columnSpan="2" GridPane.rowIndex="4">
+            <Label text="Observações (opcional)" styleClass="field-label"/>
+            <TextArea fx:id="txtObservacoes"
+                      promptText="Informações adicionais sobre a reserva..."
+                      prefRowCount="3"
+                      wrapText="true"
+                      maxWidth="Infinity"
+                      styleClass="text-field"/>
         </VBox>
 
-        <!-- Hora de fim -->
-        <VBox spacing="6" HBox.hgrow="ALWAYS">
-            <Label text="Hora Fim *"
-                   style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #334155;"/>
-            <TextField fx:id="txtHoraFim"
-                       promptText="12:00"
-                       maxWidth="Infinity"
-                       style="-fx-background-color: white;
-                              -fx-border-color: #d1d5db;
-                              -fx-border-radius: 5;
-                              -fx-background-radius: 5;
-                              -fx-padding: 8 12 8 12;
-                              -fx-font-size: 13px;
-                              -fx-text-fill: #334155;
-                              -fx-prompt-text-fill: #9ca3af;"/>
-        </VBox>
+    </GridPane>
 
-    </HBox>
-
-    <Label text="Formato dos horarios: HH:MM  (ex: 08:00, 14:30, 20:00)"
-           style="-fx-font-size: 11px; -fx-text-fill: #9ca3af;"/>
-
-    <!-- ============================================================ -->
-    <!-- LINHA 4: Observacoes (opcional)                               -->
-    <!-- ============================================================ -->
-    <VBox spacing="6">
-        <Label text="Observações (opcional)"
-               style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #334155;"/>
-        <TextArea fx:id="txtObservacoes"
-                  promptText="Informacoes adicionais sobre a reserva..."
-                  prefRowCount="3"
-                  wrapText="true"
-                  maxWidth="Infinity"
-                  style="-fx-background-color: white;
-                         -fx-border-color: #d1d5db;
-                         -fx-border-radius: 5;
-                         -fx-background-radius: 5;
-                         -fx-padding: 8 12 8 12;
-                         -fx-font-size: 13px;
-                         -fx-text-fill: #334155;
-                         -fx-prompt-text-fill: #9ca3af;"/>
-    </VBox>
-
-    <!-- ============================================================ -->
-    <!-- SEPARADOR + BOTOES                                            -->
-    <!-- ============================================================ -->
-    <Separator style="-fx-padding: 4 0 0 0;"/>
-
+    <!-- Botoes de Acao -->
     <HBox alignment="CENTER_RIGHT" spacing="12"
-          style="-fx-padding: 0 0 4 0;">
+          style="-fx-padding: 14 0 0 0; -fx-border-color: #e2e8f0; -fx-border-width: 1 0 0 0;">
 
         <Button fx:id="btnCancelar"
                 text="Cancelar"
                 onAction="#onCancelar"
-                style="-fx-background-color: white;
-                       -fx-text-fill: #374151;
-                       -fx-font-size: 13px;
-                       -fx-border-color: #d1d5db;
-                       -fx-border-radius: 5;
-                       -fx-background-radius: 5;
-                       -fx-padding: 8 20 8 20;
-                       -fx-cursor: hand;"/>
+                styleClass="btn-secondary"/>
 
         <Button fx:id="btnSalvar"
                 text="Salvar"
                 onAction="#onSalvar"
                 defaultButton="true"
-                style="-fx-background-color: #203a5c;
-                       -fx-text-fill: white;
-                       -fx-font-size: 13px;
-                       -fx-font-weight: bold;
-                       -fx-border-radius: 5;
-                       -fx-background-radius: 5;
-                       -fx-padding: 8 20 8 20;
-                       -fx-cursor: hand;"/>
+                styleClass="btn-primary"/>
     </HBox>
 
 </VBox>
-

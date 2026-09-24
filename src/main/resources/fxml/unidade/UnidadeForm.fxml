@@ -6,160 +6,91 @@
 <!--
     FORMULARIO DE CADASTRO / EDICAO DE UNIDADE
     Carregado como conteudo de um Dialog pelo UnidadeListController.
-    Nao possui stage proprio; o titulo e os botoes Salvar/Cancelar
-    sao gerenciados pelo controller via DialogPane.
     Controller: com.condomanager.controller.unidade.UnidadeFormController
 -->
 <VBox xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="com.condomanager.controller.unidade.UnidadeFormController"
       spacing="16"
-      prefWidth="480"
-      style="-fx-padding: 24 28 8 28; -fx-background-color: white;">
+      prefWidth="500"
+      styleClass="modal-container"
+      stylesheets="@../../css/style.css">
 
-    <!-- ============================================================ -->
-    <!-- LINHA 1: Bloco + Numero                                       -->
-    <!-- ============================================================ -->
-    <HBox spacing="16">
+    <!-- Titulo do Formulario -->
+    <Label text="Dados da Unidade" styleClass="modal-title"/>
 
-        <!-- Bloco -->
-        <VBox spacing="6" HBox.hgrow="ALWAYS">
-            <Label text="Bloco"
-                   style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #334155;"/>
+    <!-- Formulario em Grade -->
+    <GridPane hgap="16" vgap="14">
+        <columnConstraints>
+            <ColumnConstraints percentWidth="50"/>
+            <ColumnConstraints percentWidth="50"/>
+        </columnConstraints>
+
+        <!-- LINHA 0: Bloco + Numero -->
+        <VBox spacing="5" GridPane.columnIndex="0" GridPane.rowIndex="0">
+            <Label text="Bloco *" styleClass="field-label"/>
             <ComboBox fx:id="cmbBloco"
                       maxWidth="Infinity"
-                      style="-fx-background-color: white;
-                             -fx-border-color: #d1d5db;
-                             -fx-border-radius: 5;
-                             -fx-background-radius: 5;
-                             -fx-font-size: 13px;"/>
+                      styleClass="combo-box"/>
         </VBox>
 
-        <!-- Numero -->
-        <VBox spacing="6" HBox.hgrow="ALWAYS">
-            <Label text="Número"
-                   style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #334155;"/>
+        <VBox spacing="5" GridPane.columnIndex="1" GridPane.rowIndex="0">
+            <Label text="Número *" styleClass="field-label"/>
             <TextField fx:id="txtNumero"
-                       promptText="101"
+                       promptText="Ex: 101"
                        maxWidth="Infinity"
-                       style="-fx-background-color: white;
-                              -fx-border-color: #d1d5db;
-                              -fx-border-radius: 5;
-                              -fx-background-radius: 5;
-                              -fx-padding: 8 12 8 12;
-                              -fx-font-size: 13px;
-                              -fx-text-fill: #334155;
-                              -fx-prompt-text-fill: #9ca3af;"/>
+                       styleClass="text-field"/>
         </VBox>
 
-    </HBox>
+        <!-- LINHA 1: Proprietario (largura total) -->
+        <VBox spacing="5" GridPane.columnSpan="2" GridPane.rowIndex="1">
+            <Label text="Proprietário" styleClass="field-label"/>
+            <TextField fx:id="txtProprietario"
+                       promptText="Nome completo do proprietário"
+                       maxWidth="Infinity"
+                       styleClass="text-field"/>
+        </VBox>
 
-    <!-- ============================================================ -->
-    <!-- LINHA 2: Proprietario (largura total)                         -->
-    <!-- ============================================================ -->
-    <VBox spacing="6">
-        <Label text="Proprietário"
-               style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #334155;"/>
-        <TextField fx:id="txtProprietario"
-                   promptText="Nome completo"
-                   maxWidth="Infinity"
-                   style="-fx-background-color: white;
-                          -fx-border-color: #d1d5db;
-                          -fx-border-radius: 5;
-                          -fx-background-radius: 5;
-                          -fx-padding: 8 12 8 12;
-                          -fx-font-size: 13px;
-                          -fx-text-fill: #334155;
-                          -fx-prompt-text-fill: #9ca3af;"/>
-    </VBox>
-
-    <!-- ============================================================ -->
-    <!-- LINHA 3: Situacao de Ocupacao + Telefone                      -->
-    <!-- ============================================================ -->
-    <HBox spacing="16">
-
-        <!-- Situacao de Ocupacao -->
-        <VBox spacing="6" HBox.hgrow="ALWAYS">
-            <Label text="Situação de Ocupação"
-                   style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #334155;"/>
+        <!-- LINHA 2: Situacao de Ocupacao + Telefone -->
+        <VBox spacing="5" GridPane.columnIndex="0" GridPane.rowIndex="2">
+            <Label text="Situação de Ocupação" styleClass="field-label"/>
             <ComboBox fx:id="cmbSituacao"
                       maxWidth="Infinity"
-                      style="-fx-background-color: white;
-                             -fx-border-color: #d1d5db;
-                             -fx-border-radius: 5;
-                             -fx-background-radius: 5;
-                             -fx-font-size: 13px;"/>
+                      styleClass="combo-box"/>
         </VBox>
 
-        <!-- Telefone -->
-        <VBox spacing="6" HBox.hgrow="ALWAYS">
-            <Label text="Telefone"
-                   style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #334155;"/>
+        <VBox spacing="5" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <Label text="Telefone" styleClass="field-label"/>
             <TextField fx:id="txtTelefone"
                        promptText="(11) 99999-0000"
                        maxWidth="Infinity"
-                       style="-fx-background-color: white;
-                              -fx-border-color: #d1d5db;
-                              -fx-border-radius: 5;
-                              -fx-background-radius: 5;
-                              -fx-padding: 8 12 8 12;
-                              -fx-font-size: 13px;
-                              -fx-text-fill: #334155;
-                              -fx-prompt-text-fill: #9ca3af;"/>
+                       styleClass="text-field"/>
         </VBox>
 
-    </HBox>
+        <!-- LINHA 3: E-mail (largura total) -->
+        <VBox spacing="5" GridPane.columnSpan="2" GridPane.rowIndex="3">
+            <Label text="E-mail" styleClass="field-label"/>
+            <TextField fx:id="txtEmail"
+                       promptText="proprietario@exemplo.com"
+                       maxWidth="Infinity"
+                       styleClass="text-field"/>
+        </VBox>
 
-    <!-- ============================================================ -->
-    <!-- LINHA 4: E-mail (largura total)                               -->
-    <!-- ============================================================ -->
-    <VBox spacing="6">
-        <Label text="E-mail"
-               style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #334155;"/>
-        <TextField fx:id="txtEmail"
-                   promptText="email@exemplo.com"
-                   maxWidth="Infinity"
-                   style="-fx-background-color: white;
-                          -fx-border-color: #d1d5db;
-                          -fx-border-radius: 5;
-                          -fx-background-radius: 5;
-                          -fx-padding: 8 12 8 12;
-                          -fx-font-size: 13px;
-                          -fx-text-fill: #334155;
-                          -fx-prompt-text-fill: #9ca3af;"/>
-    </VBox>
+    </GridPane>
 
-    <!-- ============================================================ -->
-    <!-- SEPARADOR + BOTOES                                            -->
-    <!-- ============================================================ -->
-    <Separator style="-fx-padding: 4 0 0 0;"/>
-
+    <!-- Botoes de Acao -->
     <HBox alignment="CENTER_RIGHT" spacing="12"
-          style="-fx-padding: 0 0 4 0;">
+          style="-fx-padding: 14 0 0 0; -fx-border-color: #e2e8f0; -fx-border-width: 1 0 0 0;">
 
         <Button fx:id="btnCancelar"
                 text="Cancelar"
                 onAction="#onCancelar"
-                style="-fx-background-color: white;
-                       -fx-text-fill: #374151;
-                       -fx-font-size: 13px;
-                       -fx-border-color: #d1d5db;
-                       -fx-border-radius: 5;
-                       -fx-background-radius: 5;
-                       -fx-padding: 8 20 8 20;
-                       -fx-cursor: hand;"/>
+                styleClass="btn-secondary"/>
 
         <Button fx:id="btnSalvar"
                 text="Salvar"
                 onAction="#onSalvar"
                 defaultButton="true"
-                style="-fx-background-color: #203a5c;
-                       -fx-text-fill: white;
-                       -fx-font-size: 13px;
-                       -fx-font-weight: bold;
-                       -fx-border-radius: 5;
-                       -fx-background-radius: 5;
-                       -fx-padding: 8 20 8 20;
-                       -fx-cursor: hand;"/>
+                styleClass="btn-primary"/>
     </HBox>
 
 </VBox>

@@ -637,6 +637,90 @@
     -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.04), 10, 0, 0, 3);
 }
 
+/* ============================================================ */
+/* Tabelas de Atividades Recentes - Dashboard                    */
+/* ============================================================ */
+
+.dashboard-clean-table {
+    -fx-background-color: white;
+    -fx-border-color: transparent;
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+
+    -fx-table-cell-border-color: transparent;
+    -fx-table-header-border-color: transparent;
+    -fx-control-inner-background: white;
+    -fx-control-inner-background-alt: white;
+}
+
+/* Cabeçalho */
+.dashboard-clean-table .column-header-background {
+    -fx-background-color: #f8fafc;
+    -fx-border-color: transparent transparent #e2e8f0 transparent;
+    -fx-border-width: 0 0 1 0;
+}
+
+.dashboard-clean-table .column-header,
+.dashboard-clean-table .filler {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-background-insets: 0;
+    -fx-size: 40px;
+}
+
+.dashboard-clean-table .column-header .label {
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 0 10 0 10;
+    -fx-text-fill: #1e293b;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+
+/* Linhas */
+.dashboard-clean-table .table-row-cell {
+    -fx-background-color: white;
+    -fx-background-insets: 0;
+    -fx-border-color: transparent transparent #e2e8f0 transparent;
+    -fx-border-width: 0 0 1 0;
+    -fx-cell-size: 42px;
+}
+
+.dashboard-clean-table .table-row-cell:filled:hover {
+    -fx-background-color: #f8fafc;
+}
+
+/* Remove a grade das linhas sem registros */
+.dashboard-clean-table .table-row-cell:empty {
+    -fx-background-color: white;
+    -fx-border-color: transparent;
+}
+
+/* Células */
+.dashboard-clean-table .table-cell {
+    -fx-border-color: transparent;
+    -fx-padding: 0 10 0 10;
+    -fx-alignment: CENTER_LEFT;
+    -fx-text-fill: #1e293b;
+    -fx-font-size: 12px;
+}
+
+/* Seleção */
+.dashboard-clean-table .table-row-cell:filled:selected {
+    -fx-background-color: #dbeafe;
+}
+
+.dashboard-clean-table .table-row-cell:filled:selected .table-cell {
+    -fx-text-fill: #1e293b;
+}
+
+/* Área vazia da tabela */
+.dashboard-clean-table .virtual-flow,
+.dashboard-clean-table .virtual-flow .clipped-container,
+.dashboard-clean-table .virtual-flow .sheet,
+.dashboard-clean-table .placeholder {
+    -fx-background-color: white;
+}
+
 .dashboard-refresh-btn {
     -fx-background-color: white;
     -fx-text-fill: #203a5c;
@@ -684,3 +768,210 @@
     -fx-background-radius: 20;
     -fx-padding: 3 10 3 10;
 }
+
+/* ============================================================ */
+/* Classes Padronizadas de Layout e Componentes                 */
+/* ============================================================ */
+
+.container {
+    -fx-background-color: #f1f5f9;
+    -fx-padding: 24 30 24 30;
+}
+
+.heading {
+    -fx-font-family: "Inter", "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-weight: bold;
+    -fx-font-size: 22px;
+    -fx-text-fill: #1e293b;
+}
+
+.subheading {
+    -fx-font-family: "Inter", "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-size: 13px;
+    -fx-text-fill: #64748b;
+}
+
+.search-field {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #cbd5e1;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-padding: 8 12 8 12;
+    -fx-font-size: 13px;
+    -fx-text-fill: #334155;
+    -fx-prompt-text-fill: #9ca3af;
+}
+
+.search-field:focused {
+    -fx-border-color: #203a5c;
+}
+
+.btn-primary {
+    -fx-background-color: #203a5c;
+    -fx-text-fill: white;
+    -fx-font-family: "Inter", "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-weight: bold;
+    -fx-font-size: 13px;
+    -fx-background-radius: 6;
+    -fx-border-radius: 6;
+    -fx-padding: 8 16 8 16;
+    -fx-cursor: hand;
+}
+
+.btn-primary:hover {
+    -fx-background-color: #172a43;
+}
+
+.btn-secondary {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #cbd5e1;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-text-fill: #374151;
+    -fx-font-family: "Inter", "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-weight: bold;
+    -fx-font-size: 13px;
+    -fx-padding: 8 16 8 16;
+    -fx-cursor: hand;
+}
+
+.btn-secondary:hover {
+    -fx-background-color: #f8fafc;
+    -fx-border-color: #94a3b8;
+}
+
+.modal-container {
+    -fx-background-color: white;
+    -fx-padding: 24 28 20 28;
+}
+
+.modal-title {
+    -fx-font-family: "Inter", "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1e293b;
+}
+
+/* Combo Box Padronizado */
+.combo-box {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #cbd5e1;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-font-size: 13px;
+}
+
+.combo-box:focused {
+    -fx-border-color: #203a5c;
+}
+
+.combo-box .cell {
+    -fx-text-fill: #334155;
+    -fx-font-size: 13px;
+}
+
+/* DatePicker Padronizado */
+.date-picker {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #cbd5e1;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-font-size: 13px;
+}
+
+.date-picker:focused {
+    -fx-border-color: #203a5c;
+}
+
+.date-picker .text-field {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+/* ============================================================ */
+/* Tabela de Manutenções                                        */
+/* ============================================================ */
+
+.manutencao-clean-table {
+    -fx-background-color: white;
+    -fx-border-color: #e2e8f0;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+
+    -fx-table-cell-border-color: transparent;
+    -fx-table-header-border-color: transparent;
+    -fx-control-inner-background: white;
+    -fx-control-inner-background-alt: white;
+}
+
+/* Cabeçalho */
+.manutencao-clean-table .column-header-background {
+    -fx-background-color: #f8fafc;
+    -fx-border-color: transparent transparent #e2e8f0 transparent;
+    -fx-border-width: 0 0 1 0;
+}
+
+.manutencao-clean-table .column-header,
+.manutencao-clean-table .filler {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-background-insets: 0;
+    -fx-size: 40px;
+}
+
+.manutencao-clean-table .column-header .label {
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 0 10 0 10;
+    -fx-text-fill: #1e293b;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+
+/* Linhas com separadores apenas horizontais */
+.manutencao-clean-table .table-row-cell {
+    -fx-background-color: white;
+    -fx-background-insets: 0;
+    -fx-border-color: transparent transparent #e2e8f0 transparent;
+    -fx-border-width: 0 0 1 0;
+    -fx-cell-size: 44px;
+}
+
+.manutencao-clean-table .table-row-cell:filled:hover {
+    -fx-background-color: #f8fafc;
+}
+
+/* Remove a grade das linhas vazias */
+.manutencao-clean-table .table-row-cell:empty {
+    -fx-background-color: white;
+    -fx-border-color: transparent;
+}
+
+.manutencao-clean-table .table-cell {
+    -fx-border-color: transparent;
+    -fx-padding: 0 10 0 10;
+    -fx-alignment: CENTER_LEFT;
+    -fx-text-fill: #1e293b;
+    -fx-font-size: 12px;
+}
+
+.manutencao-clean-table .table-row-cell:filled:selected {
+    -fx-background-color: #dbeafe;
+}
+
+.manutencao-clean-table .table-row-cell:filled:selected .table-cell {
+    -fx-text-fill: #1e293b;
+}
+
+/* Fundo da área sem registros */
+.manutencao-clean-table .virtual-flow,
+.manutencao-clean-table .virtual-flow .clipped-container,
+.manutencao-clean-table .virtual-flow .sheet,
+.manutencao-clean-table .placeholder {
+    -fx-background-color: white;
+}
+
+
+
+

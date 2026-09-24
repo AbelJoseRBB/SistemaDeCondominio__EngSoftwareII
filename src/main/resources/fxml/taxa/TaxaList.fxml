@@ -7,25 +7,23 @@
       xmlns="http://javafx.com/javafx/21"
       fx:controller="com.condomanager.controller.taxa.TaxaListController"
       spacing="20"
-      style="-fx-background-color: #f1f5f9; -fx-padding: 24 30 24 30;"
+      styleClass="container"
       stylesheets="@../../css/style.css">
 
     <!-- CABECALHO E BOTOES DE ACAO -->
-    <HBox alignment="CENTER_LEFT" spacing="16">
-        <VBox spacing="3" HBox.hgrow="ALWAYS">
-            <Label text="Taxas Condominiais"
-                   style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #1e293b;"/>
-            <Label text="Controle de cobranças e pagamentos"
-                   style="-fx-font-size: 13px; -fx-text-fill: #64748b;"/>
+    <HBox alignment="CENTER_LEFT" spacing="12">
+        <VBox spacing="4" HBox.hgrow="ALWAYS">
+            <Label text="Taxas Condominiais" styleClass="heading"/>
+            <Label text="Controle de cobranças e pagamentos" styleClass="subheading"/>
         </VBox>
 
-        <TextField fx:id="txtBusca" promptText="🔍 Buscar por unidade ou referência"
-                   prefWidth="250" styleClass="text-field"/>
+        <TextField fx:id="txtBusca" promptText="🔍 Buscar por unidade ou referência..."
+                   prefWidth="260" styleClass="search-field"/>
         
-        <ComboBox fx:id="cbFiltroSituacao" prefWidth="120" styleClass="text-field"/>
+        <ComboBox fx:id="cbFiltroSituacao" prefWidth="130" styleClass="combo-box"/>
 
         <Button text="+ Nova Taxa" onAction="#onNovaTaxa"
-                styleClass="login-button" style="-fx-padding: 8 16 8 16;"/>
+                styleClass="btn-primary"/>
     </HBox>
 
     <!-- CARDS DE RESUMO -->

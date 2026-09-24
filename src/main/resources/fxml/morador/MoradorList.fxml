@@ -25,7 +25,7 @@
                      </children>
                   </VBox>
                   <Region HBox.hgrow="ALWAYS" />
-                  <TextField fx:id="txtBusca" prefWidth="240.0" promptText="Buscar por nome, CPF ou unidade..." styleClass="search-field" />
+                  <TextField fx:id="txtBusca" prefWidth="260.0" promptText="🔍 Buscar por nome, CPF ou unidade..." styleClass="search-field" />
                   <Button fx:id="btnNovoMorador" mnemonicParsing="false" onAction="#onNovoMorador" styleClass="btn-primary" text="+ Novo Morador" />
                </children>
             </HBox>
