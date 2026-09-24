@@ -684,3 +684,123 @@
     -fx-background-radius: 20;
     -fx-padding: 3 10 3 10;
 }
+
+/* ============================================================ */
+/* Classes Padronizadas de Layout e Componentes                 */
+/* ============================================================ */
+
+.container {
+    -fx-background-color: #f1f5f9;
+    -fx-padding: 24 30 24 30;
+}
+
+.heading {
+    -fx-font-family: "Inter", "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-weight: bold;
+    -fx-font-size: 22px;
+    -fx-text-fill: #1e293b;
+}
+
+.subheading {
+    -fx-font-family: "Inter", "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-size: 13px;
+    -fx-text-fill: #64748b;
+}
+
+.search-field {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #cbd5e1;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-padding: 8 12 8 12;
+    -fx-font-size: 13px;
+    -fx-text-fill: #334155;
+    -fx-prompt-text-fill: #9ca3af;
+}
+
+.search-field:focused {
+    -fx-border-color: #203a5c;
+}
+
+.btn-primary {
+    -fx-background-color: #203a5c;
+    -fx-text-fill: white;
+    -fx-font-family: "Inter", "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-weight: bold;
+    -fx-font-size: 13px;
+    -fx-background-radius: 6;
+    -fx-border-radius: 6;
+    -fx-padding: 8 16 8 16;
+    -fx-cursor: hand;
+}
+
+.btn-primary:hover {
+    -fx-background-color: #172a43;
+}
+
+.btn-secondary {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #cbd5e1;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-text-fill: #374151;
+    -fx-font-family: "Inter", "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-weight: bold;
+    -fx-font-size: 13px;
+    -fx-padding: 8 16 8 16;
+    -fx-cursor: hand;
+}
+
+.btn-secondary:hover {
+    -fx-background-color: #f8fafc;
+    -fx-border-color: #94a3b8;
+}
+
+.modal-container {
+    -fx-background-color: white;
+    -fx-padding: 24 28 20 28;
+}
+
+.modal-title {
+    -fx-font-family: "Inter", "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1e293b;
+}
+
+/* Combo Box Padronizado */
+.combo-box {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #cbd5e1;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-font-size: 13px;
+}
+
+.combo-box:focused {
+    -fx-border-color: #203a5c;
+}
+
+.combo-box .cell {
+    -fx-text-fill: #334155;
+    -fx-font-size: 13px;
+}
+
+/* DatePicker Padronizado */
+.date-picker {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #cbd5e1;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-font-size: 13px;
+}
+
+.date-picker:focused {
+    -fx-border-color: #203a5c;
+}
+
+.date-picker .text-field {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
