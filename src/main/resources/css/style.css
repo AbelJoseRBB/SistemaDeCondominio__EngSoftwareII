@@ -637,6 +637,90 @@
     -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.04), 10, 0, 0, 3);
 }
 
+/* ============================================================ */
+/* Tabelas de Atividades Recentes - Dashboard                    */
+/* ============================================================ */
+
+.dashboard-clean-table {
+    -fx-background-color: white;
+    -fx-border-color: transparent;
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+
+    -fx-table-cell-border-color: transparent;
+    -fx-table-header-border-color: transparent;
+    -fx-control-inner-background: white;
+    -fx-control-inner-background-alt: white;
+}
+
+/* Cabeçalho */
+.dashboard-clean-table .column-header-background {
+    -fx-background-color: #f8fafc;
+    -fx-border-color: transparent transparent #e2e8f0 transparent;
+    -fx-border-width: 0 0 1 0;
+}
+
+.dashboard-clean-table .column-header,
+.dashboard-clean-table .filler {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-background-insets: 0;
+    -fx-size: 40px;
+}
+
+.dashboard-clean-table .column-header .label {
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 0 10 0 10;
+    -fx-text-fill: #1e293b;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+
+/* Linhas */
+.dashboard-clean-table .table-row-cell {
+    -fx-background-color: white;
+    -fx-background-insets: 0;
+    -fx-border-color: transparent transparent #e2e8f0 transparent;
+    -fx-border-width: 0 0 1 0;
+    -fx-cell-size: 42px;
+}
+
+.dashboard-clean-table .table-row-cell:filled:hover {
+    -fx-background-color: #f8fafc;
+}
+
+/* Remove a grade das linhas sem registros */
+.dashboard-clean-table .table-row-cell:empty {
+    -fx-background-color: white;
+    -fx-border-color: transparent;
+}
+
+/* Células */
+.dashboard-clean-table .table-cell {
+    -fx-border-color: transparent;
+    -fx-padding: 0 10 0 10;
+    -fx-alignment: CENTER_LEFT;
+    -fx-text-fill: #1e293b;
+    -fx-font-size: 12px;
+}
+
+/* Seleção */
+.dashboard-clean-table .table-row-cell:filled:selected {
+    -fx-background-color: #dbeafe;
+}
+
+.dashboard-clean-table .table-row-cell:filled:selected .table-cell {
+    -fx-text-fill: #1e293b;
+}
+
+/* Área vazia da tabela */
+.dashboard-clean-table .virtual-flow,
+.dashboard-clean-table .virtual-flow .clipped-container,
+.dashboard-clean-table .virtual-flow .sheet,
+.dashboard-clean-table .placeholder {
+    -fx-background-color: white;
+}
+
 .dashboard-refresh-btn {
     -fx-background-color: white;
     -fx-text-fill: #203a5c;
@@ -803,4 +887,6 @@
     -fx-background-color: transparent;
     -fx-border-color: transparent;
 }
+
+
 

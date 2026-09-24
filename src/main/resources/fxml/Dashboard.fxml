@@ -102,7 +102,10 @@
                         style="-fx-background-color: transparent; -fx-text-fill: #2563eb; -fx-cursor: hand; -fx-font-size: 12px;"/>
             </HBox>
 
-            <TableView fx:id="tblReservasRecentes" VBox.vgrow="ALWAYS" prefHeight="320">
+            <TableView fx:id="tblReservasRecentes"
+                       styleClass="dashboard-clean-table"
+                       VBox.vgrow="ALWAYS"
+                       prefHeight="320">
                 <placeholder>
                     <Label text="Nenhuma reserva recente registrada."
                            style="-fx-text-fill: #9ca3af; -fx-font-size: 13px;"/>
@@ -131,14 +134,17 @@
                         style="-fx-background-color: transparent; -fx-text-fill: #2563eb; -fx-cursor: hand; -fx-font-size: 12px;"/>
             </HBox>
 
-            <TableView fx:id="tblOcorrenciasRecentes" VBox.vgrow="ALWAYS" prefHeight="320">
+            <TableView fx:id="tblOcorrenciasRecentes"
+                       styleClass="dashboard-clean-table"
+                       VBox.vgrow="ALWAYS"
+                       prefHeight="320">
                 <placeholder>
                     <Label text="Nenhuma ocorrência recente registrada."
                            style="-fx-text-fill: #9ca3af; -fx-font-size: 13px;"/>
                 </placeholder>
                 <columns>
-                    <TableColumn fx:id="colOcorrDescricao" text="TÍTULO / DESCRIÇÃO" prefWidth="150"/>
-                    <TableColumn fx:id="colOcorrLocal"     text="LOCAL / UNIDADE"   prefWidth="100"/>
+                    <TableColumn fx:id="colOcorrDescricao" text="TÍTULO" prefWidth="125"/>
+                    <TableColumn fx:id="colOcorrLocal"     text="LOCAL / UNIDADE"   prefWidth="145"/>
                     <TableColumn fx:id="colOcorrData"      text="DATA"              prefWidth="100" style="-fx-alignment: CENTER;"/>
                     <TableColumn fx:id="colOcorrSituacao"  text="SITUAÇÃO"          prefWidth="110" style="-fx-alignment: CENTER;"/>
                 </columns>
