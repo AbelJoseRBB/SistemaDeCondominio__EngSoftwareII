@@ -12,7 +12,9 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.List;
-
+import java.time.LocalDate;
+import javafx.scene.control.DateCell;
+import java.time.LocalDateTime;
 /**
  * Controller do formulario de cadastro e edicao de Reserva.
  * Recebe uma Reserva opcionalmente via setReserva() para o modo edicao.
@@ -55,6 +57,17 @@ public class ReservaFormController {
     public void initialize() {
         carregarUnidades();
         configurarAreaComum();
+        configurarData();
+    }
+
+    private void configurarData() {
+        dpData.setDayCellFactory(picker -> new DateCell() {
+            @Override
+            public void updateItem(LocalDate data, boolean vazio) {
+                super.updateItem(data, vazio);
+                setDisable(vazio || data.isBefore(LocalDate.now()));
+            }
+        });
     }
 
     /**
@@ -198,7 +211,7 @@ public class ReservaFormController {
      */
     private boolean validarCampos() {
         boolean valido = true;
-
+        LocalTime horaInicio = parseHora(txtHoraInicio.getText());
         // Reseta estilos de erro anteriores
         cmbUnidade.getStyleClass().remove("field-error");
         cmbAreaComum.getStyleClass().remove("field-error");
@@ -214,9 +227,19 @@ public class ReservaFormController {
             cmbAreaComum.getStyleClass().add("field-error");
             valido = false;
         }
-        if (dpData.getValue() == null) {
-            dpData.getStyleClass().add("field-error");
-            valido = false;
+        if (dpData.getValue() != null && horaInicio != null) {
+            LocalDateTime inicioReserva = LocalDateTime.of(dpData.getValue(), horaInicio);
+
+            if (inicioReserva.isBefore(LocalDateTime.now())) {
+                dpData.getStyleClass().add("field-error");
+                txtHoraInicio.getStyleClass().add("field-error");
+
+                mostrarAlerta(Alert.AlertType.WARNING,
+                        "Horário inválido",
+                        "Não é possível realizar uma reserva para uma data e horário que já passaram.");
+
+                return false;
+            }
         }
 
         // Valida formato HH:mm dos horarios
@@ -231,9 +254,10 @@ public class ReservaFormController {
 
         if (!valido) {
             mostrarAlerta(Alert.AlertType.WARNING,
-                "Campos obrigatórios",
-                "Preencha todos os campos marcados.\n"
-                + "Horarios devem estar no formato HH:MM (ex: 08:00, 14:30).");
+                    "Campos inválidos",
+                    "Preencha todos os campos marcados.\n"
+                    + "A data da reserva não pode ser anterior à data atual.\n"
+                    + "Os horários devem estar no formato HH:mm (ex.: 08:00, 14:30).");
         }
         return valido;
     }
