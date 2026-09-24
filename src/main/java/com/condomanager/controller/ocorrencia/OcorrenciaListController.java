@@ -29,17 +29,28 @@ public class OcorrenciaListController {
     // Componentes injetados pelo FXMLLoader
     // ------------------------------------------------------------------
 
-    @FXML private TableView<Ocorrencia> tabelaOcorrencias;
-    @FXML private TableColumn<Ocorrencia, String> colDescricao;
-    @FXML private TableColumn<Ocorrencia, String> colLocal;
-    @FXML private TableColumn<Ocorrencia, String> colData;
-    @FXML private TableColumn<Ocorrencia, String> colTipo;
-    @FXML private TableColumn<Ocorrencia, String> colSituacao;
-    @FXML private TableColumn<Ocorrencia, Void> colAcoes;
-    @FXML private TextField txtBusca;
-    @FXML private ComboBox<String> cmbSituacao;
-    @FXML private Label lblContagem;
-    @FXML private Label lblDataAtual;
+    @FXML
+    private TableView<Ocorrencia> tabelaOcorrencias;
+    @FXML
+    private TableColumn<Ocorrencia, String> colDescricao;
+    @FXML
+    private TableColumn<Ocorrencia, String> colLocal;
+    @FXML
+    private TableColumn<Ocorrencia, String> colData;
+    @FXML
+    private TableColumn<Ocorrencia, String> colTipo;
+    @FXML
+    private TableColumn<Ocorrencia, String> colSituacao;
+    @FXML
+    private TableColumn<Ocorrencia, Void> colAcoes;
+    @FXML
+    private TextField txtBusca;
+    @FXML
+    private ComboBox<String> cmbSituacao;
+    @FXML
+    private Label lblContagem;
+    @FXML
+    private Label lblDataAtual;
 
     // ------------------------------------------------------------------
     // Estado interno
@@ -117,68 +128,49 @@ public class OcorrenciaListController {
         );
 
         // Local digitado no formulario e persistido no banco.
-        colLocal.setCellValueFactory(
-                data -> new SimpleStringProperty(
+        colLocal.setCellValueFactory(data ->
+                new SimpleStringProperty(
                         data.getValue().getLocal() != null
                                 ? data.getValue().getLocal()
                                 : ""
                 )
         );
 
-        colLocal.setCellFactory(
-                col -> new TableCell<>() {
+        colLocal.setCellFactory(col -> new TableCell<>() {
+            @Override
+            protected void updateItem(String valor, boolean empty) {
+                super.updateItem(valor, empty);
 
-                    @Override
-                    protected void updateItem(
-                            String valor,
-                            boolean empty
-                    ) {
-
-                        super.updateItem(
-                                valor,
-                                empty
-                        );
-
-                        if (
-                                empty ||
-                                        valor == null ||
-                                        valor.isBlank()
-                        ) {
-
-                            setText(null);
-                            setStyle(
-                                    "-fx-text-fill: #9ca3af;"
-                            );
-
-                        } else {
-
-                            setText(valor);
-                            setStyle(
-                                    "-fx-text-fill: #9ca3af;"
-                            );
-                        }
-                    }
+                if (empty || valor == null || valor.isBlank()) {
+                    setText(null);
+                } else {
+                    setText(valor);
                 }
-        );
+
+                setStyle("-fx-text-fill: #374151;");
+            }
+        });
 
         // DATA
-        colData.setCellValueFactory(
-                data -> {
+        colData.setCellValueFactory(data -> {
+            Ocorrencia ocorrencia = data.getValue();
 
-                    Ocorrencia o =
-                            data.getValue();
+            String dataFormatada = ocorrencia.getDataAbertura() != null
+                    ? ocorrencia.getDataAbertura().format(FMT_DATA)
+                    : "";
 
-                    String dataStr =
-                            o.getDataAbertura() != null
-                                    ? o.getDataAbertura()
-                                    .format(FMT_DATA)
-                                    : "";
+            return new SimpleStringProperty(dataFormatada);
+        });
 
-                    return new SimpleStringProperty(
-                            dataStr
-                    );
-                }
-        );
+        colData.setCellFactory(col -> new TableCell<>() {
+            @Override
+            protected void updateItem(String valor, boolean empty) {
+                super.updateItem(valor, empty);
+
+                setText(empty || valor == null ? null : valor);
+                setStyle("-fx-text-fill: #374151;");
+            }
+        });
 
         // TIPO
         colTipo.setCellValueFactory(
@@ -646,23 +638,18 @@ public class OcorrenciaListController {
                 situacao.toUpperCase()
                 ) {
 
-            case "ABERTA" ->
-                    "Aberta";
+            case "ABERTA" -> "Aberta";
 
             case "EM_ANDAMENTO",
-                 "EM ANDAMENTO" ->
-                    "Em andamento";
+                 "EM ANDAMENTO" -> "Em andamento";
 
             case "EM_ANALISE",
-                 "EM ANÁLISE" ->
-                    "Em análise";
+                 "EM ANÁLISE" -> "Em análise";
 
             case "ENCERRADA",
-                 "RESOLVIDA" ->
-                    "Resolvida";
+                 "RESOLVIDA" -> "Resolvida";
 
-            default ->
-                    situacao;
+            default -> situacao;
         };
     }
 
@@ -678,23 +665,18 @@ public class OcorrenciaListController {
                 situacao.toUpperCase()
                 ) {
 
-            case "ABERTA" ->
-                    "badge-ocorrencia-aberta";
+            case "ABERTA" -> "badge-ocorrencia-aberta";
 
             case "EM_ANDAMENTO",
-                 "EM ANDAMENTO" ->
-                    "badge-ocorrencia-em-andamento";
+                 "EM ANDAMENTO" -> "badge-ocorrencia-em-andamento";
 
             case "EM_ANALISE",
-                 "EM ANÁLISE" ->
-                    "badge-ocorrencia-analise";
+                 "EM ANÁLISE" -> "badge-ocorrencia-analise";
 
             case "ENCERRADA",
-                 "RESOLVIDA" ->
-                    "badge-ocorrencia-encerrada";
+                 "RESOLVIDA" -> "badge-ocorrencia-encerrada";
 
-            default ->
-                    "badge-ocorrencia-aberta";
+            default -> "badge-ocorrencia-aberta";
         };
     }
 
@@ -710,30 +692,23 @@ public class OcorrenciaListController {
                 categoria.toUpperCase()
                 ) {
 
-            case "INFRAESTRUTURA" ->
-                    "Infraestrutura";
+            case "INFRAESTRUTURA" -> "Infraestrutura";
 
             case "CONVIVÊNCIA",
-                 "CONVIVENCIA" ->
-                    "Convivência";
+                 "CONVIVENCIA" -> "Convivência";
 
             case "ELÉTRICA",
-                 "ELETRICA" ->
-                    "Elétrica";
+                 "ELETRICA" -> "Elétrica";
 
-            case "EQUIPAMENTO" ->
-                    "Equipamento";
+            case "EQUIPAMENTO" -> "Equipamento";
 
             case "SEGURANÇA",
-                 "SEGURANCA" ->
-                    "Segurança";
+                 "SEGURANCA" -> "Segurança";
 
             case "HIDRÁULICA",
-                 "HIDRAULICA" ->
-                    "Hidráulica";
+                 "HIDRAULICA" -> "Hidráulica";
 
-            default ->
-                    categoria;
+            default -> categoria;
         };
     }
 
@@ -749,30 +724,23 @@ public class OcorrenciaListController {
                 categoria.toUpperCase()
                 ) {
 
-            case "INFRAESTRUTURA" ->
-                    "badge-tipo-infra";
+            case "INFRAESTRUTURA" -> "badge-tipo-infra";
 
             case "CONVIVÊNCIA",
-                 "CONVIVENCIA" ->
-                    "badge-tipo-convivencia";
+                 "CONVIVENCIA" -> "badge-tipo-convivencia";
 
             case "ELÉTRICA",
-                 "ELETRICA" ->
-                    "badge-tipo-eletrica";
+                 "ELETRICA" -> "badge-tipo-eletrica";
 
-            case "EQUIPAMENTO" ->
-                    "badge-tipo-equipamento";
+            case "EQUIPAMENTO" -> "badge-tipo-equipamento";
 
             case "SEGURANÇA",
-                 "SEGURANCA" ->
-                    "badge-tipo-seguranca";
+                 "SEGURANCA" -> "badge-tipo-seguranca";
 
             case "HIDRÁULICA",
-                 "HIDRAULICA" ->
-                    "badge-tipo-hidraulica";
+                 "HIDRAULICA" -> "badge-tipo-hidraulica";
 
-            default ->
-                    "badge-tipo-infra";
+            default -> "badge-tipo-infra";
         };
     }
 
