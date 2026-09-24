@@ -1,50 +1,107 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.geometry.*?>
-<?import javafx.collections.FXCollections?>
-<?import java.lang.String?>
 
-<AnchorPane prefHeight="600.0" prefWidth="900.0" 
-            stylesheets="/css/moradores.css, /css/style.css" 
-            xmlns="http://javafx.com/javafx/21" 
-            xmlns:fx="http://javafx.com/fxml/1" 
+<AnchorPane prefHeight="600.0"
+            prefWidth="900.0"
+            stylesheets="@../../css/style.css"
+            xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.condomanager.controller.manutencao.ManutencaoListController">
+
     <children>
-        <VBox spacing="20.0" styleClass="container" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <VBox spacing="20.0"
+              styleClass="container"
+              AnchorPane.bottomAnchor="0.0"
+              AnchorPane.leftAnchor="0.0"
+              AnchorPane.rightAnchor="0.0"
+              AnchorPane.topAnchor="0.0">
+
             <children>
+                <!-- Cabeçalho da tela -->
                 <HBox alignment="CENTER_LEFT" spacing="10.0">
                     <children>
                         <VBox spacing="5.0">
                             <children>
                                 <Label text="Manutenções" styleClass="heading"/>
-                                <Label text="Solicitações e controle de manutenção" styleClass="subheading"/>
+                                <Label text="Solicitações e controle de manutenção"
+                                       styleClass="subheading"/>
                             </children>
                         </VBox>
-                        <Region HBox.hgrow="ALWAYS" />
-                        <TextField fx:id="txtBusca" prefWidth="250.0" promptText="🔍 Buscar por descrição..." styleClass="search-field" />
-                        <ComboBox fx:id="cbFiltroStatus" prefWidth="150" styleClass="combo-box"/>
-                        <Button text="+ Nova Manutenção" onAction="#abrirFormularioNovo" styleClass="btn-primary" />
+
+                        <Region HBox.hgrow="ALWAYS"/>
+
+                        <TextField fx:id="txtBusca"
+                                   prefWidth="250.0"
+                                   promptText="🔍 Buscar por descrição..."
+                                   styleClass="search-field"/>
+
+                        <ComboBox fx:id="cbFiltroStatus"
+                                  prefWidth="150.0"
+                                  styleClass="combo-box"/>
+
+                        <Button text="+ Nova Manutenção"
+                                onAction="#abrirFormularioNovo"
+                                styleClass="btn-primary"/>
                     </children>
                 </HBox>
 
-                <TableView fx:id="tableView" VBox.vgrow="ALWAYS" styleClass="table-view">
+                <!-- Tabela de manutenções -->
+                <TableView fx:id="tableView"
+                           VBox.vgrow="ALWAYS"
+                           styleClass="manutencao-clean-table">
+
                     <columns>
-                        <TableColumn fx:id="colDescricao" text="SOLICITAÇÃO" prefWidth="200.0" resizable="false" reorderable="false"/>
-                        <TableColumn fx:id="colLocal" text="LOCAL" prefWidth="120.0" resizable="false" reorderable="false"/>
-                        <TableColumn fx:id="colResponsavel" text="RESPONSÁVEL" prefWidth="130.0" resizable="false" reorderable="false"/>
-                        <TableColumn fx:id="colDataSolicitacao" text="DATA SOLIC." prefWidth="100.0" resizable="false" reorderable="false"/>
-                        <TableColumn fx:id="colCusto" text="CUSTO" prefWidth="100.0" resizable="false" reorderable="false"/>
-                        <TableColumn fx:id="colSituacao" text="SITUAÇÃO" prefWidth="110.0" resizable="false" reorderable="false"/>
-                        <TableColumn fx:id="colAcoes" text="AÇÕES" prefWidth="80.0" resizable="false" reorderable="false"/>
+                        <TableColumn fx:id="colDescricao"
+                                     text="SOLICITAÇÃO"
+                                     prefWidth="200.0"
+                                     reorderable="false"/>
+
+                        <TableColumn fx:id="colLocal"
+                                     text="LOCAL"
+                                     prefWidth="120.0"
+                                     reorderable="false"/>
+
+                        <TableColumn fx:id="colResponsavel"
+                                     text="RESPONSÁVEL"
+                                     prefWidth="130.0"
+                                     reorderable="false"/>
+
+                        <TableColumn fx:id="colDataSolicitacao"
+                                     text="DATA SOLIC."
+                                     prefWidth="110.0"
+                                     reorderable="false"/>
+
+                        <TableColumn fx:id="colCusto"
+                                     text="CUSTO"
+                                     prefWidth="100.0"
+                                     reorderable="false"/>
+
+                        <TableColumn fx:id="colSituacao"
+                                     text="SITUAÇÃO"
+                                     prefWidth="110.0"
+                                     reorderable="false"/>
+
+                        <TableColumn fx:id="colAcoes"
+                                     text="AÇÕES"
+                                     prefWidth="90.0"
+                                     reorderable="false"/>
                     </columns>
+
                     <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
                     </columnResizePolicy>
                 </TableView>
-                
+
+                <!-- Contagem de registros -->
                 <HBox alignment="CENTER_LEFT">
-                    <Label fx:id="lblTotalRegistros" text="0 registro(s)" styleClass="subheading"/>
+                    <children>
+                        <Label fx:id="lblTotalRegistros"
+                               text="0 registro(s)"
+                               styleClass="subheading"/>
+                    </children>
                 </HBox>
             </children>
         </VBox>
