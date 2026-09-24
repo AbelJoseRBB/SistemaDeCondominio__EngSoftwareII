@@ -71,7 +71,7 @@
 
             <!-- Botão Entrar -->
             <!-- maxWidth="Infinity" faz o botão esticar 100% da largura do card -->
-            <Button maxWidth="Infinity" styleClass="login-button" text="Entrar" onAction="#handleLogin" />
+            <Button maxWidth="Infinity" defaultButton="true" styleClass="login-button" text="Entrar" onAction="#handleLogin" />
 
             <!-- Link Esqueci minha senha -->
             <Hyperlink styleClass="forgot-password-link" text="Esqueci minha senha" onAction="#handleEsqueciSenha" />
