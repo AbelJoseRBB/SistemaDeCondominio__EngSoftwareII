@@ -22,8 +22,8 @@
                             </children>
                         </VBox>
                         <Region HBox.hgrow="ALWAYS" />
-                        <TextField fx:id="txtBusca" prefWidth="240.0" promptText="Buscar por descrição..." styleClass="search-field" />
-                        <ComboBox fx:id="cbFiltroStatus" prefWidth="150" styleClass="search-field"/>
+                        <TextField fx:id="txtBusca" prefWidth="250.0" promptText="🔍 Buscar por descrição..." styleClass="search-field" />
+                        <ComboBox fx:id="cbFiltroStatus" prefWidth="150" styleClass="combo-box"/>
                         <Button text="+ Nova Manutenção" onAction="#abrirFormularioNovo" styleClass="btn-primary" />
                     </children>
                 </HBox>

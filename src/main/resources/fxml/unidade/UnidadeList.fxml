@@ -11,69 +11,49 @@
 -->
 <VBox xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="com.condomanager.controller.unidade.UnidadeListController"
-      spacing="0"
-      style="-fx-background-color: #f5f7fa;">
+      spacing="20"
+      styleClass="container"
+      stylesheets="@../../css/style.css">
 
     <!-- ================================================================ -->
     <!-- CABECALHO DA PAGINA                                               -->
     <!-- ================================================================ -->
-    <HBox alignment="CENTER_LEFT"
-          style="-fx-padding: 24 28 16 28; -fx-background-color: #f5f7fa;">
+    <HBox alignment="CENTER_LEFT" spacing="12">
 
         <!-- Titulo e subtitulo -->
-        <VBox spacing="2" HBox.hgrow="ALWAYS">
-            <Label text="Unidades"
-                   style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #1a2332;"/>
-            <Label text="Gerenciamento de unidades do condominio"
-                   style="-fx-font-size: 13px; -fx-text-fill: #7a8b9a;"/>
+        <VBox spacing="4" HBox.hgrow="ALWAYS">
+            <Label text="Unidades" styleClass="heading"/>
+            <Label text="Gerenciamento de unidades e proprietários do condomínio" styleClass="subheading"/>
         </VBox>
 
         <!-- Campo de busca -->
         <TextField fx:id="txtBusca"
-                   promptText="Buscar por bloco, numero ou proprietario..."
+                   promptText="🔍 Buscar por bloco, número ou proprietário..."
                    prefWidth="300"
-                   style="-fx-background-color: white;
-                          -fx-border-color: #d1d5db;
-                          -fx-border-radius: 5;
-                          -fx-background-radius: 5;
-                          -fx-padding: 8 12 8 12;
-                          -fx-font-size: 13px;
-                          -fx-text-fill: #334155;
-                          -fx-prompt-text-fill: #9ca3af;">
-            <HBox.margin>
-                <Insets right="12"/>
-            </HBox.margin>
-        </TextField>
+                   styleClass="search-field"/>
 
         <!-- Botao Nova Unidade -->
         <Button fx:id="btnNovaUnidade"
                 text="+ Nova Unidade"
                 onAction="#onNovaUnidade"
-                style="-fx-background-color: #203a5c;
-                       -fx-text-fill: white;
-                       -fx-font-size: 13px;
-                       -fx-font-weight: bold;
-                       -fx-background-radius: 5;
-                       -fx-padding: 9 18 9 18;
-                       -fx-cursor: hand;"/>
+                styleClass="btn-primary"/>
     </HBox>
 
     <!-- ================================================================ -->
     <!-- TABELA DE UNIDADES                                                -->
     <!-- ================================================================ -->
-    <VBox VBox.vgrow="ALWAYS"
-          style="-fx-padding: 0 28 0 28;">
+    <VBox VBox.vgrow="ALWAYS" styleClass="dashboard-table-card">
 
         <TableView fx:id="tabelaUnidades"
                    VBox.vgrow="ALWAYS"
-                   style="-fx-background-color: white;
-                          -fx-border-color: #e5e7eb;
-                          -fx-border-radius: 8;
-                          -fx-background-radius: 8;">
+                   styleClass="table-view-ocorrencias">
             <placeholder>
                 <Label text="Nenhuma unidade cadastrada."
                        style="-fx-text-fill: #9ca3af; -fx-font-size: 14px;"/>
             </placeholder>
+            <columnResizePolicy>
+                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+            </columnResizePolicy>
             <columns>
 
                 <TableColumn fx:id="colBloco"
@@ -88,7 +68,7 @@
 
                 <TableColumn fx:id="colProprietario"
                              text="PROPRIETÁRIO"
-                             prefWidth="180"/>
+                             prefWidth="190"/>
 
                 <!-- Coluna de situacao - celula customizada criada no controller -->
                 <TableColumn fx:id="colSituacao"
@@ -102,26 +82,27 @@
 
                 <TableColumn fx:id="colEmail"
                              text="E-MAIL"
-                             prefWidth="200"/>
+                             prefWidth="190"/>
 
                 <!-- Coluna de acoes - celula customizada criada no controller -->
                 <TableColumn fx:id="colAcoes"
                              text="AÇÕES"
-                             prefWidth="110"
+                             prefWidth="100"
                              sortable="false"
                              style="-fx-alignment: CENTER;"/>
 
             </columns>
         </TableView>
-    </VBox>
 
-    <!-- ================================================================ -->
-    <!-- RODAPE COM CONTAGEM DE REGISTROS                                  -->
-    <!-- ================================================================ -->
-    <HBox style="-fx-padding: 10 28 16 28;">
-        <Label fx:id="lblContagem"
-               text="0 registro(s) encontrado(s)"
-               style="-fx-font-size: 12px; -fx-text-fill: #7a8b9a;"/>
-    </HBox>
+        <!-- ================================================================ -->
+        <!-- RODAPE COM CONTAGEM DE REGISTROS                                  -->
+        <!-- ================================================================ -->
+        <HBox alignment="CENTER_LEFT" style="-fx-padding: 10 0 0 0;">
+            <Label fx:id="lblContagem"
+                   text="0 registro(s) encontrado(s)"
+                   styleClass="subheading"/>
+        </HBox>
+
+    </VBox>
 
 </VBox>

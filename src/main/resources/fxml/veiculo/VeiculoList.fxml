@@ -5,7 +5,7 @@
     <HBox alignment="CENTER_LEFT" spacing="10">
         <VBox spacing="4"><Label text="Veículos" styleClass="heading"/><Label text="Cadastro de veículos e vagas" styleClass="subheading"/></VBox>
         <Region HBox.hgrow="ALWAYS"/>
-        <TextField fx:id="txtBusca" promptText="Buscar por placa, modelo ou proprietário" prefWidth="280" styleClass="search-field"/>
+        <TextField fx:id="txtBusca" promptText="🔍 Buscar por placa, modelo ou proprietário..." prefWidth="280" styleClass="search-field"/>
         <Button text="↻" accessibleText="Atualizar veículos" onAction="#onAtualizar" styleClass="link-button"><tooltip><Tooltip text="Atualizar veículos"/></tooltip></Button>
         <Button text="+ Novo Veículo" onAction="#onNovoVeiculo" styleClass="btn-primary"/>
     </HBox>

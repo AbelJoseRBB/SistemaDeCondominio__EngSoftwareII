@@ -2,66 +2,105 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.geometry.*?>
-<?import javafx.collections.FXCollections?>
-<?import java.lang.String?>
 
+<!--
+    FORMULARIO DE CADASTRO / EDICAO DE MANUTENCAO
+    Controller: com.condomanager.controller.manutencao.ManutencaoFormController
+-->
 <VBox xmlns:fx="http://javafx.com/fxml/1"
       xmlns="http://javafx.com/javafx/21"
       fx:controller="com.condomanager.controller.manutencao.ManutencaoFormController"
       spacing="16"
-      style="-fx-background-color: white; -fx-padding: 24;"
-      stylesheets="@../../css/style.css"
-      prefWidth="500">
+      prefWidth="540"
+      styleClass="modal-container"
+      stylesheets="@../../css/style.css">
 
-    <Label fx:id="lblTitulo" text="Nova Manutenção" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #1e293b;"/>
+    <!-- Titulo do Formulario -->
+    <Label fx:id="lblTitulo" text="Nova Manutenção" styleClass="modal-title"/>
 
-    <GridPane vgap="12" hgap="12">
+    <!-- Formulario em Grade -->
+    <GridPane hgap="16" vgap="14">
         <columnConstraints>
-            <ColumnConstraints minWidth="120" prefWidth="120" halignment="RIGHT"/>
-            <ColumnConstraints hgrow="ALWAYS"/>
+            <ColumnConstraints percentWidth="50"/>
+            <ColumnConstraints percentWidth="50"/>
         </columnConstraints>
 
-        <!-- Descrição -->
-        <Label text="Descrição: *" GridPane.rowIndex="0" GridPane.columnIndex="0" style="-fx-font-weight: bold;"/>
-        <TextField fx:id="txtDescricao" promptText="Ex: Troca de bomba d'água" GridPane.rowIndex="0" GridPane.columnIndex="1"
-                   style="-fx-background-color: #f8fafc; -fx-border-color: #cbd5e1; -fx-border-radius: 4;"/>
+        <!-- LINHA 0: Descricao (largura total) -->
+        <VBox spacing="5" GridPane.columnSpan="2" GridPane.rowIndex="0">
+            <Label text="Descrição *" styleClass="field-label"/>
+            <TextField fx:id="txtDescricao"
+                       promptText="Ex: Troca de bomba d'água"
+                       maxWidth="Infinity"
+                       styleClass="text-field"/>
+        </VBox>
 
-        <!-- Local -->
-        <Label text="Local:" GridPane.rowIndex="1" GridPane.columnIndex="0" style="-fx-font-weight: bold;"/>
-        <TextField fx:id="txtLocal" promptText="Ex: Casa de máquinas" GridPane.rowIndex="1" GridPane.columnIndex="1"
-                   style="-fx-background-color: #f8fafc; -fx-border-color: #cbd5e1; -fx-border-radius: 4;"/>
+        <!-- LINHA 1: Local + Responsavel -->
+        <VBox spacing="5" GridPane.columnIndex="0" GridPane.rowIndex="1">
+            <Label text="Local" styleClass="field-label"/>
+            <TextField fx:id="txtLocal"
+                       promptText="Ex: Casa de máquinas"
+                       maxWidth="Infinity"
+                       styleClass="text-field"/>
+        </VBox>
 
-        <!-- Responsável -->
-        <Label text="Responsável:" GridPane.rowIndex="2" GridPane.columnIndex="0" style="-fx-font-weight: bold;"/>
-        <TextField fx:id="txtResponsavel" promptText="Ex: Hidráulica Rápida" GridPane.rowIndex="2" GridPane.columnIndex="1"
-                   style="-fx-background-color: #f8fafc; -fx-border-color: #cbd5e1; -fx-border-radius: 4;"/>
+        <VBox spacing="5" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <Label text="Responsável" styleClass="field-label"/>
+            <TextField fx:id="txtResponsavel"
+                       promptText="Ex: Hidráulica Rápida"
+                       maxWidth="Infinity"
+                       styleClass="text-field"/>
+        </VBox>
 
-        <!-- Data Prevista/Solic. -->
-        <Label text="Data Prevista: *" GridPane.rowIndex="3" GridPane.columnIndex="0" style="-fx-font-weight: bold;"/>
-        <DatePicker fx:id="dpDataSolicitacao" prefWidth="150" GridPane.rowIndex="3" GridPane.columnIndex="1"
-                    style="-fx-background-color: #f8fafc; -fx-border-color: #cbd5e1; -fx-border-radius: 4;"/>
+        <!-- LINHA 2: Data Prevista + Situacao -->
+        <VBox spacing="5" GridPane.columnIndex="0" GridPane.rowIndex="2">
+            <Label text="Data Prevista *" styleClass="field-label"/>
+            <DatePicker fx:id="dpDataSolicitacao"
+                        maxWidth="Infinity"
+                        promptText="dd/mm/aaaa"
+                        styleClass="date-picker"/>
+        </VBox>
 
-        <!-- Situação -->
-        <Label text="Situação: *" GridPane.rowIndex="4" GridPane.columnIndex="0" style="-fx-font-weight: bold;"/>
-        <ComboBox fx:id="cbSituacao" prefWidth="150" GridPane.rowIndex="4" GridPane.columnIndex="1"
-                  style="-fx-background-color: #f8fafc; -fx-border-color: #cbd5e1; -fx-border-radius: 4;"/>
+        <VBox spacing="5" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <Label text="Situação *" styleClass="field-label"/>
+            <ComboBox fx:id="cbSituacao"
+                      maxWidth="Infinity"
+                      styleClass="combo-box"/>
+        </VBox>
 
-        <!-- Custo Estimado -->
-        <Label text="Custo (R$):" GridPane.rowIndex="5" GridPane.columnIndex="0" style="-fx-font-weight: bold;"/>
-        <TextField fx:id="txtCusto" promptText="0,00" prefWidth="150" GridPane.rowIndex="5" GridPane.columnIndex="1"
-                   style="-fx-background-color: #f8fafc; -fx-border-color: #cbd5e1; -fx-border-radius: 4;" maxWidth="150"/>
-                   
-        <!-- Observações -->
-        <Label text="Observações:" GridPane.rowIndex="6" GridPane.columnIndex="0" style="-fx-font-weight: bold;" alignment="TOP_RIGHT"/>
-        <TextArea fx:id="txtObservacoes" prefRowCount="3" promptText="Detalhes adicionais..." GridPane.rowIndex="6" GridPane.columnIndex="1"
-                  style="-fx-background-color: #f8fafc; -fx-border-color: #cbd5e1; -fx-border-radius: 4;"/>
+        <!-- LINHA 3: Custo -->
+        <VBox spacing="5" GridPane.columnIndex="0" GridPane.rowIndex="3">
+            <Label text="Custo Estimado (R$)" styleClass="field-label"/>
+            <TextField fx:id="txtCusto"
+                       promptText="0,00"
+                       maxWidth="Infinity"
+                       styleClass="text-field"/>
+        </VBox>
+
+        <!-- LINHA 4: Observacoes (largura total) -->
+        <VBox spacing="5" GridPane.columnSpan="2" GridPane.rowIndex="4">
+            <Label text="Observações (opcional)" styleClass="field-label"/>
+            <TextArea fx:id="txtObservacoes"
+                      promptText="Detalhes adicionais sobre a manutenção..."
+                      prefRowCount="3"
+                      wrapText="true"
+                      maxWidth="Infinity"
+                      styleClass="text-field"/>
+        </VBox>
 
     </GridPane>
 
-    <HBox spacing="12" alignment="CENTER_RIGHT" style="-fx-padding: 16 0 0 0; -fx-border-color: #e2e8f0; -fx-border-width: 1 0 0 0;">
-        <Button text="Cancelar" onAction="#cancelar" 
-                style="-fx-background-color: white; -fx-border-color: #cbd5e1; -fx-border-radius: 4; -fx-padding: 8 16; -fx-cursor: hand;"/>
-        <Button text="Salvar" onAction="#salvar" 
-                style="-fx-background-color: #1e3a5f; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 8 16; -fx-background-radius: 4; -fx-cursor: hand;"/>
+    <!-- Botoes de Acao -->
+    <HBox alignment="CENTER_RIGHT" spacing="12"
+          style="-fx-padding: 14 0 0 0; -fx-border-color: #e2e8f0; -fx-border-width: 1 0 0 0;">
+
+        <Button text="Cancelar"
+                onAction="#cancelar"
+                styleClass="btn-secondary"/>
+
+        <Button text="Salvar"
+                onAction="#salvar"
+                defaultButton="true"
+                styleClass="btn-primary"/>
     </HBox>
+
 </VBox>

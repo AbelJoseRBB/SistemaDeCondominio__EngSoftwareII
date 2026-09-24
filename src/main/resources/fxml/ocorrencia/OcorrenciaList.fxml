@@ -12,6 +12,7 @@
 <VBox xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="com.condomanager.controller.ocorrencia.OcorrenciaListController"
       spacing="0"
+      stylesheets="@../../css/style.css"
       style="-fx-background-color: #ffffff;">
 
     <!-- ================================================================ -->
