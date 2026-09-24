@@ -1,5 +1,488 @@
-﻿<!-- Tela de lista de Relatorio - construa manualmente -->
-<!-- Controller: com.condomanager.controller.relatorio.RelatorioListController -->
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.condomanager.controller.relatorio.RelatorioListController"/>
+<?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
+<ScrollPane xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.condomanager.controller.relatorio.RelatorioListController"
+            stylesheets="@/css/relatorio.css"
+            fitToWidth="true"
+            style="-fx-background: #f5f8fc; -fx-background-color: #f5f8fc;">
+
+    <content>
+        <VBox spacing="20"
+              style="-fx-background-color: #f5f8fc;">
+
+            <padding>
+                <Insets top="28" right="28" bottom="32" left="28"/>
+            </padding>
+
+            <!-- CABECALHO DA PAGINA -->
+
+            <VBox spacing="5">
+                <Label text="Relatórios"
+                       style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: #172b4d;"/>
+
+                <Label text="Geração e exportação de relatórios administrativos"
+                       style="-fx-font-size: 13px; -fx-text-fill: #64748b;"/>
+            </VBox>
+
+            <!-- PRIMEIRA LINHA -->
+
+            <HBox spacing="20">
+
+                <!-- UNIDADES -->
+
+                <VBox spacing="14"
+                      prefWidth="0"
+                      minWidth="0"
+                      HBox.hgrow="ALWAYS"
+                      style="-fx-background-color: white; -fx-background-radius: 10;
+                             -fx-border-color: #dce3ed; -fx-border-radius: 10;
+                             -fx-padding: 22;">
+
+                    <HBox spacing="16" alignment="TOP_LEFT">
+
+                        <Label text="🏢"
+                               minWidth="44"
+                               style="-fx-font-size: 28px;"/>
+
+                        <VBox spacing="6" HBox.hgrow="ALWAYS">
+
+                            <Label text="Relatório de Unidades"
+                                   style="-fx-font-size: 16px; -fx-font-weight: bold;
+                                          -fx-text-fill: #172b4d;"/>
+
+                            <Label text="Listagem completa de unidades com situação de ocupação, proprietários e contatos."
+                                   wrapText="true"
+                                   style="-fx-font-size: 12px; -fx-text-fill: #64748b;"/>
+                        </VBox>
+
+                    </HBox>
+
+                    <Region VBox.vgrow="ALWAYS"/>
+
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+
+                        <Button text="▤  Gerar relatório"
+                                onAction="#onGerarUnidades"
+                                style="-fx-background-color: #203b61; -fx-text-fill: white;
+                                       -fx-font-size: 12px; -fx-font-weight: bold;
+                                       -fx-background-radius: 5; -fx-padding: 10 16;
+                                       -fx-cursor: hand;"/>
+
+                        <Button text="⇩  Exportar"
+                                onAction="#onExportarUnidades"
+                                style="-fx-background-color: white; -fx-text-fill: #203b61;
+                                       -fx-font-size: 12px; -fx-font-weight: bold;
+                                       -fx-border-color: #cbd5e1; -fx-border-radius: 5;
+                                       -fx-background-radius: 5; -fx-padding: 9 16;
+                                       -fx-cursor: hand;"/>
+                    </HBox>
+
+                </VBox>
+
+                <!-- MORADORES -->
+
+                <VBox spacing="14"
+                      prefWidth="0"
+                      minWidth="0"
+                      HBox.hgrow="ALWAYS"
+                      style="-fx-background-color: white; -fx-background-radius: 10;
+                             -fx-border-color: #dce3ed; -fx-border-radius: 10;
+                             -fx-padding: 22;">
+
+                    <HBox spacing="16" alignment="TOP_LEFT">
+
+                        <Label text="👥"
+                               minWidth="44"
+                               style="-fx-font-size: 28px;"/>
+
+                        <VBox spacing="6" HBox.hgrow="ALWAYS">
+
+                            <Label text="Relatório de Moradores"
+                                   style="-fx-font-size: 16px; -fx-font-weight: bold;
+                                          -fx-text-fill: #172b4d;"/>
+
+                            <Label text="Cadastro de todos os moradores, tipo de vínculo e situação de cada unidade."
+                                   wrapText="true"
+                                   style="-fx-font-size: 12px; -fx-text-fill: #64748b;"/>
+                        </VBox>
+
+                    </HBox>
+
+                    <Region VBox.vgrow="ALWAYS"/>
+
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+
+                        <Button text="▤  Gerar relatório"
+                                onAction="#onGerarMoradores"
+                                style="-fx-background-color: #203b61; -fx-text-fill: white;
+                                       -fx-font-size: 12px; -fx-font-weight: bold;
+                                       -fx-background-radius: 5; -fx-padding: 10 16;
+                                       -fx-cursor: hand;"/>
+
+                        <Button text="⇩  Exportar"
+                                onAction="#onExportarMoradores"
+                                style="-fx-background-color: white; -fx-text-fill: #203b61;
+                                       -fx-font-size: 12px; -fx-font-weight: bold;
+                                       -fx-border-color: #cbd5e1; -fx-border-radius: 5;
+                                       -fx-background-radius: 5; -fx-padding: 9 16;
+                                       -fx-cursor: hand;"/>
+                    </HBox>
+
+                </VBox>
+
+            </HBox>
+
+            <!-- SEGUNDA LINHA -->
+
+            <HBox spacing="20">
+
+                <!-- TAXAS -->
+
+                <VBox spacing="14"
+                      prefWidth="0"
+                      minWidth="0"
+                      HBox.hgrow="ALWAYS"
+                      style="-fx-background-color: white; -fx-background-radius: 10;
+                             -fx-border-color: #dce3ed; -fx-border-radius: 10;
+                             -fx-padding: 22;">
+
+                    <HBox spacing="16" alignment="TOP_LEFT">
+
+                        <Label text="💳"
+                               minWidth="44"
+                               style="-fx-font-size: 28px;"/>
+
+                        <VBox spacing="6" HBox.hgrow="ALWAYS">
+
+                            <Label text="Relatório de Taxas Condominiais"
+                                   style="-fx-font-size: 16px; -fx-font-weight: bold;
+                                          -fx-text-fill: #172b4d;"/>
+
+                            <Label text="Situação financeira por unidade: taxas pagas, pendentes e em atraso."
+                                   wrapText="true"
+                                   style="-fx-font-size: 12px; -fx-text-fill: #64748b;"/>
+                        </VBox>
+
+                    </HBox>
+
+                    <Region VBox.vgrow="ALWAYS"/>
+
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+
+                        <Label text="Período:"
+                               style="-fx-font-size: 12px; -fx-text-fill: #475569;"/>
+
+                        <ComboBox fx:id="cbPeriodoTaxas"
+                                  maxWidth="Infinity"
+                                  HBox.hgrow="ALWAYS"/>
+                    </HBox>
+
+                    <HBox fx:id="boxPeriodoPersonalizadoTaxas"
+                          spacing="10"
+                          visible="false"
+                          managed="false">
+
+                        <DatePicker fx:id="dpDataInicialTaxas"
+                                    promptText="Data inicial"
+                                    maxWidth="Infinity"
+                                    HBox.hgrow="ALWAYS"/>
+
+                        <DatePicker fx:id="dpDataFinalTaxas"
+                                    promptText="Data final"
+                                    maxWidth="Infinity"
+                                    HBox.hgrow="ALWAYS"/>
+                    </HBox>
+
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+
+                        <Button text="▤  Gerar relatório"
+                                onAction="#onGerarTaxas"
+                                style="-fx-background-color: #203b61; -fx-text-fill: white;
+                                       -fx-font-size: 12px; -fx-font-weight: bold;
+                                       -fx-background-radius: 5; -fx-padding: 10 16;
+                                       -fx-cursor: hand;"/>
+
+                        <Button text="⇩  Exportar"
+                                onAction="#onExportarTaxas"
+                                style="-fx-background-color: white; -fx-text-fill: #203b61;
+                                       -fx-font-size: 12px; -fx-font-weight: bold;
+                                       -fx-border-color: #cbd5e1; -fx-border-radius: 5;
+                                       -fx-background-radius: 5; -fx-padding: 9 16;
+                                       -fx-cursor: hand;"/>
+                    </HBox>
+
+                </VBox>
+
+                <!-- RESERVAS -->
+
+                <VBox spacing="14"
+                      prefWidth="0"
+                      minWidth="0"
+                      HBox.hgrow="ALWAYS"
+                      style="-fx-background-color: white; -fx-background-radius: 10;
+                             -fx-border-color: #dce3ed; -fx-border-radius: 10;
+                             -fx-padding: 22;">
+
+                    <HBox spacing="16" alignment="TOP_LEFT">
+
+                        <Label text="🗓"
+                               minWidth="44"
+                               style="-fx-font-size: 28px;"/>
+
+                        <VBox spacing="6" HBox.hgrow="ALWAYS">
+
+                            <Label text="Relatório de Reservas"
+                                   style="-fx-font-size: 16px; -fx-font-weight: bold;
+                                          -fx-text-fill: #172b4d;"/>
+
+                            <Label text="Histórico e agenda de reservas de áreas comuns por período selecionado."
+                                   wrapText="true"
+                                   style="-fx-font-size: 12px; -fx-text-fill: #64748b;"/>
+                        </VBox>
+
+                    </HBox>
+
+                    <Region VBox.vgrow="ALWAYS"/>
+
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+
+                        <Label text="Período:"
+                               style="-fx-font-size: 12px; -fx-text-fill: #475569;"/>
+
+                        <ComboBox fx:id="cbPeriodoReservas"
+                                  maxWidth="Infinity"
+                                  HBox.hgrow="ALWAYS"/>
+                    </HBox>
+
+                    <HBox fx:id="boxPeriodoPersonalizadoReservas"
+                          spacing="10"
+                          visible="false"
+                          managed="false">
+
+                        <DatePicker fx:id="dpDataInicialReservas"
+                                    promptText="Data inicial"
+                                    maxWidth="Infinity"
+                                    HBox.hgrow="ALWAYS"/>
+
+                        <DatePicker fx:id="dpDataFinalReservas"
+                                    promptText="Data final"
+                                    maxWidth="Infinity"
+                                    HBox.hgrow="ALWAYS"/>
+                    </HBox>
+
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+
+                        <Button text="▤  Gerar relatório"
+                                onAction="#onGerarReservas"
+                                style="-fx-background-color: #203b61; -fx-text-fill: white;
+                                       -fx-font-size: 12px; -fx-font-weight: bold;
+                                       -fx-background-radius: 5; -fx-padding: 10 16;
+                                       -fx-cursor: hand;"/>
+
+                        <Button text="⇩  Exportar"
+                                onAction="#onExportarReservas"
+                                style="-fx-background-color: white; -fx-text-fill: #203b61;
+                                       -fx-font-size: 12px; -fx-font-weight: bold;
+                                       -fx-border-color: #cbd5e1; -fx-border-radius: 5;
+                                       -fx-background-radius: 5; -fx-padding: 9 16;
+                                       -fx-cursor: hand;"/>
+                    </HBox>
+
+                </VBox>
+
+            </HBox>
+
+            <!-- TERCEIRA LINHA -->
+
+            <HBox spacing="20">
+
+                <!-- OCORRENCIAS -->
+
+                <VBox spacing="14"
+                      prefWidth="0"
+                      minWidth="0"
+                      HBox.hgrow="ALWAYS"
+                      style="-fx-background-color: white; -fx-background-radius: 10;
+                             -fx-border-color: #dce3ed; -fx-border-radius: 10;
+                             -fx-padding: 22;">
+
+                    <HBox spacing="16" alignment="TOP_LEFT">
+
+                        <Label text="⚠"
+                               minWidth="44"
+                               style="-fx-font-size: 28px; -fx-text-fill: #e9a23b;"/>
+
+                        <VBox spacing="6" HBox.hgrow="ALWAYS">
+
+                            <Label text="Relatório de Ocorrências"
+                                   style="-fx-font-size: 16px; -fx-font-weight: bold;
+                                          -fx-text-fill: #172b4d;"/>
+
+                            <Label text="Ocorrências registradas com situação e histórico de atendimento."
+                                   wrapText="true"
+                                   style="-fx-font-size: 12px; -fx-text-fill: #64748b;"/>
+                        </VBox>
+
+                    </HBox>
+
+                    <Region VBox.vgrow="ALWAYS"/>
+
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+
+                        <Label text="Período:"
+                               style="-fx-font-size: 12px; -fx-text-fill: #475569;"/>
+
+                        <ComboBox fx:id="cbPeriodoOcorrencias"
+                                  maxWidth="Infinity"
+                                  HBox.hgrow="ALWAYS"/>
+                    </HBox>
+
+                    <HBox fx:id="boxPeriodoPersonalizadoOcorrencias"
+                          spacing="10"
+                          visible="false"
+                          managed="false">
+
+                        <DatePicker fx:id="dpDataInicialOcorrencias"
+                                    promptText="Data inicial"
+                                    maxWidth="Infinity"
+                                    HBox.hgrow="ALWAYS"/>
+
+                        <DatePicker fx:id="dpDataFinalOcorrencias"
+                                    promptText="Data final"
+                                    maxWidth="Infinity"
+                                    HBox.hgrow="ALWAYS"/>
+                    </HBox>
+
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+
+                        <Button text="▤  Gerar relatório"
+                                onAction="#onGerarOcorrencias"
+                                style="-fx-background-color: #203b61; -fx-text-fill: white;
+                                       -fx-font-size: 12px; -fx-font-weight: bold;
+                                       -fx-background-radius: 5; -fx-padding: 10 16;
+                                       -fx-cursor: hand;"/>
+
+                        <Button text="⇩  Exportar"
+                                onAction="#onExportarOcorrencias"
+                                style="-fx-background-color: white; -fx-text-fill: #203b61;
+                                       -fx-font-size: 12px; -fx-font-weight: bold;
+                                       -fx-border-color: #cbd5e1; -fx-border-radius: 5;
+                                       -fx-background-radius: 5; -fx-padding: 9 16;
+                                       -fx-cursor: hand;"/>
+                    </HBox>
+
+                </VBox>
+
+                <!-- MANUTENCOES -->
+
+                <VBox spacing="14"
+                      prefWidth="0"
+                      minWidth="0"
+                      HBox.hgrow="ALWAYS"
+                      style="-fx-background-color: white; -fx-background-radius: 10;
+                             -fx-border-color: #dce3ed; -fx-border-radius: 10;
+                             -fx-padding: 22;">
+
+                    <HBox spacing="16" alignment="TOP_LEFT">
+
+                        <Label text="🔧"
+                               minWidth="44"
+                               style="-fx-font-size: 28px;"/>
+
+                        <VBox spacing="6" HBox.hgrow="ALWAYS">
+
+                            <Label text="Relatório de Manutenções"
+                                   style="-fx-font-size: 16px; -fx-font-weight: bold;
+                                          -fx-text-fill: #172b4d;"/>
+
+                            <Label text="Manutenções realizadas, em andamento e custos totais do período."
+                                   wrapText="true"
+                                   style="-fx-font-size: 12px; -fx-text-fill: #64748b;"/>
+                        </VBox>
+
+                    </HBox>
+
+                    <Region VBox.vgrow="ALWAYS"/>
+
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+
+                        <Label text="Período:"
+                               style="-fx-font-size: 12px; -fx-text-fill: #475569;"/>
+
+                        <ComboBox fx:id="cbPeriodoManutencoes"
+                                  maxWidth="Infinity"
+                                  HBox.hgrow="ALWAYS"/>
+                    </HBox>
+
+                    <HBox fx:id="boxPeriodoPersonalizadoManutencoes"
+                          spacing="10"
+                          visible="false"
+                          managed="false">
+
+                        <DatePicker fx:id="dpDataInicialManutencoes"
+                                    promptText="Data inicial"
+                                    maxWidth="Infinity"
+                                    HBox.hgrow="ALWAYS"/>
+
+                        <DatePicker fx:id="dpDataFinalManutencoes"
+                                    promptText="Data final"
+                                    maxWidth="Infinity"
+                                    HBox.hgrow="ALWAYS"/>
+                    </HBox>
+
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+
+                        <Button text="▤  Gerar relatório"
+                                onAction="#onGerarManutencoes"
+                                style="-fx-background-color: #203b61; -fx-text-fill: white;
+                                       -fx-font-size: 12px; -fx-font-weight: bold;
+                                       -fx-background-radius: 5; -fx-padding: 10 16;
+                                       -fx-cursor: hand;"/>
+
+                        <Button text="⇩  Exportar"
+                                onAction="#onExportarManutencoes"
+                                style="-fx-background-color: white; -fx-text-fill: #203b61;
+                                       -fx-font-size: 12px; -fx-font-weight: bold;
+                                       -fx-border-color: #cbd5e1; -fx-border-radius: 5;
+                                       -fx-background-radius: 5; -fx-padding: 9 16;
+                                       -fx-cursor: hand;"/>
+                    </HBox>
+
+                </VBox>
+
+            </HBox>
+
+            <!-- RESULTADO DO RELATORIO -->
+
+            <VBox spacing="16"
+                  styleClass="relatorio-resultado">
+
+                <VBox spacing="6">
+
+                    <Label fx:id="lblTituloRelatorio"
+                           text="Selecione um relatório"
+                           styleClass="relatorio-titulo"/>
+
+                    <Label fx:id="lblMensagem"
+                           text=""
+                           wrapText="true"
+                           styleClass="relatorio-mensagem"/>
+
+                </VBox>
+
+                <TableView fx:id="tabelaRelatorio"
+                           prefHeight="350"
+                           minHeight="150"
+                           fixedCellSize="48"
+                           styleClass="relatorio-tabela"/>
+
+            </VBox>
+
+        </VBox>
+    </content>
+
+</ScrollPane>

@@ -1,5 +1,120 @@
-﻿<!-- Tela de lista de Reserva - construa manualmente -->
-<!-- Controller: com.condomanager.controller.reserva.ReservaListController -->
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.condomanager.controller.reserva.ReservaListController"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
 
+<!--
+    TELA DE LISTAGEM DE RESERVAS
+    Exibe tabela com todas as reservas, busca em tempo real,
+    filtro por situacao e botao para abrir o formulario modal de cadastro/edicao.
+    Controller: com.condomanager.controller.reserva.ReservaListController
+-->
+<VBox xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.condomanager.controller.reserva.ReservaListController"
+      spacing="20"
+      styleClass="container"
+      stylesheets="@../../css/style.css">
 
+    <!-- ================================================================ -->
+    <!-- CABECALHO DA PAGINA                                               -->
+    <!-- ================================================================ -->
+    <HBox alignment="CENTER_LEFT" spacing="12">
+
+        <!-- Titulo e subtitulo -->
+        <VBox spacing="4" HBox.hgrow="ALWAYS">
+            <Label text="Reservas" styleClass="heading"/>
+            <Label text="Gerenciamento de reservas de áreas comuns do condomínio" styleClass="subheading"/>
+        </VBox>
+
+        <!-- Campo de busca -->
+        <TextField fx:id="txtBusca"
+                   promptText="🔍 Buscar por área ou unidade..."
+                   prefWidth="260"
+                   styleClass="search-field"/>
+
+        <!-- Filtro por situacao -->
+        <ComboBox fx:id="cmbSituacao"
+                  prefWidth="140"
+                  styleClass="combo-box"/>
+
+        <!-- Botao Nova Reserva -->
+        <Button fx:id="btnNovaReserva"
+                text="+ Nova Reserva"
+                onAction="#onNovaReserva"
+                styleClass="btn-primary"/>
+    </HBox>
+
+    <!-- ================================================================ -->
+    <!-- TABELA DE RESERVAS                                                -->
+    <!-- ================================================================ -->
+    <VBox VBox.vgrow="ALWAYS" styleClass="dashboard-table-card">
+
+        <TableView fx:id="tabelaReservas"
+                   VBox.vgrow="ALWAYS"
+                   styleClass="table-view-ocorrencias">
+            <placeholder>
+                <Label text="Nenhuma reserva cadastrada."
+                       style="-fx-text-fill: #9ca3af; -fx-font-size: 14px;"/>
+            </placeholder>
+            <columnResizePolicy>
+                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+            </columnResizePolicy>
+            <columns>
+
+                <!-- Unidade responsavel pela reserva -->
+                <TableColumn fx:id="colUnidade"
+                             text="UNIDADE"
+                             prefWidth="140"/>
+
+                <!-- Area comum reservada -->
+                <TableColumn fx:id="colArea"
+                             text="ÁREA COMUM"
+                             prefWidth="170"/>
+
+                <!-- Data da reserva -->
+                <TableColumn fx:id="colData"
+                             text="DATA"
+                             prefWidth="110"
+                             style="-fx-alignment: CENTER;"/>
+
+                <!-- Hora de inicio -->
+                <TableColumn fx:id="colHoraInicio"
+                             text="HORA INÍCIO"
+                             prefWidth="95"
+                             style="-fx-alignment: CENTER;"/>
+
+                <!-- Hora de fim -->
+                <TableColumn fx:id="colHoraFim"
+                             text="HORA FIM"
+                             prefWidth="95"
+                             style="-fx-alignment: CENTER;"/>
+
+                <!-- Situacao - badge colorido -->
+                <TableColumn fx:id="colSituacao"
+                             text="SITUAÇÃO"
+                             prefWidth="120"
+                             sortable="true"
+                             style="-fx-alignment: CENTER;"/>
+
+                <!-- Acoes: editar + cancelar -->
+                <TableColumn fx:id="colAcoes"
+                             text="AÇÕES"
+                             prefWidth="90"
+                             sortable="false"
+                             style="-fx-alignment: CENTER;"/>
+
+            </columns>
+        </TableView>
+
+        <!-- ================================================================ -->
+        <!-- RODAPE COM CONTAGEM DE REGISTROS                                  -->
+        <!-- ================================================================ -->
+        <HBox alignment="CENTER_LEFT" style="-fx-padding: 10 0 0 0;">
+            <Label fx:id="lblContagem"
+                   text="0 registro(s)"
+                   styleClass="subheading"/>
+        </HBox>
+
+    </VBox>
+
+</VBox>

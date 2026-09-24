@@ -1,34 +1,977 @@
-﻿/* ============================================================
-   Estilos globais da aplicacao
-   Aplique este CSS nas suas telas JavaFX
-   Exemplo: scene.getStylesheets().add(getClass().getResource("/css/style.css").toExternalForm());
-   ============================================================ */
+/* Fundo geral da aplicação */
+.root-pane {
+    -fx-background-color: #f1f5f9;
+}
 
-.root {
-    -fx-font-family: 'Segoe UI', Arial, sans-serif;
+/* Cartão branco central */
+.login-card {
+    -fx-background-color: white;
+    -fx-background-radius: 10;
+    -fx-padding: 40;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.08), 15, 0, 0, 5);
+}
+
+/* Container do ícone */
+.icon-container {
+    -fx-background-color: #203a5c;
+    -fx-background-radius: 10;
+}
+
+/* Ícone SVG da casa */
+.icon-svg {
+    -fx-fill: white;
+    -fx-scale-x: 1.2;
+    -fx-scale-y: 1.2;
+}
+
+/* Textos do Cabeçalho */
+.title-label {
+    -fx-text-fill: #1f375b;
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+}
+
+.subtitle-label {
+    -fx-text-fill: #7a8b9a;
+    -fx-font-size: 14px;
+}
+
+/* Labels dos campos de texto */
+.field-label {
+    -fx-text-fill: #334155;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+
+/* Campos de Texto (Usuário e Senha) */
+.text-field,
+.password-field {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #d1d5db;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-padding: 10 12 10 12;
+    -fx-font-size: 14px;
+    -fx-text-fill: #334155;
+    -fx-prompt-text-fill: #9ca3af;
+}
+
+.text-field:focused,
+.password-field:focused {
+    -fx-border-color: #203a5c;
+}
+
+/* Checkbox */
+.custom-checkbox {
+    -fx-text-fill: #4b5563;
     -fx-font-size: 13px;
-    -fx-background-color: #f5f5f5;
 }
 
-.button {
-    -fx-background-color: #2196F3;
+/* Botão Entrar */
+.login-button {
+    -fx-background-color: #203a5c;
     -fx-text-fill: white;
-    -fx-background-radius: 4px;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 5;
+    -fx-padding: 12;
     -fx-cursor: hand;
+}
+
+.login-button:hover {
+    -fx-background-color: #172a43;
+}
+
+/* Link Esqueci minha senha */
+.forgot-password-link {
+    -fx-text-fill: #3b82f6;
+    -fx-font-size: 13px;
+    -fx-border-color: transparent;
+    -fx-padding: 10 0 0 0;
+}
+
+.forgot-password-link:hover {
+    -fx-underline: true;
+}
+
+/* Link de cadastro alinhado ao texto do rodape */
+.registration-link {
+    -fx-text-fill: #3b82f6;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-border-color: transparent;
+    -fx-padding: 0;
+    -fx-cursor: hand;
+}
+
+.registration-link:hover {
+    -fx-underline: true;
+}
+
+/* Mensagem de erro de autenticacao */
+.error-label {
+    -fx-text-fill: #dc2626;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-background-color: #fef2f2;
+    -fx-background-radius: 5;
+    -fx-border-color: #fca5a5;
+    -fx-border-radius: 5;
+    -fx-padding: 8 12 8 12;
+}
+
+/* Campos com erro de validacao */
+.field-error {
+    -fx-border-color: #dc2626;
+}
+
+/* ============================================================ */
+/* Badges de status de ocupacao (Tabela de Unidades)            */
+/* ============================================================ */
+.badge-ocupada {
+    -fx-background-color: #dcfce7;
+    -fx-text-fill: #15803d;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 20;
+    -fx-padding: 3 10 3 10;
+}
+
+.badge-desocupada {
+    -fx-background-color: #fee2e2;
+    -fx-text-fill: #b91c1c;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 20;
+    -fx-padding: 3 10 3 10;
+}
+
+.badge-alugada {
+    -fx-background-color: #fef9c3;
+    -fx-text-fill: #854d0e;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 20;
+    -fx-padding: 3 10 3 10;
+}
+
+/* Botoes de acao na tabela (visualizar / editar / excluir) */
+.btn-acao-ver {
+    -fx-background-color: #eff6ff;
+    -fx-text-fill: #1d4ed8;
+    -fx-background-radius: 4;
+    -fx-padding: 4 8 4 8;
+    -fx-cursor: hand;
+    -fx-font-size: 13px;
+    -fx-border-color: transparent;
+}
+
+.btn-acao-ver:hover {
+    -fx-background-color: #dbeafe;
+}
+
+.btn-acao-editar {
+    -fx-background-color: #f0fdf4;
+    -fx-text-fill: #15803d;
+    -fx-background-radius: 4;
+    -fx-padding: 4 8 4 8;
+    -fx-cursor: hand;
+    -fx-font-size: 13px;
+    -fx-border-color: transparent;
+}
+
+.btn-acao-editar:hover {
+    -fx-background-color: #dcfce7;
+}
+
+.btn-acao-excluir {
+    -fx-background-color: #fff1f2;
+    -fx-text-fill: #be123c;
+    -fx-background-radius: 4;
+    -fx-padding: 4 8 4 8;
+    -fx-cursor: hand;
+    -fx-font-size: 13px;
+    -fx-border-color: transparent;
+}
+
+.btn-acao-excluir:hover {
+    -fx-background-color: #ffe4e6;
+}
+
+/* ============================================================ */
+/* Badges de situacao de Ocorrencias                            */
+/* ============================================================ */
+
+.badge-ocorrencia-aberta {
+    -fx-background-color: #f1f5f9;
+    -fx-text-fill: #475569;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 4;
+    -fx-padding: 2 8 2 8;
+}
+
+.badge-ocorrencia-em-andamento {
+    -fx-background-color: #dbeafe;
+    -fx-text-fill: #1d4ed8;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 4;
+    -fx-padding: 2 8 2 8;
+}
+
+.badge-ocorrencia-encerrada {
+    -fx-background-color: #dcfce7;
+    -fx-text-fill: #15803d;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 4;
+    -fx-padding: 2 8 2 8;
+}
+
+.badge-ocorrencia-analise {
+    -fx-background-color: #fef9c3;
+    -fx-text-fill: #a16207;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 4;
+    -fx-padding: 2 8 2 8;
+}
+
+/* ============================================================ */
+/* Badges de tipo / categoria de Ocorrencias                    */
+/* ============================================================ */
+
+.badge-tipo-infra {
+    -fx-background-color: #dbeafe;
+    -fx-text-fill: #1d4ed8;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 4;
+    -fx-padding: 2 8 2 8;
+}
+
+.badge-tipo-convivencia {
+    -fx-background-color: #fef9c3;
+    -fx-text-fill: #a16207;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 4;
+    -fx-padding: 2 8 2 8;
+}
+
+.badge-tipo-eletrica {
+    -fx-background-color: #dcfce7;
+    -fx-text-fill: #15803d;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 4;
+    -fx-padding: 2 8 2 8;
+}
+
+.badge-tipo-equipamento {
+    -fx-background-color: #dbeafe;
+    -fx-text-fill: #1d4ed8;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 4;
+    -fx-padding: 2 8 2 8;
+}
+
+.badge-tipo-seguranca {
+    -fx-background-color: #f1f5f9;
+    -fx-text-fill: #475569;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 4;
+    -fx-padding: 2 8 2 8;
+}
+
+.badge-tipo-hidraulica {
+    -fx-background-color: #dcfce7;
+    -fx-text-fill: #15803d;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 4;
+    -fx-padding: 2 8 2 8;
+}
+
+/* ============================================================ */
+/* Customizacoes TableView de Ocorrencias                       */
+/* ============================================================ */
+
+.table-view-ocorrencias {
+    -fx-background-color: white;
+    -fx-border-color: #e5e7eb;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-padding: 0;
+}
+.table-view-ocorrencias .column-header-background {
+    -fx-background-color: #f8fafc;
+    -fx-background-radius: 8 8 0 0;
+    -fx-padding: 10 0 10 0;
+    -fx-border-color: transparent transparent #e5e7eb transparent;
+    -fx-border-width: 0.8px;
+}
+.table-view-ocorrencias .column-header {
+    -fx-background-color: transparent;
+    -fx-size: 40px;
+    -fx-border-color: transparent;
+}
+.table-view-ocorrencias .column-header .label {
+    -fx-text-fill: #6b7280;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+}
+.table-view-ocorrencias .table-row-cell {
+    -fx-background-color: white;
+    -fx-border-color: transparent transparent #f1f5f9 transparent;
+    -fx-border-width: 0.8px;
+    -fx-cell-size: 50px;
+}
+.table-view-ocorrencias .table-row-cell:empty {
+    -fx-border-color: transparent;
+}
+.table-view-ocorrencias .table-cell {
+    -fx-border-color: transparent;
+    -fx-text-fill: #374151;
+    -fx-font-size: 13px;
+    -fx-alignment: center-left;
+}
+.table-view-ocorrencias .table-row-cell:hover {
+    -fx-background-color: #f8fafc;
+}
+.table-view-ocorrencias .table-cell:empty {
+    -fx-border-color: transparent;
+}
+
+
+/* ============================================================ */
+/* Badges de situacao de Reservas                               */
+/* ============================================================ */
+
+.badge-reserva-confirmada {
+    -fx-background-color: #dcfce7;
+    -fx-text-fill: #15803d;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 20;
+    -fx-padding: 3 10 3 10;
+}
+
+.badge-reserva-pendente {
+    -fx-background-color: #fef9c3;
+    -fx-text-fill: #854d0e;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 20;
+    -fx-padding: 3 10 3 10;
+}
+
+.badge-reserva-cancelada {
+    -fx-background-color: #f1f5f9;
+    -fx-text-fill: #64748b;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 20;
+    -fx-padding: 3 10 3 10;
+}
+
+/* ============================================================ */
+/* Customizacoes dos Popups (Alertas nativos do JavaFX)         */
+/* ============================================================ */
+
+.dialog-pane {
+    -fx-background-color: white;
+    -fx-font-family: "Inter", "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-min-width: 400px;
+}
+
+.dialog-pane > .content.label {
+    -fx-padding: 10 15 15 15;
+    -fx-text-fill: #4b5563;
+    -fx-font-size: 14px;
+    -fx-wrap-text: true;
+}
+
+.dialog-pane:header .header-panel {
+    -fx-background-color: #f8fafc;
+    -fx-padding: 15;
+}
+
+.dialog-pane:header .header-panel .label {
+    -fx-text-fill: #1f375b;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+.dialog-pane > .button-bar > .container {
+    -fx-padding: 15;
+}
+
+.dialog-pane > .button-bar > .container > .button {
+    -fx-background-color: #203a5c;
+    -fx-text-fill: white;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 5;
+    -fx-padding: 8 20 8 20;
+    -fx-cursor: hand;
+}
+
+.dialog-pane > .button-bar > .container > .button:hover {
+    -fx-background-color: #172a43;
+}
+
+/* ============================================================ */
+/* Novo Design da Sidebar (Menu Lateral)                        */
+/* ============================================================ */
+
+.sidebar {
+    -fx-background-color: #1e3a5f;
+    -fx-pref-width: 220px;
+    -fx-padding: 0;
+}
+
+.sidebar-header {
+    -fx-padding: 24 20 20 20;
+    -fx-border-width: 0 0 0.8 0;
+    -fx-border-color: transparent transparent #ffffff14 transparent;
+}
+
+.sidebar-logo-container {
+    -fx-spacing: 12px;
+    -fx-alignment: center-left;
+}
+
+.sidebar-logo-icon {
+    -fx-background-color: #ffffff26;
+    -fx-background-radius: 7px;
+    -fx-pref-width: 36px;
+    -fx-pref-height: 36px;
+    -fx-min-width: 36px;
+    -fx-min-height: 36px;
+    -fx-alignment: center;
+}
+
+.sidebar-logo-svg {
+    -fx-fill: white;
+}
+
+.sidebar-title-container {
+    -fx-spacing: 0px;
+}
+
+.sidebar-title {
+    -fx-font-family: "Inter", "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-weight: bold;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 15px;
+}
+
+.sidebar-subtitle {
+    -fx-font-family: "Inter", "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-text-fill: #ffffff80;
+    -fx-font-size: 11px;
+}
+
+.sidebar-nav {
+    -fx-padding: 12 10 12 10;
+    -fx-spacing: 2px;
+}
+
+.sidebar-btn {
+    -fx-background-color: transparent;
+    -fx-text-fill: #ffffffa6;
+    -fx-font-size: 13px;
+    -fx-font-family: "Inter", "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-padding: 9 12 9 12;
+    -fx-alignment: center-left;
+    -fx-graphic-text-gap: 10px;
+    -fx-background-radius: 6px;
+    -fx-cursor: hand;
+}
+
+.sidebar-btn:hover {
+    -fx-background-color: #ffffff1f;
+    -fx-text-fill: #ffffff;
+}
+
+.sidebar-btn-active {
+    -fx-background-color: #ffffff1f;
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: bold;
+    -fx-border-width: 0 0 0 3px;
+    -fx-border-color: transparent transparent transparent #60a5fa;
+    -fx-border-radius: 2px;
+    -fx-background-radius: 6px;
+}
+
+.graphic-container {
+    -fx-min-width: 24px;
+    -fx-pref-width: 24px;
+    -fx-max-width: 24px;
+    -fx-alignment: center;
+}
+
+.sidebar-btn .svg-icon, .sidebar-btn-active .svg-icon {
+    -fx-fill: #ffffffa6;
+}
+
+.sidebar-btn:hover .svg-icon, .sidebar-btn-active .svg-icon {
+    -fx-fill: #ffffff;
+}
+
+.sidebar-footer {
+    -fx-padding: 14 10 14 10;
+    -fx-border-width: 0.8 0 0 0;
+    -fx-border-color: #ffffff14 transparent transparent transparent;
+}
+
+.sidebar-user-container {
+    -fx-padding: 8 12 8 12;
+    -fx-spacing: 10px;
+    -fx-alignment: center-left;
+}
+
+.sidebar-avatar {
+    -fx-background-color: #2563eb;
+    -fx-background-radius: 15px;
+    -fx-pref-width: 30px;
+    -fx-pref-height: 30px;
+    -fx-min-width: 30px;
+    -fx-min-height: 30px;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-alignment: center;
+}
+
+.sidebar-username {
+    -fx-font-family: "Inter", "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-weight: bold;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 12px;
+}
+
+.sidebar-userrole {
+    -fx-font-family: "Inter", "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-text-fill: #ffffff73;
+    -fx-font-size: 11px;
+}
+
+.sidebar-logout-btn {
+    -fx-background-color: transparent;
+    -fx-text-fill: #ffffff8c;
+    -fx-font-size: 13px;
+    -fx-font-family: "Inter", "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-padding: 8 12 8 12;
+    -fx-alignment: center-left;
+    -fx-graphic-text-gap: 10px;
+    -fx-background-radius: 6px;
+    -fx-cursor: hand;
+}
+
+.sidebar-logout-btn:hover {
+    -fx-background-color: #ffffff1f;
+    -fx-text-fill: #ffffff;
+}
+
+.sidebar-logout-btn .svg-icon {
+    -fx-fill: #ffffff8c;
+}
+
+.sidebar-logout-btn:hover .svg-icon {
+    -fx-fill: #ffffff;
+}
+/* ============================================================ */
+/* Dashboard e Cards de Resumo                                  */
+/* ============================================================ */
+
+.dashboard-root {
+    -fx-background-color: #f1f5f9;
+}
+
+.summary-card {
+    -fx-background-color: white;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-border-color: #e2e8f0;
+    -fx-padding: 16 20 16 20;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.04), 10, 0, 0, 3);
+    -fx-cursor: hand;
+}
+
+.summary-card:hover {
+    -fx-border-color: #cbd5e1;
+    -fx-effect: dropshadow(three-pass-box, rgba(32, 58, 92, 0.12), 12, 0, 0, 4);
+}
+
+.card-label {
+    -fx-text-fill: #64748b;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+}
+
+.card-value {
+    -fx-text-fill: #1e293b;
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+}
+
+.card-subtext {
+    -fx-text-fill: #94a3b8;
+    -fx-font-size: 11px;
+}
+
+.dashboard-table-card {
+    -fx-background-color: white;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-border-color: #e2e8f0;
+    -fx-padding: 16;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.04), 10, 0, 0, 3);
+}
+
+/* ============================================================ */
+/* Tabelas de Atividades Recentes - Dashboard                    */
+/* ============================================================ */
+
+.dashboard-clean-table {
+    -fx-background-color: white;
+    -fx-border-color: transparent;
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+
+    -fx-table-cell-border-color: transparent;
+    -fx-table-header-border-color: transparent;
+    -fx-control-inner-background: white;
+    -fx-control-inner-background-alt: white;
+}
+
+/* Cabeçalho */
+.dashboard-clean-table .column-header-background {
+    -fx-background-color: #f8fafc;
+    -fx-border-color: transparent transparent #e2e8f0 transparent;
+    -fx-border-width: 0 0 1 0;
+}
+
+.dashboard-clean-table .column-header,
+.dashboard-clean-table .filler {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-background-insets: 0;
+    -fx-size: 40px;
+}
+
+.dashboard-clean-table .column-header .label {
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 0 10 0 10;
+    -fx-text-fill: #1e293b;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+
+/* Linhas */
+.dashboard-clean-table .table-row-cell {
+    -fx-background-color: white;
+    -fx-background-insets: 0;
+    -fx-border-color: transparent transparent #e2e8f0 transparent;
+    -fx-border-width: 0 0 1 0;
+    -fx-cell-size: 42px;
+}
+
+.dashboard-clean-table .table-row-cell:filled:hover {
+    -fx-background-color: #f8fafc;
+}
+
+/* Remove a grade das linhas sem registros */
+.dashboard-clean-table .table-row-cell:empty {
+    -fx-background-color: white;
+    -fx-border-color: transparent;
+}
+
+/* Células */
+.dashboard-clean-table .table-cell {
+    -fx-border-color: transparent;
+    -fx-padding: 0 10 0 10;
+    -fx-alignment: CENTER_LEFT;
+    -fx-text-fill: #1e293b;
+    -fx-font-size: 12px;
+}
+
+/* Seleção */
+.dashboard-clean-table .table-row-cell:filled:selected {
+    -fx-background-color: #dbeafe;
+}
+
+.dashboard-clean-table .table-row-cell:filled:selected .table-cell {
+    -fx-text-fill: #1e293b;
+}
+
+/* Área vazia da tabela */
+.dashboard-clean-table .virtual-flow,
+.dashboard-clean-table .virtual-flow .clipped-container,
+.dashboard-clean-table .virtual-flow .sheet,
+.dashboard-clean-table .placeholder {
+    -fx-background-color: white;
+}
+
+.dashboard-refresh-btn {
+    -fx-background-color: white;
+    -fx-text-fill: #203a5c;
+    -fx-border-color: #cbd5e1;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
     -fx-padding: 8 16 8 16;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
 }
 
-.button:hover {
-    -fx-background-color: #1976D2;
+.dashboard-refresh-btn:hover {
+    -fx-background-color: #f8fafc;
+    -fx-border-color: #94a3b8;
 }
 
-.text-field, .password-field {
-    -fx-background-radius: 4px;
-    -fx-border-color: #cccccc;
-    -fx-border-radius: 4px;
-    -fx-padding: 6 10 6 10;
+/* ============================================================ */
+/* Badges de situacao de Taxas                                  */
+/* ============================================================ */
+
+.badge-pago {
+    -fx-background-color: #dcfce7;
+    -fx-text-fill: #15803d;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 20;
+    -fx-padding: 3 10 3 10;
 }
 
-.label {
-    -fx-text-fill: #333333;
+.badge-pendente {
+    -fx-background-color: #fef9c3;
+    -fx-text-fill: #854d0e;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 20;
+    -fx-padding: 3 10 3 10;
 }
+
+.badge-atrasado {
+    -fx-background-color: #fee2e2;
+    -fx-text-fill: #b91c1c;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 20;
+    -fx-padding: 3 10 3 10;
+}
+
+/* ============================================================ */
+/* Classes Padronizadas de Layout e Componentes                 */
+/* ============================================================ */
+
+.container {
+    -fx-background-color: #f1f5f9;
+    -fx-padding: 24 30 24 30;
+}
+
+.heading {
+    -fx-font-family: "Inter", "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-weight: bold;
+    -fx-font-size: 22px;
+    -fx-text-fill: #1e293b;
+}
+
+.subheading {
+    -fx-font-family: "Inter", "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-size: 13px;
+    -fx-text-fill: #64748b;
+}
+
+.search-field {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #cbd5e1;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-padding: 8 12 8 12;
+    -fx-font-size: 13px;
+    -fx-text-fill: #334155;
+    -fx-prompt-text-fill: #9ca3af;
+}
+
+.search-field:focused {
+    -fx-border-color: #203a5c;
+}
+
+.btn-primary {
+    -fx-background-color: #203a5c;
+    -fx-text-fill: white;
+    -fx-font-family: "Inter", "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-weight: bold;
+    -fx-font-size: 13px;
+    -fx-background-radius: 6;
+    -fx-border-radius: 6;
+    -fx-padding: 8 16 8 16;
+    -fx-cursor: hand;
+}
+
+.btn-primary:hover {
+    -fx-background-color: #172a43;
+}
+
+.btn-secondary {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #cbd5e1;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-text-fill: #374151;
+    -fx-font-family: "Inter", "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-weight: bold;
+    -fx-font-size: 13px;
+    -fx-padding: 8 16 8 16;
+    -fx-cursor: hand;
+}
+
+.btn-secondary:hover {
+    -fx-background-color: #f8fafc;
+    -fx-border-color: #94a3b8;
+}
+
+.modal-container {
+    -fx-background-color: white;
+    -fx-padding: 24 28 20 28;
+}
+
+.modal-title {
+    -fx-font-family: "Inter", "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1e293b;
+}
+
+/* Combo Box Padronizado */
+.combo-box {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #cbd5e1;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-font-size: 13px;
+}
+
+.combo-box:focused {
+    -fx-border-color: #203a5c;
+}
+
+.combo-box .cell {
+    -fx-text-fill: #334155;
+    -fx-font-size: 13px;
+}
+
+/* DatePicker Padronizado */
+.date-picker {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #cbd5e1;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-font-size: 13px;
+}
+
+.date-picker:focused {
+    -fx-border-color: #203a5c;
+}
+
+.date-picker .text-field {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+/* ============================================================ */
+/* Tabela de Manutenções                                        */
+/* ============================================================ */
+
+.manutencao-clean-table {
+    -fx-background-color: white;
+    -fx-border-color: #e2e8f0;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+
+    -fx-table-cell-border-color: transparent;
+    -fx-table-header-border-color: transparent;
+    -fx-control-inner-background: white;
+    -fx-control-inner-background-alt: white;
+}
+
+/* Cabeçalho */
+.manutencao-clean-table .column-header-background {
+    -fx-background-color: #f8fafc;
+    -fx-border-color: transparent transparent #e2e8f0 transparent;
+    -fx-border-width: 0 0 1 0;
+}
+
+.manutencao-clean-table .column-header,
+.manutencao-clean-table .filler {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-background-insets: 0;
+    -fx-size: 40px;
+}
+
+.manutencao-clean-table .column-header .label {
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 0 10 0 10;
+    -fx-text-fill: #1e293b;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+
+/* Linhas com separadores apenas horizontais */
+.manutencao-clean-table .table-row-cell {
+    -fx-background-color: white;
+    -fx-background-insets: 0;
+    -fx-border-color: transparent transparent #e2e8f0 transparent;
+    -fx-border-width: 0 0 1 0;
+    -fx-cell-size: 44px;
+}
+
+.manutencao-clean-table .table-row-cell:filled:hover {
+    -fx-background-color: #f8fafc;
+}
+
+/* Remove a grade das linhas vazias */
+.manutencao-clean-table .table-row-cell:empty {
+    -fx-background-color: white;
+    -fx-border-color: transparent;
+}
+
+.manutencao-clean-table .table-cell {
+    -fx-border-color: transparent;
+    -fx-padding: 0 10 0 10;
+    -fx-alignment: CENTER_LEFT;
+    -fx-text-fill: #1e293b;
+    -fx-font-size: 12px;
+}
+
+.manutencao-clean-table .table-row-cell:filled:selected {
+    -fx-background-color: #dbeafe;
+}
+
+.manutencao-clean-table .table-row-cell:filled:selected .table-cell {
+    -fx-text-fill: #1e293b;
+}
+
+/* Fundo da área sem registros */
+.manutencao-clean-table .virtual-flow,
+.manutencao-clean-table .virtual-flow .clipped-container,
+.manutencao-clean-table .virtual-flow .sheet,
+.manutencao-clean-table .placeholder {
+    -fx-background-color: white;
+}
+
+
+
+

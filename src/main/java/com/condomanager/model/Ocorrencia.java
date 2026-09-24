@@ -1,4 +1,4 @@
-﻿package com.condomanager.model;
+package com.condomanager.model;
 
 import java.time.LocalDateTime;
 
@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 public class Ocorrencia {
     private int id;
     private Integer idUnidade; // Pode ser nulo se for area comum
+    private String local;
     private String titulo;
     private String descricao;
     private String categoria; // "RECLAMACAO", "INFORMACAO", "MANUTENCAO", "SEGURANCA"
@@ -37,5 +38,17 @@ public class Ocorrencia {
     public void setDataEncerramento(LocalDateTime dataEncerramento) { this.dataEncerramento = dataEncerramento; }
     public String getResposta() { return resposta; }
     public void setResposta(String resposta) { this.resposta = resposta; }
+    public void setLocal(String local) {
+        this.local = local;
+    }
+    public String getLocal() {
+        return local;
+    }
+    public void setLocalFormatado(String localFormatado) {
+        this.local = localFormatado;
+    }
+    public String getLocalFormatado() {
+        return local != null ? local : "";
+    }
 }
 

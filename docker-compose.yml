@@ -1,0 +1,70 @@
+# ============================================================
+# Docker Compose - Banco de Dados CondoManager
+#
+# Ferramentas e versões:
+# - Banco de Dados: MySQL 8.0 (utilizado pelo código e scripts SQL do projeto)
+# - Alternativa: PostgreSQL 16 (citado no installEnv.ps1, acessível via profile 'postgres')
+#
+# Comandos rápidos:
+#   Subir o banco:        docker compose up -d
+#   Parar o banco:        docker compose down
+#   Ver logs do banco:    docker compose logs -f db
+#   Terminal MySQL:       docker compose exec -it db mysql -u root -proot condominio_db
+#   Resetar banco:        docker compose down -v && docker compose up -d
+#   Exportar dump:        docker compose exec -T db mysqldump -u root -proot condominio_db > backup.sql
+#   Restaurar dump:       docker compose exec -T db mysql -u root -proot condominio_db < backup.sql
+# ============================================================
+
+services:
+  # ------------------------------------------------------------
+  # Banco de Dados Principal: MySQL 8.0
+  # ------------------------------------------------------------
+  db:
+    image: mysql:8.0
+    container_name: condomanager-db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-condominio_db}
+      MYSQL_USER: ${MYSQL_USER:-condo_user}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-condo_pass}
+    ports:
+      - "${MYSQL_PORT:-3306}:3306"
+    volumes:
+      # Scripts de inicialização executados automaticamente no primeiro boot
+      - ./src/main/resources/sql/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+      - ./src/main/resources/sql/dados_teste.sql:/docker-entrypoint-initdb.d/02-dados_teste.sql:ro
+      # Persistência dos dados
+      - condomanager-mysql-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD:-root}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 15s
+
+  # ------------------------------------------------------------
+  # Banco de Dados Opcional: PostgreSQL 16
+  # Mencionado no installEnv.ps1 ($PostgreSQLWingetId)
+  # Para subir em paralelo ou isolado: docker compose --profile postgres up -d
+  # ------------------------------------------------------------
+  postgres:
+    image: postgres:16
+    container_name: condomanager-postgres
+    profiles:
+      - postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-condominio_db}
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-root}
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - condomanager-postgres-data:/var/lib/postgresql/data
+
+volumes:
+  condomanager-mysql-data:
+    name: condomanager-mysql-data
+  condomanager-postgres-data:
+    name: condomanager-postgres-data

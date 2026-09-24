@@ -1,4 +1,4 @@
-﻿-- ============================================================
+-- ============================================================
 -- Schema do Banco de Dados - Sistema de Gestao de Condominio
 -- Banco: MySQL 8.0+
 -- Execute este script para criar todas as tabelas.
@@ -15,6 +15,7 @@ CREATE TABLE IF NOT EXISTS usuario (
     id         INT AUTO_INCREMENT PRIMARY KEY,
     nome       VARCHAR(100) NOT NULL,
     login      VARCHAR(50)  NOT NULL UNIQUE,
+    email      VARCHAR(100) NOT NULL UNIQUE,
     senha_hash VARCHAR(255) NOT NULL,          -- Hash BCrypt
     perfil     ENUM('ADMIN', 'OPERADOR') NOT NULL DEFAULT 'OPERADOR'
 );
@@ -28,6 +29,7 @@ CREATE TABLE IF NOT EXISTS unidade (
     situacao         ENUM('OCUPADO','DESOCUPADO','VENDA','ALUGUEL') NOT NULL DEFAULT 'DESOCUPADO',
     telefone_contato VARCHAR(20),
     email_contato    VARCHAR(100),
+    limite_veiculos INT NOT NULL DEFAULT 2 CHECK (limite_veiculos >= 0),
     UNIQUE KEY uk_bloco_numero (bloco, numero)
 );
 
@@ -39,7 +41,8 @@ CREATE TABLE IF NOT EXISTS morador (
     cpf        VARCHAR(14)  UNIQUE,
     telefone   VARCHAR(20),
     email      VARCHAR(100),
-    tipo       ENUM('PROPRIETARIO','INQUILINO','DEPENDENTE') NOT NULL,
+    tipo       ENUM('PROPRIETARIO','INQUILINO','LOCATARIO','DEPENDENTE') NOT NULL,
+    situacao   ENUM('ATIVO','INATIVO') NOT NULL DEFAULT 'ATIVO',
     FOREIGN KEY (id_unidade) REFERENCES unidade(id) ON DELETE CASCADE
 );
 
@@ -71,6 +74,7 @@ CREATE TABLE IF NOT EXISTS reserva (
 CREATE TABLE IF NOT EXISTS ocorrencia (
     id                 INT AUTO_INCREMENT PRIMARY KEY,
     id_unidade         INT,                               -- Nullable (pode ser area comum)
+    local              VARCHAR(100),
     titulo             VARCHAR(150) NOT NULL,
     descricao          TEXT,
     categoria          ENUM('RECLAMACAO','INFORMACAO','MANUTENCAO','SEGURANCA') NOT NULL,
@@ -101,15 +105,24 @@ CREATE TABLE IF NOT EXISTS veiculo (
     id           INT AUTO_INCREMENT PRIMARY KEY,
     id_unidade   INT NOT NULL,
     placa        VARCHAR(10) NOT NULL UNIQUE,
+    marca        VARCHAR(80),
+    id_proprietario INT,
     modelo       VARCHAR(80),
     cor          VARCHAR(30),
     numero_vaga  VARCHAR(10),                            -- Nullable
+    placa_normalizada VARCHAR(10) GENERATED ALWAYS AS (UPPER(REPLACE(TRIM(placa), '-', ''))) STORED,
+    vaga_normalizada VARCHAR(10) GENERATED ALWAYS AS (NULLIF(UPPER(TRIM(numero_vaga)), '')) STORED,
+    UNIQUE KEY uk_veiculo_placa_normalizada (placa_normalizada),
+    UNIQUE KEY uk_veiculo_vaga (vaga_normalizada),
+    FOREIGN KEY (id_proprietario) REFERENCES morador(id),
     FOREIGN KEY (id_unidade) REFERENCES unidade(id) ON DELETE CASCADE
 );
 
 -- ============================================================
 -- Dados iniciais: usuario administrador padrao
 -- Senha: admin123 (hash BCrypt - TROQUE em producao!)
+-- INSERT IGNORE: seguro para executar multiplas vezes;
+-- ignora silenciosamente se o login 'admin' ja existir.
 -- ============================================================
-INSERT INTO usuario (nome, login, senha_hash, perfil)
-VALUES ('Administrador', 'admin', '$2a$10$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36WQoeG6Lruj3vjPGga31lW', 'ADMIN');
+INSERT IGNORE INTO usuario (nome, login, email, senha_hash, perfil)
+VALUES ('Administrador', 'admin', 'admin@condomanager.com', '$2a$10$tyWUHDECdFpz9iZr2aZyJ..QWWRIzttF4yhXkCk4lU8umqjL0xxTa', 'ADMIN');

@@ -1,5 +1,96 @@
-﻿<!-- Tela de formulario de Unidade - construa manualmente -->
-<!-- Controller: com.condomanager.controller.unidade.UnidadeFormController -->
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.condomanager.controller.unidade.UnidadeFormController"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
 
+<!--
+    FORMULARIO DE CADASTRO / EDICAO DE UNIDADE
+    Carregado como conteudo de um Dialog pelo UnidadeListController.
+    Controller: com.condomanager.controller.unidade.UnidadeFormController
+-->
+<VBox xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.condomanager.controller.unidade.UnidadeFormController"
+      spacing="16"
+      prefWidth="500"
+      styleClass="modal-container"
+      stylesheets="@../../css/style.css">
 
+    <!-- Titulo do Formulario -->
+    <Label text="Dados da Unidade" styleClass="modal-title"/>
+
+    <!-- Formulario em Grade -->
+    <GridPane hgap="16" vgap="14">
+        <columnConstraints>
+            <ColumnConstraints percentWidth="50"/>
+            <ColumnConstraints percentWidth="50"/>
+        </columnConstraints>
+
+        <!-- LINHA 0: Bloco + Numero -->
+        <VBox spacing="5" GridPane.columnIndex="0" GridPane.rowIndex="0">
+            <Label text="Bloco *" styleClass="field-label"/>
+            <ComboBox fx:id="cmbBloco"
+                      maxWidth="Infinity"
+                      styleClass="combo-box"/>
+        </VBox>
+
+        <VBox spacing="5" GridPane.columnIndex="1" GridPane.rowIndex="0">
+            <Label text="Número *" styleClass="field-label"/>
+            <TextField fx:id="txtNumero"
+                       promptText="Ex: 101"
+                       maxWidth="Infinity"
+                       styleClass="text-field"/>
+        </VBox>
+
+        <!-- LINHA 1: Proprietario (largura total) -->
+        <VBox spacing="5" GridPane.columnSpan="2" GridPane.rowIndex="1">
+            <Label text="Proprietário" styleClass="field-label"/>
+            <TextField fx:id="txtProprietario"
+                       promptText="Nome completo do proprietário"
+                       maxWidth="Infinity"
+                       styleClass="text-field"/>
+        </VBox>
+
+        <!-- LINHA 2: Situacao de Ocupacao + Telefone -->
+        <VBox spacing="5" GridPane.columnIndex="0" GridPane.rowIndex="2">
+            <Label text="Situação de Ocupação" styleClass="field-label"/>
+            <ComboBox fx:id="cmbSituacao"
+                      maxWidth="Infinity"
+                      styleClass="combo-box"/>
+        </VBox>
+
+        <VBox spacing="5" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <Label text="Telefone" styleClass="field-label"/>
+            <TextField fx:id="txtTelefone"
+                       promptText="(11) 99999-0000"
+                       maxWidth="Infinity"
+                       styleClass="text-field"/>
+        </VBox>
+
+        <!-- LINHA 3: E-mail (largura total) -->
+        <VBox spacing="5" GridPane.columnSpan="2" GridPane.rowIndex="3">
+            <Label text="E-mail" styleClass="field-label"/>
+            <TextField fx:id="txtEmail"
+                       promptText="proprietario@exemplo.com"
+                       maxWidth="Infinity"
+                       styleClass="text-field"/>
+        </VBox>
+
+    </GridPane>
+
+    <!-- Botoes de Acao -->
+    <HBox alignment="CENTER_RIGHT" spacing="12"
+          style="-fx-padding: 14 0 0 0; -fx-border-color: #e2e8f0; -fx-border-width: 1 0 0 0;">
+
+        <Button fx:id="btnCancelar"
+                text="Cancelar"
+                onAction="#onCancelar"
+                styleClass="btn-secondary"/>
+
+        <Button fx:id="btnSalvar"
+                text="Salvar"
+                onAction="#onSalvar"
+                defaultButton="true"
+                styleClass="btn-primary"/>
+    </HBox>
+
+</VBox>
