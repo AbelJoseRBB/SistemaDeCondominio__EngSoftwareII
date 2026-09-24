@@ -1,0 +1,30 @@
+.veiculos-page { -fx-background-color: #f1f5f9; -fx-padding: 28; -fx-font-family: "Segoe UI"; }
+.heading { -fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #111827; }
+.subheading { -fx-font-size: 13px; -fx-text-fill: #64748b; }
+.muted { -fx-font-size: 12px; -fx-text-fill: #7c8ca5; }
+.search-field { -fx-background-color: white; -fx-border-color: #cbd5e1; -fx-border-radius: 4; -fx-background-radius: 4; -fx-padding: 9 10; }
+.btn-primary { -fx-background-color: #1e3a5f; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 10 15; -fx-background-radius: 4; -fx-cursor: hand; }
+.btn-primary:hover { -fx-background-color: #2c507b; }
+.btn-secondary { -fx-background-color: white; -fx-border-color: #cbd5e1; -fx-border-radius: 4; -fx-background-radius: 4; -fx-text-fill: #334155; -fx-padding: 9 15; -fx-cursor: hand; }
+.link-button { -fx-background-color: transparent; -fx-text-fill: #64748b; -fx-cursor: hand; }
+.veiculos-page .table-view { -fx-background-color: white; -fx-border-color: #dfe4ec; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 0; }
+.veiculos-page .column-header-background, .veiculos-page .column-header, .veiculos-page .filler { -fx-background-color: #f8fafc; }
+.veiculos-page .column-header { -fx-size: 37; -fx-border-width: 0 0 1 0; -fx-border-color: #e2e8f0; }
+.veiculos-page .column-header .label { -fx-alignment: CENTER_LEFT; -fx-padding: 0 14; -fx-font-size: 11px; -fx-text-fill: #6b7b92; -fx-font-weight: bold; }
+.veiculos-page .table-row-cell { -fx-background-color: white; -fx-border-color: transparent transparent #edf2f7 transparent; }
+.veiculos-page .table-row-cell:filled:hover, .veiculos-page .table-row-cell:filled:selected { -fx-background-color: #eaf2fc; }
+.veiculos-page .table-cell { -fx-border-width: 0; -fx-alignment: CENTER_LEFT; -fx-padding: 0 14; -fx-font-size: 13px; -fx-text-fill: #1e3a5f; }
+.placa { -fx-font-family: Consolas; -fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #1e3a5f; -fx-background-color: #f1f5f9; -fx-background-radius: 3; -fx-padding: 2 7; }
+.acao-editar { -fx-background-color: #f0fdf4; -fx-text-fill: #16803c; -fx-padding: 4 7; -fx-cursor: hand; }
+.acao-excluir { -fx-background-color: #fee2e2; -fx-text-fill: #ef3038; -fx-padding: 4 7; -fx-cursor: hand; }
+.veiculo-modal { -fx-background-color: white; -fx-background-radius: 10; -fx-font-family: "Segoe UI"; }
+.modal-header { -fx-padding: 16 24; -fx-border-width: 0 0 1 0; -fx-border-color: #e2e8f0; }
+.modal-title { -fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #111827; }
+.modal-body { -fx-padding: 24; }
+.modal-body .label { -fx-text-fill: #334155; -fx-font-size: 12px; }
+.modal-body .text-field, .modal-body .combo-box { -fx-background-color: #f8fafc; -fx-border-color: #cbd5e1; -fx-background-radius: 4; -fx-border-radius: 4; -fx-pref-height: 38; -fx-font-size: 13px; }
+.modal-body .text-field { -fx-padding: 8 10; }
+.modal-body .text-field:focused, .modal-body .combo-box:focused { -fx-border-color: #3b82f6; }
+.modal-footer { -fx-padding: 16 24 24 24; -fx-border-width: 1 0 0 0; -fx-border-color: #e2e8f0; }
+.modal-body .form-error { -fx-text-fill: #b91c1c; }
+.mensagem { -fx-text-fill: #1e3a5f; -fx-font-size: 13px; }

@@ -1,3 +1,21 @@
-<!-- Tela de formulario de Veiculo - construa manualmente -->
-<!-- Controller: com.condomanager.controller.veiculo.VeiculoFormController -->
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<VBox xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21" fx:controller="com.condomanager.controller.veiculo.VeiculoFormController" prefWidth="560" styleClass="veiculo-modal" stylesheets="@../../css/veiculos.css">
+    <HBox alignment="CENTER_LEFT" styleClass="modal-header"><Label fx:id="lblTitulo" text="Novo Veículo" styleClass="modal-title"/><Region HBox.hgrow="ALWAYS"/><Button text="×" accessibleText="Fechar formulário" onAction="#onCancelar" styleClass="link-button"/></HBox>
+    <VBox spacing="16" styleClass="modal-body">
+        <GridPane hgap="20" vgap="18">
+            <columnConstraints><ColumnConstraints percentWidth="50"/><ColumnConstraints percentWidth="50"/></columnConstraints>
+            <VBox spacing="5"><Label text="Placa" labelFor="$txtPlaca"/><TextField fx:id="txtPlaca" promptText="ABC-1D23"/></VBox>
+            <VBox spacing="5" GridPane.columnIndex="1"><Label text="Modelo" labelFor="$txtModelo"/><TextField fx:id="txtModelo" promptText="Onix, Civic..."/></VBox>
+            <VBox spacing="5" GridPane.rowIndex="1"><Label text="Marca" labelFor="$txtMarca"/><TextField fx:id="txtMarca" promptText="Chevrolet, Honda..."/></VBox>
+            <VBox spacing="5" GridPane.rowIndex="1" GridPane.columnIndex="1"><Label text="Cor" labelFor="$txtCor"/><TextField fx:id="txtCor" promptText="Prata, Preto..."/></VBox>
+            <VBox spacing="5" GridPane.rowIndex="2"><Label text="Unidade" labelFor="$cbUnidade"/><ComboBox fx:id="cbUnidade" promptText="Selecione a unidade" maxWidth="Infinity"/></VBox>
+            <VBox spacing="5" GridPane.rowIndex="2" GridPane.columnIndex="1"><Label text="Número da Vaga" labelFor="$txtVaga"/><TextField fx:id="txtVaga" promptText="A-01"/></VBox>
+            <VBox spacing="5" GridPane.rowIndex="3" GridPane.columnSpan="2"><Label text="Proprietário" labelFor="$cbProprietario"/><ComboBox fx:id="cbProprietario" promptText="Selecione o proprietário" maxWidth="Infinity"/></VBox>
+        </GridPane>
+        <Label fx:id="lblOcupacao" wrapText="true" styleClass="muted"/>
+        <Label fx:id="lblErro" wrapText="true" visible="false" managed="false" styleClass="form-error"/>
+    </VBox>
+    <HBox alignment="CENTER_RIGHT" spacing="8" styleClass="modal-footer"><Button text="Cancelar" cancelButton="true" onAction="#onCancelar" styleClass="btn-secondary"/><Button fx:id="btnSalvar" text="Salvar" defaultButton="true" onAction="#onSalvar" styleClass="btn-primary"/></HBox>
+</VBox>

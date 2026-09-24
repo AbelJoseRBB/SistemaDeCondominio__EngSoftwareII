@@ -164,3 +164,56 @@ mvn javafx:run
 | `Access denied for user 'root'` | Senha incorreta no `db.properties` | Verifique a senha definida na instalação |
 | `Unknown database 'condominio_db'` | Schema não foi executado | Execute o `schema.sql` no Workbench |
 | `db.properties not found` | Arquivo não foi criado | Copie o `.example` e renomeie |
+
+
+## Gestão de veículos
+
+O menu **Veículos** oferece listagem, busca por placa/modelo/proprietário, cadastro,
+edição e exclusão com confirmação. O formulário associa o veículo a uma unidade e
+seleciona seu proprietário entre os moradores ativos dessa unidade (qualquer tipo
+de morador pode ser proprietário de um veículo).
+
+Placa, modelo, marca, cor, unidade, vaga e proprietário são obrigatórios para novos
+cadastros e edições. Placas antigas e Mercosul são aceitas e normalizadas. Placas e
+vagas não podem se repetir no condomínio; a edição desconsidera o próprio veículo.
+O limite é verificado em transação com bloqueio da unidade; índices únicos também
+protegem contra placas e vagas duplicadas em gravações simultâneas.
+
+### Atualização de bancos existentes
+
+Execute **uma vez** `src/main/resources/sql/migracao_veiculos.sql` antes de abrir
+este módulo em um banco antigo. Para bancos novos, use o `schema.sql` atualizado.
+A migração não apaga veículos; registros antigos sem proprietário ou marca podem
+ser consultados e devem ser completados ao editar. Corrija eventuais placas/vagas
+duplicadas antes da migração. Não use o reset do banco para atualizar a estrutura.
+
+Como os requisitos não especificam um número, o limite inicial adotado é **2**
+veículos/vagas por unidade, configurável em `unidade.limite_veiculos`. Por exemplo:
+
+```sql
+UPDATE unidade SET limite_veiculos = 3 WHERE bloco = 'A' AND numero = '101';
+```
+
+O valor zero impede novos veículos. O formulário mostra a ocupação e informa quando
+o limite é atingido. Uma edição mantém a vaga do próprio veículo disponível.
+
+
+### Teste de integração com MySQL
+
+`VeiculoPersistenceTest` verifica persistência, conflitos de placa/vaga, vínculo do
+proprietário, limite, edição, transferência de unidade, exclusão e reutilização da
+vaga. É opt-in e exige um banco descartável cujo nome comece com
+`codex_veiculos_test_`, contendo o schema atualizado. Nunca aponte para o banco de uso.
+
+No PowerShell, após preparar esse banco exclusivo:
+
+```powershell
+$env:VEICULO_MYSQL_TEST = 'true'
+$env:DB_URL = 'jdbc:mysql://localhost:3306/codex_veiculos_test_local?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC'
+mvn '-Dtest=VeiculoPersistenceTest' test
+Remove-Item Env:VEICULO_MYSQL_TEST
+Remove-Item Env:DB_URL
+```
+
+O teste remove seus próprios registros ao terminar. As credenciais seguem a
+configuração normal do projeto (`DB_USER`/`DB_PASSWORD`, quando necessário).
