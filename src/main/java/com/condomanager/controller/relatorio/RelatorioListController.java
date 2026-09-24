@@ -1,4 +1,4 @@
-﻿package com.condomanager.controller.relatorio;
+package com.condomanager.controller.relatorio;
 
 import javafx.fxml.FXML;
 

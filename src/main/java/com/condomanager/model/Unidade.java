@@ -1,4 +1,4 @@
-﻿package com.condomanager.model;
+package com.condomanager.model;
 
 /**
  * Representa uma unidade (apartamento/casa) do condominio.

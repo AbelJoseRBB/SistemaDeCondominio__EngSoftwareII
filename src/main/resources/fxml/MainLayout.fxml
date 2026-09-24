@@ -1,54 +1,138 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.geometry.*?>
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.shape.*?>
 
 <!--
-    TELA PRINCIPAL - Container com sidebar fixa
+    TELA PRINCIPAL - Layout Base com Sidebar Fixa e Area Central Responsiva
     Carrega os modulos na area de conteudo dinamicamente.
     Controller: com.condomanager.controller.MainLayoutController
 -->
 <BorderPane xmlns:fx="http://javafx.com/fxml/1"
+            xmlns="http://javafx.com/javafx/21"
             fx:controller="com.condomanager.controller.MainLayoutController"
-            prefWidth="1024" prefHeight="680">
+            prefWidth="1280" prefHeight="720" minWidth="1000" minHeight="650"
+            stylesheets="@../css/style.css">
 
-    <!-- SIDEBAR ESQUERDA (fixa) -->
+    <!-- ================================================================ -->
+    <!-- SIDEBAR ESQUERDA (Menu Lateral de Navegacao)                     -->
+    <!-- ================================================================ -->
     <left>
-        <VBox fx:id="sidebar" prefWidth="200" spacing="4"
-              style="-fx-background-color: #1a2332; -fx-padding: 0;">
-
+        <VBox fx:id="sidebar" styleClass="sidebar">
+            
             <!-- Logo / Nome do sistema -->
-            <VBox style="-fx-padding: 20 16 16 16;">
-                <Label text="CondoManager" style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;"/>
-                <Label text="v1.0" style="-fx-text-fill: #8899aa; -fx-font-size: 11px;"/>
-            </VBox>
+            <HBox styleClass="sidebar-header, sidebar-logo-container">
+                <StackPane styleClass="sidebar-logo-icon">
+                    <SVGPath content="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" styleClass="sidebar-logo-svg"/>
+                </StackPane>
+                <VBox styleClass="sidebar-title-container">
+                    <Label text="CondoManager" styleClass="sidebar-title"/>
+                    <Label text="v1.0" styleClass="sidebar-subtitle"/>
+                </VBox>
+            </HBox>
 
             <!-- Itens do menu -->
-            <Button fx:id="btnDashboard"   text="Dashboard"   onAction="#onDashboard"   maxWidth="Infinity"/>
-            <Button fx:id="btnUnidades"    text="Unidades"    onAction="#onUnidades"    maxWidth="Infinity"/>
-            <Button fx:id="btnMoradores"   text="Moradores"   onAction="#onMoradores"   maxWidth="Infinity"/>
-            <Button fx:id="btnTaxas"       text="Taxas"       onAction="#onTaxas"       maxWidth="Infinity"/>
-            <Button fx:id="btnReservas"    text="Reservas"    onAction="#onReservas"    maxWidth="Infinity"/>
-            <Button fx:id="btnOcorrencias" text="Ocorrencias" onAction="#onOcorrencias" maxWidth="Infinity"/>
-            <Button fx:id="btnManutencoes" text="Manutencoes" onAction="#onManutencoes" maxWidth="Infinity"/>
-            <Button fx:id="btnVeiculos"    text="Veiculos"    onAction="#onVeiculos"    maxWidth="Infinity"/>
-            <Button fx:id="btnRelatorios"  text="Relatorios"  onAction="#onRelatorios"  maxWidth="Infinity"/>
-
-            <Pane VBox.vgrow="ALWAYS"/>
+            <VBox styleClass="sidebar-nav" VBox.vgrow="ALWAYS">
+                <Button fx:id="btnDashboard" text="Dashboard" onAction="#onDashboard" styleClass="sidebar-btn" maxWidth="Infinity">
+                    <graphic>
+                        <StackPane styleClass="graphic-container">
+                            <SVGPath content="M3 13h8V3H3v10zm2-8h4v4H5V5zm8 16h8V11h-8v10zm2-8h4v4h-4v-4zM13 3v6h8V3h-8zm6 4h-4V5h4v2zM3 21h8v-6H3v6zm2-4h4v2H5v-2z" styleClass="svg-icon"/>
+                        </StackPane>
+                    </graphic>
+                </Button>
+                <Button fx:id="btnUnidades" text="Unidades" onAction="#onUnidades" styleClass="sidebar-btn" maxWidth="Infinity">
+                    <graphic>
+                        <StackPane styleClass="graphic-container">
+                            <SVGPath content="M12 5.69l5 4.5V18h-2v-6H9v6H7v-7.81l5-4.5M12 3L2 12h3v8h6v-6h2v6h6v-8h3L12 3z" styleClass="svg-icon"/>
+                        </StackPane>
+                    </graphic>
+                </Button>
+                <Button fx:id="btnMoradores" text="Moradores" onAction="#onMoradores" styleClass="sidebar-btn" maxWidth="Infinity">
+                    <graphic>
+                        <StackPane styleClass="graphic-container">
+                            <SVGPath content="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5zm-8-3c2.67 0 5.33 1.33 5.33 2.5v.5H2.67v-.5c0-1.17 2.67-2.5 5.33-2.5z" styleClass="svg-icon"/>
+                        </StackPane>
+                    </graphic>
+                </Button>
+                <Button fx:id="btnTaxas" text="Taxas" onAction="#onTaxas" styleClass="sidebar-btn" maxWidth="Infinity">
+                    <graphic>
+                        <StackPane styleClass="graphic-container">
+                            <SVGPath content="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z" styleClass="svg-icon"/>
+                        </StackPane>
+                    </graphic>
+                </Button>
+                <Button fx:id="btnReservas" text="Reservas" onAction="#onReservas" styleClass="sidebar-btn" maxWidth="Infinity">
+                    <graphic>
+                        <StackPane styleClass="graphic-container">
+                            <SVGPath content="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zM5 8V6h14v2H5z" styleClass="svg-icon"/>
+                        </StackPane>
+                    </graphic>
+                </Button>
+                <Button fx:id="btnOcorrencias" text="Ocorrências" onAction="#onOcorrencias" styleClass="sidebar-btn" maxWidth="Infinity">
+                    <graphic>
+                        <StackPane styleClass="graphic-container">
+                            <SVGPath content="M12 5.99L19.53 19H4.47L12 5.99M12 2L1 21h22L12 2zm1 14h-2v2h2v-2zm0-6h-2v4h2v-4z" styleClass="svg-icon"/>
+                        </StackPane>
+                    </graphic>
+                </Button>
+                <Button fx:id="btnManutencoes" text="Manutenções" onAction="#onManutencoes" styleClass="sidebar-btn" maxWidth="Infinity">
+                    <graphic>
+                        <StackPane styleClass="graphic-container">
+                            <SVGPath content="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4zM7.6 11.1c-1.1 1.1-2.9 1.1-4 .1-.4-.4-.7-.9-.8-1.4l3.1-3.1 3.1-3.1c.5.1 1 .4 1.4.8 1 1 1 2.9-.1 4l-2.7 2.7z" styleClass="svg-icon"/>
+                        </StackPane>
+                    </graphic>
+                </Button>
+                <Button fx:id="btnVeiculos" text="Veículos" onAction="#onVeiculos" styleClass="sidebar-btn" maxWidth="Infinity">
+                    <graphic>
+                        <StackPane styleClass="graphic-container">
+                            <SVGPath content="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.85 7h10.29l1.08 3.11H5.77L6.85 7zM19 17H5v-5h14v5zM7.5 16c.83 0 1.5-.67 1.5-1.5S8.33 13 7.5 13 6 13.67 6 14.5 6.67 16 7.5 16zm9 0c.83 0 1.5-.67 1.5-1.5s-.67-1.5-1.5-1.5-1.5.67-1.5 1.5.67 1.5 1.5 1.5z" styleClass="svg-icon"/>
+                        </StackPane>
+                    </graphic>
+                </Button>
+                <Button fx:id="btnRelatorios" text="Relatórios" onAction="#onRelatorios" styleClass="sidebar-btn" maxWidth="Infinity">
+                    <graphic>
+                        <StackPane styleClass="graphic-container">
+                            <SVGPath content="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm4 18H6V4h7v5h5v11zM8 15h8v2H8zm0-4h8v2H8z" styleClass="svg-icon"/>
+                        </StackPane>
+                    </graphic>
+                </Button>
+            </VBox>
 
             <!-- Info do usuario logado + Sair -->
-            <VBox style="-fx-padding: 12 16 16 16;" spacing="8">
-                <Label fx:id="lblUsuario" text="Usuario" style="-fx-text-fill: white; -fx-font-weight: bold;"/>
-                <Label fx:id="lblPerfil"  text="Perfil"  style="-fx-text-fill: #8899aa; -fx-font-size: 11px;"/>
-                <Button fx:id="btnSair"   text="Sair"    onAction="#onSair" maxWidth="Infinity"/>
+            <VBox styleClass="sidebar-footer">
+                <HBox styleClass="sidebar-user-container">
+                    <Label fx:id="lblIniciais" text="U" styleClass="sidebar-avatar"/>
+                    <VBox>
+                        <Label fx:id="lblUsuario" text="Usuario" styleClass="sidebar-username"/>
+                        <Label fx:id="lblPerfil" text="Perfil" styleClass="sidebar-userrole"/>
+                    </VBox>
+                </HBox>
+                <Button fx:id="btnSair" text="Sair" onAction="#onSair" styleClass="sidebar-logout-btn" maxWidth="Infinity">
+                    <graphic>
+                        <StackPane styleClass="graphic-container">
+                            <SVGPath content="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z" styleClass="svg-icon"/>
+                        </StackPane>
+                    </graphic>
+                </Button>
             </VBox>
         </VBox>
     </left>
 
-    <!-- AREA DE CONTEUDO (troca dinamicamente) -->
+    <!-- ================================================================ -->
+    <!-- AREA CENTRAL DE CONTEUDO (Troca de Modulos Dinamica)             -->
+    <!-- ================================================================ -->
     <center>
-        <StackPane fx:id="contentArea">
-            <!-- Cada modulo sera carregado aqui via FXMLLoader -->
+        <StackPane fx:id="contentArea" style="-fx-background-color: #f1f5f9;">
+            <!-- O conteudo de cada modulo e carregado aqui via FXMLLoader -->
         </StackPane>
     </center>
 

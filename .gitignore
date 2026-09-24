@@ -1,4 +1,4 @@
-﻿# Maven
+# Maven
 target/
 *.class
 *.jar
@@ -25,8 +25,12 @@ Thumbs.db
 desktop.ini
 
 # Configuracoes locais do banco de dados (NUNCA versionar!)
+# Copie db.properties.example -> db.properties e preencha sua senha local.
+src/main/resources/db.properties
+# Arquivos de config antigos (legado)
 src/main/resources/database.properties
 src/main/resources/config.properties
+.env
 
 # Logs
 *.log
