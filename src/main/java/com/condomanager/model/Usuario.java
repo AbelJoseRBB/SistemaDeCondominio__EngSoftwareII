@@ -1,4 +1,4 @@
-package com.condomanager.model;
+﻿package com.condomanager.model;
 
 /**
  * Representa um usuario do sistema (administrador ou operador).
@@ -8,23 +8,17 @@ public class Usuario {
     private int id;
     private String nome;
     private String login;
-    private String email;
     private String senhaHash; // Armazenada como hash BCrypt
     private String perfil;    // "ADMIN" ou "OPERADOR"
 
     public Usuario() {}
 
-    public Usuario(int id, String nome, String login, String email, String senhaHash, String perfil) {
+    public Usuario(int id, String nome, String login, String senhaHash, String perfil) {
         this.id = id;
         this.nome = nome;
         this.login = login;
-        this.email = email;
         this.senhaHash = senhaHash;
         this.perfil = perfil;
-    }
-
-    public Usuario(int id, String nome, String login, String senhaHash, String perfil) {
-        this(id, nome, login, null, senhaHash, perfil);
     }
 
     // Getters e Setters
@@ -34,8 +28,6 @@ public class Usuario {
     public void setNome(String nome) { this.nome = nome; }
     public String getLogin() { return login; }
     public void setLogin(String login) { this.login = login; }
-    public String getEmail() { return email; }
-    public void setEmail(String email) { this.email = email; }
     public String getSenhaHash() { return senhaHash; }
     public void setSenhaHash(String senhaHash) { this.senhaHash = senhaHash; }
     public String getPerfil() { return perfil; }
