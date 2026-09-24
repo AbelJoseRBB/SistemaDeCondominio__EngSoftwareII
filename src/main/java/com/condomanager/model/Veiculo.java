@@ -1,14 +1,10 @@
-package com.condomanager.model;
+﻿package com.condomanager.model;
 
 /**
  * Representa um veiculo vinculado a uma unidade do condominio.
  */
 public class Veiculo {
     private int id;
-    private int idProprietario;
-    private String marca;
-    private String unidade;
-    private String proprietario;
     private int idUnidade;
     private String placa;
     private String modelo;
@@ -16,15 +12,6 @@ public class Veiculo {
     private String numeroVaga; // Pode ser nulo se nao houver vaga fixa
 
     public Veiculo() {}
-
-    public int getIdProprietario() { return idProprietario; }
-    public void setIdProprietario(int value) { idProprietario = value; }
-    public String getMarca() { return marca; }
-    public void setMarca(String value) { marca = value; }
-    public String getUnidade() { return unidade; }
-    public void setUnidade(String value) { unidade = value; }
-    public String getProprietario() { return proprietario; }
-    public void setProprietario(String value) { proprietario = value; }
 
     // Getters e Setters
     public int getId() { return id; }

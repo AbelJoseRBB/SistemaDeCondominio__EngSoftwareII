@@ -1,4 +1,4 @@
-package com.condomanager.model;
+﻿package com.condomanager.model;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;

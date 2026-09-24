@@ -1,7 +1,0 @@
-# Template de configuração do banco de dados.
-# Copie este arquivo para db.properties e preencha com suas credenciais locais.
-# O arquivo db.properties está no .gitignore e NUNCA deve ser versionado.
-
-db.url=jdbc:mysql://localhost:3306/condominio_db
-db.user=root
-db.password=

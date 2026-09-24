@@ -1,27 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.control.*?>
-<VBox xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21" fx:controller="com.condomanager.controller.veiculo.VeiculoListController" spacing="14" styleClass="veiculos-page" stylesheets="@../../css/veiculos.css">
-    <HBox alignment="CENTER_LEFT" spacing="10">
-        <VBox spacing="4"><Label text="Veículos" styleClass="heading"/><Label text="Cadastro de veículos e vagas" styleClass="subheading"/></VBox>
-        <Region HBox.hgrow="ALWAYS"/>
-        <TextField fx:id="txtBusca" promptText="Buscar por placa, modelo ou proprietário" prefWidth="280" styleClass="search-field"/>
-        <Button text="↻" accessibleText="Atualizar veículos" onAction="#onAtualizar" styleClass="link-button"><tooltip><Tooltip text="Atualizar veículos"/></tooltip></Button>
-        <Button text="+ Novo Veículo" onAction="#onNovoVeiculo" styleClass="btn-primary"/>
-    </HBox>
-    <Label fx:id="lblMensagem" wrapText="true" managed="false" visible="false" styleClass="mensagem"/>
-    <TableView fx:id="tabela" fixedCellSize="49" minHeight="90">
-        <columnResizePolicy><TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/></columnResizePolicy>
-        <columns>
-            <TableColumn fx:id="colPlaca" text="PLACA" prefWidth="150"/>
-            <TableColumn fx:id="colModelo" text="MODELO" prefWidth="140"/>
-            <TableColumn fx:id="colMarca" text="MARCA" prefWidth="140"/>
-            <TableColumn fx:id="colCor" text="COR" prefWidth="120"/>
-            <TableColumn fx:id="colUnidade" text="UNIDADE" prefWidth="110"/>
-            <TableColumn fx:id="colVaga" text="VAGA" prefWidth="100"/>
-            <TableColumn fx:id="colProprietario" text="PROPRIETÁRIO" prefWidth="190"/>
-            <TableColumn fx:id="colAcoes" text="AÇÕES" prefWidth="90" minWidth="80" sortable="false"/>
-        </columns>
-    </TableView>
-    <Label fx:id="lblContagem" text="0 registro(s)" styleClass="muted"/>
-</VBox>
+﻿<!-- Tela de lista de Veiculo - construa manualmente -->
+<!-- Controller: com.condomanager.controller.veiculo.VeiculoListController -->
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.condomanager.controller.veiculo.VeiculoListController"/>
+
+

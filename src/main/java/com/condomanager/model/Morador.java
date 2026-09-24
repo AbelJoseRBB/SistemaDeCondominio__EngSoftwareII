@@ -1,4 +1,4 @@
-package com.condomanager.model;
+﻿package com.condomanager.model;
 
 /**
  * Representa um morador vinculado a uma unidade do condominio.
@@ -10,8 +10,7 @@ public class Morador {
     private String cpf;
     private String telefone;
     private String email;
-    private String tipo; // "PROPRIETARIO", "INQUILINO", "LOCATARIO", "DEPENDENTE"
-    private String situacao; // "ATIVO", "INATIVO"
+    private String tipo; // "PROPRIETARIO", "INQUILINO", "DEPENDENTE"
 
     public Morador() {}
 
@@ -30,7 +29,5 @@ public class Morador {
     public void setEmail(String email) { this.email = email; }
     public String getTipo() { return tipo; }
     public void setTipo(String tipo) { this.tipo = tipo; }
-    public String getSituacao() { return situacao; }
-    public void setSituacao(String situacao) { this.situacao = situacao; }
 }
 

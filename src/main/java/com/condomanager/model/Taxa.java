@@ -1,4 +1,4 @@
-package com.condomanager.model;
+﻿package com.condomanager.model;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -13,7 +13,6 @@ public class Taxa {
     private BigDecimal valor;
     private LocalDate vencimento;
     private String situacao; // "PENDENTE", "PAGO", "ATRASADO"
-    private String unidadeTexto; // Adicionado para exibicao na tabela
 
     public Taxa() {}
 
@@ -30,8 +29,5 @@ public class Taxa {
     public void setVencimento(LocalDate vencimento) { this.vencimento = vencimento; }
     public String getSituacao() { return situacao; }
     public void setSituacao(String situacao) { this.situacao = situacao; }
-
-    public String getUnidadeTexto() { return unidadeTexto; }
-    public void setUnidadeTexto(String unidadeTexto) { this.unidadeTexto = unidadeTexto; }
 }
 
